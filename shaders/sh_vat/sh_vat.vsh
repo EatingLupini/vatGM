@@ -44,22 +44,6 @@ void main()
 	float frame_px = 1.0 / u_tex_size.y;
 	float frame_px_half = frame_px * 0.5;
 	
-	/*
-	// with wobbling effect
-	vec4 pos = texture2DLod(u_anim_offsets, vec2((in_Index + 0.5) / u_tex_size.x, clamp(u_time + frame_px_half, 0.0, (u_frame_count - 1.0) * frame_px)), 0.0);
-	vec4 real_pos = pos * u_offset_dist + u_offset_min;
-	
-	// blend animations
-	if (u_blend > 0.0)
-	{
-		vec4 pos_old = texture2DLod(u_anim_offsets_old, vec2((in_Index + 0.5) / u_tex_size.x, clamp(u_time_old + frame_px_half, 0.0, (u_frame_count_old - 1.0) * frame_px)), 0.0);
-		vec4 real_pos_old = pos_old * u_offset_dist_old + u_offset_min_old;
-		
-		real_pos = mix(real_pos_old, real_pos, u_blend);
-	}
-	*/
-	
-	
 	// fix wobbling effect
 	float sample_num = 5.0;
 	float sample_range = frame_px * 10.0;
@@ -92,43 +76,6 @@ void main()
 		real_pos = mix(real_pos_old, real_pos, u_blend);
 	}
 	
-	
-	/*
-	// fix wobbling effect
-	float sample_num = 5.0;
-	float sample_range = frame_px * 10.0;
-	
-	vec4 avg_pos = vec4(0.0);
-	vec4 avg_pos_old = vec4(0.0);
-	
-	for (float i=-sample_range*0.5; i<sample_range*0.5; i+=sample_range/sample_num)
-	{
-		if (u_loop)
-			avg_pos += texture2DLod(u_anim_offsets, vec2((in_Index + 0.5) / u_tex_size.x, mod_neg(u_time + frame_px_half + i, (u_frame_count - 1.0) * frame_px)), 0.0);
-		else
-			avg_pos += texture2DLod(u_anim_offsets, vec2((in_Index + 0.5) / u_tex_size.x, clamp(u_time + frame_px_half + i, 0.0, (u_frame_count - 1.0) * frame_px)), 0.0);
-		
-		if (u_blend > 0.0)
-		{
-			if (u_loop_old)
-				avg_pos_old += texture2DLod(u_anim_offsets_old, vec2((in_Index + 0.5) / u_tex_size.x, mod_neg(u_time_old + frame_px_half + i, (u_frame_count_old - 1.0) * frame_px)), 0.0);
-			else
-				avg_pos_old += texture2DLod(u_anim_offsets_old, vec2((in_Index + 0.5) / u_tex_size.x, clamp(u_time_old + frame_px_half + i, 0.0, (u_frame_count_old - 1.0) * frame_px)), 0.0);
-		}
-	}
-	avg_pos /= sample_num;
-	vec4 real_pos = avg_pos * u_offset_dist + u_offset_min;
-	
-	if (u_blend > 0.0)
-	{
-		avg_pos_old /= sample_num;
-		vec4 real_pos_old = avg_pos_old * u_offset_dist_old + u_offset_min_old;
-		
-		real_pos = mix(real_pos_old, real_pos, u_blend);
-	}
-	*/
-	
-	
 	// add offset to position
 	vec3 final_pos = in_Position + real_pos.xyz;
 	
@@ -136,7 +83,6 @@ void main()
     gl_Position = gm_Matrices[MATRIX_WORLD_VIEW_PROJECTION] * vec4(final_pos, 1.);
 	
 	// normals
-	//vec4 mdd = texture2DLod(u_anim_normals, vec2((in_Index + 0.5) / u_tex_size.x, clamp(u_time + frame_px_half, 0.0, (u_frame_count - 1.0) * frame_px)), 0.0);
 	vec4 color_normal = texture2DLod(u_anim_normals, vec2((in_Index + 0.5) / u_tex_size.x, clamp(u_time + frame_px_half, 0.0, (u_frame_count - 1.0) * frame_px)), 0.0);
 	
 	// blend normal
