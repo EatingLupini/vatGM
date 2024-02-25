@@ -1,0 +1,44 @@
+{
+    "animations": [
+        {
+            "name": "anim0",
+            "loop": false,
+            "speed": 0.5,
+            "num_vertices": 7882,
+            "num_frames": 130,
+            "tex_size": 8192,
+            "offset_min": -1.9254114627838135,
+            "offset_max": 1.3608264923095703,
+            "dist": 3.286237955093384,
+            "offset_tex_name": "anim0_offset.png",
+            "normal_tex_name": "anim0_normal.png"
+        },
+	{
+            "name": "anim1",
+            "loop": true,
+            "speed": 0.8,
+            "num_vertices": 7882,
+            "num_frames": 33,
+            "tex_size": 8192,
+            "offset_min": -1.0256009101867676,
+            "offset_max": 0.9202495813369751,
+            "dist": 1.9458504915237427,
+            "offset_tex_name": "anim1_offset.png",
+            "normal_tex_name": "anim1_normal.png"
+        },
+	{
+            "name": "anim2",
+            "loop": true,
+            "speed": 0.5,
+            "num_vertices": 7882,
+            "num_frames": 32,
+            "tex_size": 8192,
+            "offset_min": -0.8162100911140442,
+            "offset_max": 0.8384729623794556,
+            "dist": 1.6546830534934998,
+            "offset_tex_name": "anim2_offset.png",
+            "normal_tex_name": "anim2_normal.png"
+        }
+    ],
+    "model_name": "model.obj"
+}

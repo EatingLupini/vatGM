@@ -1,0 +1,6 @@
+PNG 16 bit
+https://forum.gamemaker.io/index.php?threads/sprite_add-issue-with-a-png-16-bit-rgba-vs-8-bit.103441/
+
+export blender obj
+https://github.com/mcvnh/blender-batch-export-obj/blob/master/batchexport.py
+https://docs.blender.org/api/current/bpy.ops.export_scene.html#bpy.ops.export_scene.obj

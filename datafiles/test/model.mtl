@@ -1,0 +1,13 @@
+# Blender 3.5.1 MTL File: 'zombie.blend'
+# www.blender.org
+
+newmtl WorldWar_zombie_material
+Ns 200.000000
+Ka 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 3
+map_Kd D:/Davide/Programmi/blender-3.5.1-windows-x64/assets/world_war_zombie_diffuse.png
+map_Ks C:/world_war_zombie_specular.png
+map_Bump -bm 1.000000 C:/world_war_zombie_normal.png

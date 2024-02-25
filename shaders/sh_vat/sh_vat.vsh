@@ -1,0 +1,166 @@
+attribute vec3 in_Position;                  
+attribute vec2 in_TextureCoord;           
+attribute vec4 in_Colour;                
+attribute vec3 in_Normal;
+attribute float in_Index;
+
+varying vec3 vertex_position;
+varying vec2 uvs;
+varying vec3 normal;
+varying vec4 vertex_color;
+
+// anim 1
+uniform sampler2D u_anim_offsets;
+uniform sampler2D u_anim_normals;
+uniform float u_frame_count;
+uniform float u_offset_min;
+uniform float u_offset_dist;
+uniform bool u_loop;
+uniform float u_time;
+
+// anim 2
+uniform sampler2D u_anim_offsets_old;
+uniform sampler2D u_anim_normals_old;
+uniform float u_frame_count_old;
+uniform float u_offset_min_old;
+uniform float u_offset_dist_old;
+uniform bool u_loop_old;
+uniform float u_time_old;
+
+// shared
+uniform vec2 u_tex_size;
+uniform float u_blend;
+
+
+// mod function that works with negative numbers
+float mod_neg(float xx, float mm)
+{
+    return mod(mod(xx, mm) + mm, mm);
+}
+
+
+void main()
+{
+	float frame_px = 1.0 / u_tex_size.y;
+	float frame_px_half = frame_px * 0.5;
+	
+	/*
+	// with wobbling effect
+	vec4 pos = texture2DLod(u_anim_offsets, vec2((in_Index + 0.5) / u_tex_size.x, clamp(u_time + frame_px_half, 0.0, (u_frame_count - 1.0) * frame_px)), 0.0);
+	vec4 real_pos = pos * u_offset_dist + u_offset_min;
+	
+	// blend animations
+	if (u_blend > 0.0)
+	{
+		vec4 pos_old = texture2DLod(u_anim_offsets_old, vec2((in_Index + 0.5) / u_tex_size.x, clamp(u_time_old + frame_px_half, 0.0, (u_frame_count_old - 1.0) * frame_px)), 0.0);
+		vec4 real_pos_old = pos_old * u_offset_dist_old + u_offset_min_old;
+		
+		real_pos = mix(real_pos_old, real_pos, u_blend);
+	}
+	*/
+	
+	
+	// fix wobbling effect
+	float sample_num = 5.0;
+	float sample_range = frame_px * 10.0;
+	
+	vec4 avg_pos = vec4(0.0);
+	for (float i=-sample_range*0.5; i<sample_range*0.5; i+=sample_range/sample_num)
+	{
+		if (u_loop)
+			avg_pos += texture2DLod(u_anim_offsets, vec2((in_Index + 0.5) / u_tex_size.x, mod_neg(u_time + frame_px_half + i, (u_frame_count - 1.0) * frame_px)), 0.0);
+		else
+			avg_pos += texture2DLod(u_anim_offsets, vec2((in_Index + 0.5) / u_tex_size.x, clamp(u_time + frame_px_half + i, 0.0, (u_frame_count - 1.0) * frame_px)), 0.0);
+	}
+	avg_pos /= sample_num;
+	vec4 real_pos = avg_pos * u_offset_dist + u_offset_min;
+	
+	// blend animations
+	if (u_blend > 0.0)
+	{
+		avg_pos = vec4(0.0);
+		for (float i=-sample_range*0.5; i<sample_range*0.5; i+=sample_range/sample_num)
+		{
+			if (u_loop_old)
+				avg_pos += texture2DLod(u_anim_offsets_old, vec2((in_Index + 0.5) / u_tex_size.x, mod_neg(u_time_old + frame_px_half + i, (u_frame_count_old - 1.0) * frame_px)), 0.0);
+			else
+				avg_pos += texture2DLod(u_anim_offsets_old, vec2((in_Index + 0.5) / u_tex_size.x, clamp(u_time_old + frame_px_half + i, 0.0, (u_frame_count_old - 1.0) * frame_px)), 0.0);
+		}
+		avg_pos /= sample_num;
+		vec4 real_pos_old = avg_pos * u_offset_dist_old + u_offset_min_old;
+		
+		real_pos = mix(real_pos_old, real_pos, u_blend);
+	}
+	
+	
+	/*
+	// fix wobbling effect
+	float sample_num = 5.0;
+	float sample_range = frame_px * 10.0;
+	
+	vec4 avg_pos = vec4(0.0);
+	vec4 avg_pos_old = vec4(0.0);
+	
+	for (float i=-sample_range*0.5; i<sample_range*0.5; i+=sample_range/sample_num)
+	{
+		if (u_loop)
+			avg_pos += texture2DLod(u_anim_offsets, vec2((in_Index + 0.5) / u_tex_size.x, mod_neg(u_time + frame_px_half + i, (u_frame_count - 1.0) * frame_px)), 0.0);
+		else
+			avg_pos += texture2DLod(u_anim_offsets, vec2((in_Index + 0.5) / u_tex_size.x, clamp(u_time + frame_px_half + i, 0.0, (u_frame_count - 1.0) * frame_px)), 0.0);
+		
+		if (u_blend > 0.0)
+		{
+			if (u_loop_old)
+				avg_pos_old += texture2DLod(u_anim_offsets_old, vec2((in_Index + 0.5) / u_tex_size.x, mod_neg(u_time_old + frame_px_half + i, (u_frame_count_old - 1.0) * frame_px)), 0.0);
+			else
+				avg_pos_old += texture2DLod(u_anim_offsets_old, vec2((in_Index + 0.5) / u_tex_size.x, clamp(u_time_old + frame_px_half + i, 0.0, (u_frame_count_old - 1.0) * frame_px)), 0.0);
+		}
+	}
+	avg_pos /= sample_num;
+	vec4 real_pos = avg_pos * u_offset_dist + u_offset_min;
+	
+	if (u_blend > 0.0)
+	{
+		avg_pos_old /= sample_num;
+		vec4 real_pos_old = avg_pos_old * u_offset_dist_old + u_offset_min_old;
+		
+		real_pos = mix(real_pos_old, real_pos, u_blend);
+	}
+	*/
+	
+	
+	// add offset to position
+	vec3 final_pos = in_Position + real_pos.xyz;
+	
+	//Vertex position.
+    gl_Position = gm_Matrices[MATRIX_WORLD_VIEW_PROJECTION] * vec4(final_pos, 1.);
+	
+	// normals
+	//vec4 mdd = texture2DLod(u_anim_normals, vec2((in_Index + 0.5) / u_tex_size.x, clamp(u_time + frame_px_half, 0.0, (u_frame_count - 1.0) * frame_px)), 0.0);
+	vec4 color_normal = texture2DLod(u_anim_normals, vec2((in_Index + 0.5) / u_tex_size.x, clamp(u_time + frame_px_half, 0.0, (u_frame_count - 1.0) * frame_px)), 0.0);
+	
+	// blend normal
+	if (u_blend > 0.0)
+	{
+		vec4 color_normal_old = texture2DLod(u_anim_normals_old, vec2((in_Index + 0.5) / u_tex_size.x, clamp(u_time_old + frame_px_half, 0.0, (u_frame_count_old - 1.0) * frame_px)), 0.0);
+		color_normal = mix(color_normal_old, color_normal, u_blend);
+	}
+	vec4 real_normal = vec4((color_normal * 2.0 - 1.0).xyz, 0.0);
+	
+    //Vertex data.
+	vertex_position = in_Position;
+	uvs = in_TextureCoord;
+    vertex_color = in_Colour;
+	
+	//vec3 ttt = (gm_Matrices[MATRIX_WORLD] * vec4(in_Normal, 0.0)).xyz;
+	vec3 ttt = (gm_Matrices[MATRIX_WORLD] * real_normal).xyz;
+	vec4 in_normal_color = vec4((ttt + 1.0) * 0.5, 1.0);
+	//vec4 in_normal_color = vec4((in_Normal + 1.0) * 0.5, 1.0);
+    vertex_color = in_normal_color;
+	
+	//vec4 real_normal = color_normal * 2.0 - 1.0;
+	//normal = (gm_Matrices[MATRIX_WORLD] * vec4(real_normal.xyz, 0.0)).xyz;
+	
+	normal = (gm_Matrices[MATRIX_WORLD] * vec4(in_Normal, 0.0)).xyz;
+}
+
