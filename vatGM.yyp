@@ -41,7 +41,7 @@
     {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"GMD3D11.dll","CopyToMask":64,"filePath":"datafiles",},
     {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"anim0_normal.png","CopyToMask":-1,"filePath":"datafiles/test",},
     {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"anim0_offset.png","CopyToMask":-1,"filePath":"datafiles/test",},
-    {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"anim1_normal.png","CopyToMask":-1,"filePath":"datafiles/test",},
+    {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"anim1_normal.png","CopyToMask":3035426170322551022,"filePath":"datafiles/test",},
     {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"anim1_offset.png","CopyToMask":-1,"filePath":"datafiles/test",},
     {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"anim2_normal.png","CopyToMask":-1,"filePath":"datafiles/test",},
     {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"anim2_offset.png","CopyToMask":-1,"filePath":"datafiles/test",},

@@ -9,6 +9,7 @@ function AnimationManager(anim, anim_end_func) constructor
 	
 	self.anim_over = false;
 	self.blend = 0;
+	self.sample = 0;
 	
 	static set_shader_params = function()
 	{
@@ -40,6 +41,7 @@ function AnimationManager(anim, anim_end_func) constructor
 		// shared
 		shader_set_uniform_f(tex_size_param, self.anim.tex_size, self.anim.tex_size);
 		shader_set_uniform_f(blend_param, self.blend);
+		shader_set_uniform_f(sample_param, self.sample);
 	}
 	
 	static step = function()
@@ -112,7 +114,7 @@ function init_animations()
 				offset_min_param, offset_dist_param, loop_param, time_param,
 				anim_offsets_old_param, anim_normals_old_param, frame_count_old_param,
 				offset_min_old_param, offset_dist_old_param, loop_old_param, time_old_param,
-				tex_size_param, blend_param;
+				tex_size_param, blend_param, sample_param;
 	
 	// anim 1
 	anim_offsets_param = shader_get_sampler_index(sh_vat, "u_anim_offsets");
@@ -135,5 +137,6 @@ function init_animations()
 	// shared
 	tex_size_param = shader_get_uniform(sh_vat, "u_tex_size");
 	blend_param = shader_get_uniform(sh_vat, "u_blend");
+	sample_param = shader_get_uniform(sh_vat, "u_sample_num");
 }
 

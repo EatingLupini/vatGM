@@ -71,14 +71,12 @@ pl_spd = pl_spd_min;
 
 #region ENTITIES
 
-/*
 var num_zombies = 32;
 for (var j=0; j<num_zombies; j++)
 	for (var i=0; i<num_zombies; i++)
 		instance_create_depth(32 + 64 * i, 32 + 64 * j, 0, obj_entity);
-*/
 
-instance_create_depth(32, 32, 0, obj_entity);
+//instance_create_depth(32, 32, 0, obj_entity);
 
 #endregion
 

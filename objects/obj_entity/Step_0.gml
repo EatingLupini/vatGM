@@ -1,5 +1,11 @@
 /// @description
 
+anim.sample = 30.0;
+if (point_distance_3d(x, y, 0, obj_camera.pl_x, obj_camera.pl_y, obj_camera.pl_z) >= 128)
+{
+	anim.sample = 1.0;
+}
+
 // ROT
 if (keyboard_check(ord("Z")))
 {

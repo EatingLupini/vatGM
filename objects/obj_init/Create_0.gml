@@ -23,7 +23,7 @@ models = ds_map_create();
 ds_map_add(models, "zombie", [model_temp, spr_tex_temp, anim_temp]);
 
 // debug
-show_debug_overlay(true);
+//show_debug_overlay(true);
 
 // go to test room
 room_goto(rm_test);

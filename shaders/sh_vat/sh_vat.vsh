@@ -30,6 +30,7 @@ uniform float u_time_old;
 // shared
 uniform vec2 u_tex_size;
 uniform float u_blend;
+uniform float u_sample_num;
 
 
 // mod function that works with negative numbers
@@ -45,32 +46,32 @@ void main()
 	float frame_px_half = frame_px * 0.5;
 	
 	// fix wobbling effect
-	float sample_num = 5.0;
+	//float u_sample_num = 5.0;
 	float sample_range = frame_px * 10.0;
 	
 	vec4 avg_pos = vec4(0.0);
-	for (float i=-sample_range*0.5; i<sample_range*0.5; i+=sample_range/sample_num)
+	for (float i=-sample_range*0.5; i<sample_range*0.5; i+=sample_range/u_sample_num)
 	{
 		if (u_loop)
 			avg_pos += texture2DLod(u_anim_offsets, vec2((in_Index + 0.5) / u_tex_size.x, mod_neg(u_time + frame_px_half + i, (u_frame_count - 1.0) * frame_px)), 0.0);
 		else
 			avg_pos += texture2DLod(u_anim_offsets, vec2((in_Index + 0.5) / u_tex_size.x, clamp(u_time + frame_px_half + i, 0.0, (u_frame_count - 1.0) * frame_px)), 0.0);
 	}
-	avg_pos /= sample_num;
+	avg_pos /= u_sample_num;
 	vec4 real_pos = avg_pos * u_offset_dist + u_offset_min;
 	
 	// blend animations
 	if (u_blend > 0.0)
 	{
 		avg_pos = vec4(0.0);
-		for (float i=-sample_range*0.5; i<sample_range*0.5; i+=sample_range/sample_num)
+		for (float i=-sample_range*0.5; i<sample_range*0.5; i+=sample_range/u_sample_num)
 		{
 			if (u_loop_old)
 				avg_pos += texture2DLod(u_anim_offsets_old, vec2((in_Index + 0.5) / u_tex_size.x, mod_neg(u_time_old + frame_px_half + i, (u_frame_count_old - 1.0) * frame_px)), 0.0);
 			else
 				avg_pos += texture2DLod(u_anim_offsets_old, vec2((in_Index + 0.5) / u_tex_size.x, clamp(u_time_old + frame_px_half + i, 0.0, (u_frame_count_old - 1.0) * frame_px)), 0.0);
 		}
-		avg_pos /= sample_num;
+		avg_pos /= u_sample_num;
 		vec4 real_pos_old = avg_pos * u_offset_dist_old + u_offset_min_old;
 		
 		real_pos = mix(real_pos_old, real_pos, u_blend);
@@ -91,22 +92,22 @@ void main()
 		vec4 color_normal_old = texture2DLod(u_anim_normals_old, vec2((in_Index + 0.5) / u_tex_size.x, clamp(u_time_old + frame_px_half, 0.0, (u_frame_count_old - 1.0) * frame_px)), 0.0);
 		color_normal = mix(color_normal_old, color_normal, u_blend);
 	}
-	vec4 real_normal = vec4((color_normal * 2.0 - 1.0).xyz, 0.0);
+	vec3 real_normal = color_normal.xyz * 2.0 - 1.0;
 	
     //Vertex data.
 	vertex_position = in_Position;
 	uvs = in_TextureCoord;
     vertex_color = in_Colour;
 	
-	//vec3 ttt = (gm_Matrices[MATRIX_WORLD] * vec4(in_Normal, 0.0)).xyz;
-	vec3 ttt = (gm_Matrices[MATRIX_WORLD] * real_normal).xyz;
-	vec4 in_normal_color = vec4((ttt + 1.0) * 0.5, 1.0);
-	//vec4 in_normal_color = vec4((in_Normal + 1.0) * 0.5, 1.0);
-    vertex_color = in_normal_color;
 	
-	//vec4 real_normal = color_normal * 2.0 - 1.0;
-	//normal = (gm_Matrices[MATRIX_WORLD] * vec4(real_normal.xyz, 0.0)).xyz;
+	vec3 ttt = vec3(real_normal.x, -real_normal.y, real_normal.z);
+	//normal = (gm_Matrices[MATRIX_WORLD] * vec4(in_Normal, 0.0)).xyz;
+	//normal = (gm_Matrices[MATRIX_WORLD] * vec4(real_normal, 0.0)).xyz;
+	normal = (gm_Matrices[MATRIX_WORLD] * vec4(ttt, 0.0)).xyz;
+	//normal = vec4(in_Normal, 0.0).xyz;
+	//normal = vec4(real_normal, 0.0).xyz;
 	
-	normal = (gm_Matrices[MATRIX_WORLD] * vec4(in_Normal, 0.0)).xyz;
+	//vertex_color = vec4((normal + 1.0) * 0.5, 1.0);
 }
+
 
