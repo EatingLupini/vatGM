@@ -98,15 +98,8 @@ void main()
 	vertex_position = in_Position;
 	uvs = in_TextureCoord;
     vertex_color = in_Colour;
-	
-	
-	vec3 ttt = vec3(real_normal.x, -real_normal.y, real_normal.z);
-	//normal = (gm_Matrices[MATRIX_WORLD] * vec4(in_Normal, 0.0)).xyz;
-	//normal = (gm_Matrices[MATRIX_WORLD] * vec4(real_normal, 0.0)).xyz;
-	normal = (gm_Matrices[MATRIX_WORLD] * vec4(ttt, 0.0)).xyz;
-	//normal = vec4(in_Normal, 0.0).xyz;
-	//normal = vec4(real_normal, 0.0).xyz;
-	
+	normal = (gm_Matrices[MATRIX_WORLD] * vec4(real_normal, 0.0)).xyz;
+
 	//vertex_color = vec4((normal + 1.0) * 0.5, 1.0);
 }
 
