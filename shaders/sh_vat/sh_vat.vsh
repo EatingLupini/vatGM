@@ -46,7 +46,6 @@ void main()
 	float frame_px_half = frame_px * 0.5;
 	
 	// fix wobbling effect
-	//float u_sample_num = 5.0;
 	float sample_range = frame_px * 10.0;
 	
 	vec4 avg_pos = vec4(0.0);

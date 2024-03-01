@@ -1,11 +1,11 @@
-function TextureMaterialAnim(texture, subimg, anim) : TextureMaterial(sh_vat, texture, subimg) constructor
+function TextureMaterialAnim(texture, subimg, anim_manager) : TextureMaterial(sh_vat, texture, subimg) constructor
 {
-	self.anim = anim;
+	self.anim_manager = anim_manager;
 	
 	static on_apply = function()
 	{
-		self.anim.step();
-		self.anim.set_shader_params();
+		self.anim_manager.step();
+		self.anim_manager.set_shader_params();
 	}
 }
 
