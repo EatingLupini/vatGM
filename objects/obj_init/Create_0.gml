@@ -14,7 +14,8 @@ init_animations();
 #macro TEXTURE	1
 #macro ANIMS	2
 
-var model_temp = load_model("test/model.obj");
+//var model_temp = load_model("test/model.obj");
+var model_temp = load_buffer_model("test/model.buf")
 model_temp.freeze();
 var spr_tex_temp = sprite_add("test/world_war_zombie_diffuse.png", 0, true, false, 0, 0);
 var anim_temp = load_vertex_animation("test/info.json");

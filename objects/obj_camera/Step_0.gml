@@ -10,11 +10,16 @@ if (keyboard_check_pressed(vk_escape))
 
 if (keyboard_check(190))	// .
 	gspd += 0.1;
-if (keyboard_check(188)) // ,
+if (keyboard_check(188))	// ,
 	gspd -= 0.1;
 
 if (keyboard_check_pressed(ord("L")))
 	game_set_speed(game_get_speed(gamespeed_fps) == 30 ? 60 : 30, gamespeed_fps);
+
+if (mouse_wheel_down())
+	pl_spd -= 0.1;
+if (mouse_wheel_up())
+	pl_spd += 0.1;
 
 
 #endregion
@@ -29,7 +34,7 @@ if (keyboard_check_pressed(ord("P")))
 }
 
 // movement
-pl_spd = keyboard_check(vk_shift) ? pl_spd_max : pl_spd_min;
+//pl_spd = keyboard_check(vk_shift) ? pl_spd_max : pl_spd_min;
 
 var dir_ws = (keyboard_check(ord("W")) - keyboard_check(ord("S"))) * !is_paused;
 var dir_da = (keyboard_check(ord("D")) - keyboard_check(ord("A"))) * !is_paused;

@@ -46,6 +46,7 @@
     {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"anim2_normal.png","CopyToMask":-1,"filePath":"datafiles/test",},
     {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"anim2_offset.png","CopyToMask":-1,"filePath":"datafiles/test",},
     {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"info.json","CopyToMask":-1,"filePath":"datafiles/test",},
+    {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"model.buf","CopyToMask":-1,"filePath":"datafiles/test",},
     {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"model.mtl","CopyToMask":-1,"filePath":"datafiles/test",},
     {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"model.obj","CopyToMask":-1,"filePath":"datafiles/test",},
     {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"world_war_zombie_diffuse.png","CopyToMask":-1,"filePath":"datafiles/test",},

@@ -46,7 +46,7 @@ void main()
 	float frame_px_half = frame_px * 0.5;
 	
 	// fix wobbling effect
-	float sample_range = frame_px * 10.0;
+	float sample_range = frame_px * 2.0;
 	
 	vec4 avg_pos = vec4(0.0);
 	for (float i=-sample_range*0.5; i<sample_range*0.5; i+=sample_range/u_sample_num)
@@ -74,6 +74,18 @@ void main()
 		vec4 real_pos_old = avg_pos * u_offset_dist_old + u_offset_min_old;
 		
 		real_pos = mix(real_pos_old, real_pos, u_blend);
+		
+		
+		/*
+		// better performance, lower quality
+		avg_pos = vec4(0.0);
+		if (u_loop_old)
+			avg_pos += texture2DLod(u_anim_offsets_old, vec2((in_Index + 0.5) / u_tex_size.x, mod_neg(u_time_old + frame_px_half, (u_frame_count_old - 1.0) * frame_px)), 0.0);
+		else
+			avg_pos += texture2DLod(u_anim_offsets_old, vec2((in_Index + 0.5) / u_tex_size.x, clamp(u_time_old + frame_px_half, 0.0, (u_frame_count_old - 1.0) * frame_px)), 0.0);
+		vec4 real_pos_old = avg_pos * u_offset_dist_old + u_offset_min_old;
+		real_pos = mix(real_pos_old, real_pos, u_blend);
+		*/
 	}
 	
 	// add offset to position
