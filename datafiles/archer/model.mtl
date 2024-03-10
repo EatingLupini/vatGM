@@ -1,0 +1,50 @@
+# Blender MTL File: 'archer_full.blend'
+# Material Count: 4
+
+newmtl Akai_MAT
+Ns 50.000012
+Ka 1.000000 1.000000 1.000000
+Kd 1.000000 1.000000 1.000000
+Ks 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 3
+map_Bump D:\\Davide\\home\\app\\mixamo-mini\\tmp\\skins_db42961a-023b-48a1-9c2d-092dfe7e35bb.fbm\\Erika_Archer_Clothes_normal.png
+map_Kd D:\\Davide\\home\\app\\mixamo-mini\\tmp\\skins_db42961a-023b-48a1-9c2d-092dfe7e35bb.fbm\\Erika_Archer_Clothes_diffuse.png
+
+newmtl Body_MAT
+Ns 63.117921
+Ka 0.500000 0.500000 0.500000
+Kd 1.000000 1.000000 1.000000
+Ks 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 3
+map_Bump D:\\Davide\\home\\app\\mixamo-mini\\tmp\\skins_db42961a-023b-48a1-9c2d-092dfe7e35bb.fbm\\FemaleFitA_StdNM.png
+map_Kd D:\\Davide\\home\\app\\mixamo-mini\\tmp\\skins_db42961a-023b-48a1-9c2d-092dfe7e35bb.fbm\\FemaleFitA_Body_diffuse.png
+
+newmtl EyeSpec_MAT
+Ns 514.188036
+Ka 0.500000 0.500000 0.500000
+Kd 1.000000 1.000000 1.000000
+Ks 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 3
+map_Bump D:\\Davide\\home\\app\\mixamo-mini\\tmp\\skins_db42961a-023b-48a1-9c2d-092dfe7e35bb.fbm\\FemaleFitA_StdNM.png
+map_Kd D:\\Davide\\home\\app\\mixamo-mini\\tmp\\skins_db42961a-023b-48a1-9c2d-092dfe7e35bb.fbm\\FemaleFitA_Body_diffuse.png
+
+newmtl eyelash_MAT
+Ns 199.999995
+Ka 0.500000 0.500000 0.500000
+Kd 1.000000 1.000000 1.000000
+Ks 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 3
+map_Kd D:\\Davide\\home\\app\\mixamo-mini\\tmp\\skins_db42961a-023b-48a1-9c2d-092dfe7e35bb.fbm\\FemaleFitA_eyelash_diffuse.png
+map_d D:\\Davide\\home\\app\\mixamo-mini\\tmp\\skins_db42961a-023b-48a1-9c2d-092dfe7e35bb.fbm\\FemaleFitA_eyelash_diffuse.png

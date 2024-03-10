@@ -20,9 +20,6 @@
 
 
 bl_info = {
-    "original_work": "https://github.com/JoshRBogart/unreal_tools",
-    "original_author": "Joshua Bogart",
-    
     "name": "Vertex Animation Texture",
     "author": "Davide Modenese",
     "version": (1, 0),
@@ -47,17 +44,18 @@ def print_debug(data):
         for area in screen.areas:
             if area.type == 'CONSOLE':
                 override = {'window': window, 'screen': screen, 'area': area}
-                bpy.ops.console.scrollback_append(override, text=str(data), type="OUTPUT")  
+                bpy.ops.console.scrollback_append(override, text=str(data), type="OUTPUT")
 
 
-def get_per_frame_mesh_data(context, data, objects):
+def set_per_frame_mesh_data(context, data, objects, anim):
     """Return a list of combined mesh data per frame"""
     meshes = []
-    for i in frame_range(context.scene):
+    for i in range(anim['frame_start'], anim['frame_end'] + 1):
         context.scene.frame_set(i)
         depsgraph = context.evaluated_depsgraph_get()
         bm = bmesh.new()
         for ob in objects:
+            ob.modifiers["Armature"].object = bpy.data.objects[anim['name']]
             eval_object = ob.evaluated_get(depsgraph)
             me = data.meshes.new_from_object(eval_object)
             me.transform(ob.matrix_world)
@@ -68,7 +66,7 @@ def get_per_frame_mesh_data(context, data, objects):
         bm.free()
         me.calc_normals()
         meshes.append(me)
-    return meshes
+    anim['meshes'] = meshes
 
 
 def create_export_mesh_object(context, data, me):
@@ -86,31 +84,19 @@ def create_export_mesh_object(context, data, me):
     return ob
 
 
-def get_vertex_data(data, original_mesh, meshes, anim_info):
+def get_vertex_data(data, original_mesh, anim):
     """Return lists of vertex offsets and normals from a list of mesh data"""
-    num_vertices = len(meshes[0].vertices)
-    num_frames = len(meshes)
-    num_max = max(num_vertices, num_frames)
-    tex_size = 1;
-    while tex_size < num_max:
-        tex_size *= 2;
-    
     original = original_mesh.vertices
     offsets = []
     offsets_range = [0, 0]  # min - max
-    offsets_normalized = []
-    normals_full = []
     normals = []
-    for me in reversed(meshes):
+    for me in reversed(anim['meshes']):
         row = []
         row_normal = []
         for v in me.vertices:
-            # offsets
+            # offsets (si potrebbe fare anche sta roba -> vec.xyz = vec.zyx)
             offset = v.co - original[v.index].co
-            
-            # switch axes
-            # si potrebbe fare anche sta roba -> vec.xyz = vec.zyx
-            offset[0], offset[1] = offset[1], offset[0]
+            offset[0], offset[1] = offset[1], offset[0]  # switch axes
             offset[0] *= -1
             
             # add offset to the list
@@ -135,53 +121,48 @@ def get_vertex_data(data, original_mesh, meshes, anim_info):
         if not me.users:
             data.meshes.remove(me)
     
-    
-    # normalize offsets
-    dist_max = offsets_range[1] - offsets_range[0]
-    for temp_j in range(tex_size):
-        if temp_j >= tex_size - len(offsets):
-            j = temp_j - tex_size + len(offsets)
-            for i in range(tex_size):
-                if i < len(offsets[j]):
-                    for axis in offsets[j][i]:
-                        axis_norm = (axis - offsets_range[0]) / dist_max
-                        offsets_normalized.append(axis_norm)
-                    offsets_normalized.append(1)
-                    normals_full.extend(normals[j][i])
-                else:
-                    offsets_normalized.extend([0, 0, 0, 0])
-                    normals_full.extend([0, 0, 0, 0])
-        else:
-            for i in range(tex_size):
-                offsets_normalized.extend([0, 0, 0, 0])
-                normals_full.extend([0, 0, 0, 0])
-    
-    # debug
-    # print_debug(f'num_vertices: {num_vertices} - num_frames: {num_frames} - tex_size: {tex_size}')
-    # print_debug(offsets_range)
-    # print_debug(dist_max)
-    
-    # add stats to info
-    anim_info['num_vertices'] = num_vertices
-    anim_info['num_frames'] = num_frames
-    anim_info['tex_size'] = tex_size
-    
-    # add offsets_range and dist_max to info
-    anim_info['offset_min'] = offsets_range[0]
-    anim_info['offset_max'] = offsets_range[1]
-    anim_info['dist'] = dist_max
-    
-    return offsets_normalized, normals_full, (tex_size, tex_size)
+    return offsets, normals, offsets_range
 
 
-def frame_range(scene):
-    """Return a range object with with scene's frame start, end, and step"""
-    return range(scene.frame_start, scene.frame_end + 1, scene.frame_step)
+def merge_vertex_data(animations, tex_size):
+    offsets_final = []
+    normals_final = []
+    
+    for anim in reversed(animations):
+        offset_min = anim['offset_min']
+        dist = anim['dist']
+
+        offsets = anim['offsets']
+        normals = anim['normals']
+
+        # https://blender.stackexchange.com/questions/643/is-it-possible-to-create-image-data-and-save-to-a-file-from-a-script
+        for j in range(len(offsets)):
+            offsets_row = offsets[j]
+            normals_row = normals[j]
+            for i in range(len(offsets_row)):
+                offsets_vert = offsets_row[i]
+                normals_vert = normals_row[i]
+                for axis in offsets_vert:
+                    axis_norm = (axis - offset_min) / dist
+                    offsets_final.append(axis_norm)
+                offsets_final.append(1)
+                normals_final.extend(normals_vert)
+            # fill the row with transparent pixels
+            missing_pixels = [0, 0, 0, 0] * (tex_size - len(offsets_row))
+            offsets_final.extend(missing_pixels)
+            normals_final.extend(missing_pixels)
+    
+    #fill the image with transparent pixels
+    missing_pixels = [0] * (tex_size*tex_size*4 - len(offsets_final))
+    offsets_final[0:0] = missing_pixels
+    normals_final[0:0] = missing_pixels
+    
+    return offsets_final, normals_final
 
 
-def bake_vertex_data(context, data, offsets, normals, size):
+def bake_vertex_data(data, offsets, normals, size):
     """Stores vertex offsets and normals in seperate image textures"""
-    width, height = size
+    width, height = size, size
     offset_texture = data.images.new(
         name="offsets",
         width=width,
@@ -213,7 +194,7 @@ def bake_vertex_data(context, data, offsets, normals, size):
     return offset_texture, normal_texture
 
 
-def writeMesh(path, filename):
+def write_mesh(path, filename):
     fp = path + filename
     
     # ---- BUG ---- somehow it exports two meshes
@@ -226,6 +207,7 @@ def writeMesh(path, filename):
     bpy.ops.export_scene.obj(
         filepath=fp,
         check_existing=True,
+        use_selection=True,
         use_mesh_modifiers=True,
         use_uvs=True,
         use_normals=True,
@@ -235,7 +217,7 @@ def writeMesh(path, filename):
     )
 
 
-def writeTextures(textures, path, filenames):
+def write_textures(textures, path, filenames):
     offset_texture, normal_texture = textures
     
     # write offset texture
@@ -249,9 +231,43 @@ def writeTextures(textures, path, filenames):
     normal_texture.save()
 
 
-def writeJson(info, path):
+def write_json(info, path):
     with open(path + "info.json", "w") as outfile:
         json.dump(info, outfile, indent=4)
+
+
+def test_data(selected_obj):
+    print_debug("selected_obj: " + str(selected_obj))
+    selected_obj.modifiers["Armature"].object = bpy.data.objects["run_back"]
+
+    for scene in bpy.data.scenes:
+        for ob in scene.objects:
+            # print_debug(ob)
+            if (ob.animation_data is not None and ob.animation_data.action is not None):
+                print_debug("ARM: " + ob.name)
+                print_debug("ARM: " + str(ob.animation_data.action.frame_range.x))
+                print_debug("ARM: " + str(ob.animation_data.action.frame_range.y))
+
+
+def get_all_animations(scene):
+    anims = list()
+    frame_count = 0
+    for ob in scene.objects:
+        is_valid_ob = ob.animation_data is not None and \
+                        ob.animation_data.action is not None and \
+                        ob.type == 'ARMATURE'
+        if (is_valid_ob):
+            f_start = ob.animation_data.action.frame_range.x
+            f_end = ob.animation_data.action.frame_range.y
+            frame_count += f_end - f_start + 1
+
+            anims.append({
+                'name': ob.name,
+                'frame_start': int(f_start),
+                'frame_end': int(f_end)
+            })
+    
+    return anims, frame_count
 
 
 class OBJECT_OT_ProcessAnimMeshes(bpy.types.Operator):
@@ -261,7 +277,7 @@ class OBJECT_OT_ProcessAnimMeshes(bpy.types.Operator):
     bl_label = "Process"
     
     bpy.types.WindowManager.export_anim_name = bpy.props.StringProperty(
-        default="anim0",
+        default="anim",
         name="Animation Name",
         description="Animation name used in the json file.")
     bpy.types.WindowManager.export_mesh_toggle = bpy.props.BoolProperty(default=True)
@@ -297,10 +313,15 @@ class OBJECT_OT_ProcessAnimMeshes(bpy.types.Operator):
         ob = context.object
         wm = context.window_manager
         data = bpy.data
-        
+
         objects = [ob for ob in context.selected_objects if ob.type == 'MESH']
         vertex_count = sum([len(ob.data.vertices) for ob in objects])
-        frame_count = len(frame_range(context.scene))
+        animations, frame_count = get_all_animations(context.scene)
+        
+        print_debug(f"Verteces count: {vertex_count}")
+        print_debug(f"Animations count: {len(animations)}")
+        print_debug(f"Frames count: {frame_count}")
+        
         for ob in objects:
             for mod in ob.modifiers:
                 if mod.type not in self.allowed_modifiers:
@@ -330,62 +351,96 @@ class OBJECT_OT_ProcessAnimMeshes(bpy.types.Operator):
         # export data
         info = dict()
         info['animations'] = []
-        #info['vertex_count'] = vertex_count
-        
-        # get per frame mesh
-        meshes = get_per_frame_mesh_data(context, data, objects)
         
         # get pose mesh
         mesh = ob.data
         export_mesh_data = mesh.copy()
         export_mesh_data.transform(ob.matrix_world)
-        
+
+        # add stats to info
+        num_vertices = len(export_mesh_data.vertices)
+        num_max = max(num_vertices, frame_count)
+        tex_size = 1;
+        while tex_size < num_max:
+            tex_size *= 2;
+        info['num_vertices'] = num_vertices
+        info['num_frames'] = frame_count
+        info['tex_size'] = tex_size
+
         # create and write export mesh
-        final_mesh = None
         if wm.export_mesh_toggle:
             # create
+            print_debug("Creating mesh...")
             create_export_mesh_object(context, data, export_mesh_data)
-            print_debug("Creating mesh... Done.")
+            print_debug("Done.")
             
             # write
+            print_debug("Writing mesh...")
             mesh_filename = "model.obj"
-            writeMesh(self.directory, mesh_filename)
-            print_debug("Writing mesh... Done.")
+            write_mesh(self.directory, mesh_filename)
+            print_debug("Done.")
             
             # add model filename to info
             info['model_name'] = mesh_filename
-        
+
         # create and write textures
-        offsets_tex, normals_tex = None, None
         if wm.export_textures_toggle:
-            # anim info
-            anim_info = dict()
-            anim_info['name'] = wm.export_anim_name
-            anim_info['loop'] = False
-            anim_info['speed'] = 1
-            
+            print_debug("Writing texture...")
+            frame_start = 0
+            # loop through all animations found
+            for anim in animations:
+                # get per frame mesh
+                set_per_frame_mesh_data(context, data, objects, anim)
+
+                # anim info
+                anim_info = dict()
+                anim_info['name'] = anim['name']
+                anim_info['loop'] = False
+                anim_info['speed'] = 1
+                
+                # get data
+                offsets_tex, normals_tex = None, None
+                offsets, normals, offsets_range = get_vertex_data(data, export_mesh_data, anim)
+                anim['offsets'] = offsets
+                anim['normals'] = normals
+                anim['offset_min'] = offsets_range[0]
+                anim['offset_max'] = offsets_range[1]
+                anim['dist'] = offsets_range[1] - offsets_range[0]
+
+                # add offsets_range and dist_max to info
+                anim_info['frame_start'] = frame_start
+                anim_info['frame_end'] = frame_start + len(anim['meshes']) - 1
+                anim_info['offset_min'] = offsets_range[0]
+                anim_info['offset_max'] = offsets_range[1]
+                anim_info['dist'] = offsets_range[1] - offsets_range[0]
+
+                # add anim info
+                info['animations'].append(anim_info)
+
+                # next frame start
+                frame_start += len(anim['meshes'])
+
             # create
-            offsets, normals, texture_size = get_vertex_data(data, export_mesh_data, meshes, anim_info)
-            offsets_tex, normals_tex = bake_vertex_data(context, data, offsets, normals, texture_size)
-            print_debug("Creating textures... Done.")
-            
+            offsets_final, normals_final = merge_vertex_data(animations, tex_size)
+            offsets_tex, normals_tex = bake_vertex_data(data, offsets_final, normals_final, tex_size)
+                
             # write
             text_filenames = [
                 wm.export_anim_name + "_offset.png",
                 wm.export_anim_name + "_normal.png"
                 ]
-            writeTextures([offsets_tex, normals_tex], self.directory, text_filenames)
-            print_debug("Writing textures... Done.")
+            write_textures([offsets_tex, normals_tex], self.directory, text_filenames)
             
             # add texture data to info
-            anim_info['offset_tex_name'] = text_filenames[0]
-            anim_info['normal_tex_name'] = text_filenames[1]
-            info['animations'].append(anim_info)
+            info['offsets_tex_name'] = text_filenames[0]
+            info['normals_tex_name'] = text_filenames[1]
+            print_debug("Done.")
         
         # write json
         if wm.export_json_toggle and (wm.export_mesh_toggle or wm.export_textures_toggle):
-            writeJson(info, self.directory)
-            print_debug("Writing json... Done.")
+            print_debug("Writing json...")
+            write_json(info, self.directory)
+            print_debug("Done.")
         
         print_debug("FINISHED")
         

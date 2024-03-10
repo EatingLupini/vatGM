@@ -34,6 +34,11 @@
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Tile Sets","folderPath":"folders/Tile Sets.yy",},
   ],
   "IncludedFiles": [
+    {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"anim_normal.png","CopyToMask":-1,"filePath":"datafiles/archer",},
+    {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"anim_offset.png","CopyToMask":-1,"filePath":"datafiles/archer",},
+    {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"info.json","CopyToMask":-1,"filePath":"datafiles/archer",},
+    {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"model.mtl","CopyToMask":-1,"filePath":"datafiles/archer",},
+    {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"model.obj","CopyToMask":-1,"filePath":"datafiles/archer",},
     {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"cube.mtl","CopyToMask":-1,"filePath":"datafiles/cube",},
     {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"cube.obj","CopyToMask":-1,"filePath":"datafiles/cube",},
     {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"normals.png","CopyToMask":-1,"filePath":"datafiles/cube",},
