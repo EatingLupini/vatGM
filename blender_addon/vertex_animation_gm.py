@@ -49,13 +49,16 @@ def print_debug(data):
 
 def set_per_frame_mesh_data(context, data, objects, anim):
     """Return a list of combined mesh data per frame"""
+    # update the armature modifier with the current animation
+    for ob in objects:
+        ob.modifiers[0].object = bpy.data.objects[anim['name']]
+
     meshes = []
     for i in range(anim['frame_start'], anim['frame_end'] + 1):
         context.scene.frame_set(i)
         depsgraph = context.evaluated_depsgraph_get()
         bm = bmesh.new()
         for ob in objects:
-            ob.modifiers["Armature"].object = bpy.data.objects[anim['name']]
             eval_object = ob.evaluated_get(depsgraph)
             me = data.meshes.new_from_object(eval_object)
             me.transform(ob.matrix_world)
@@ -67,7 +70,6 @@ def set_per_frame_mesh_data(context, data, objects, anim):
         me.calc_normals()
         meshes.append(me)
     anim['meshes'] = meshes
-
 
 def create_export_mesh_object(context, data, me):
     """Return a mesh object with correct UVs"""

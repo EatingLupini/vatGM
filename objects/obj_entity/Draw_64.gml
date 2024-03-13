@@ -1,5 +1,3 @@
 /// @description
 
-//draw_sprite_stretched(anims_info[0].spr_normals, 0, 0, 128, 512, 512);
-
-draw_text(256, 32, string("dist: {0}\na: {1}\nsample_num: {2}", dist, a, 2 + round(a)));
+draw_text(256, 32, string("time: {0}\ncurrent_anim: {1}", anim_manager.time, list_anims_name[current_anim]));

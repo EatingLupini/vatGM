@@ -1,38 +1,64 @@
+// Model Animations
+function ModelAnimations(info) constructor
+{
+	/*
+	"model_name": "model.obj",
+    "tex_diffuse": "tex_diffuse.png",
+    "num_vertices": 5588,
+    "num_frames": 505.0,
+    "tex_size": 8192,
+    "offsets_tex_name": "anim_offset.png",
+    "normals_tex_name": "anim_normal.png",
+	"animations": 
+	*/
+	
+	self.path = info.path;
+	self.filename = info.model_name;
+	self.tex_diffuse = info.tex_diffuse;
+	self.vertex_count = info.num_vertices;
+	self.frames_count = info.num_frames;
+	self.tex_size = info.tex_size;
+	self.spr_offsets = sprite_add(info.path + info.offsets_tex_name, 0, false, false, 0, 0);
+	self.spr_normals = sprite_add(info.path + info.normals_tex_name, 0, false, false, 0, 0);
+	self.tex_offsets = sprite_get_texture(self.spr_offsets, 0);
+	self.tex_normals = sprite_get_texture(self.spr_normals, 0);
+	self.animations = ds_map_create();
+	
+	// create vertex animation
+	for (var i=0; i<array_length(info.animations); i++)
+	{
+		var anim = new VertexAnimation(info.animations[i]);
+		ds_map_add(self.animations, anim.name, anim)
+	}
+}
+
 // Vertex Animation Data
 function VertexAnimation(anim_info) constructor
 {
 	/*
-	"name": "anim0",
-    "num_vertices": 7882,
-    "num_frames": 130,
-    "tex_size": 8192,
-    "offset_min": -1.9254114627838135,
-    "offset_max": 1.3608264923095703,
-    "dist": 3.286237955093384,
-    "offset_tex_name": "anim0_offset.png",
-    "normal_tex_name": "anim0_normal.png"
+    "name": "idle",
+    "loop": false,
+    "speed": 1,
+    "frame_start": 0,
+    "frame_end": 153,
+    "offset_min": -0.7483420968055725,
+    "offset_max": 0.7136947512626648,
+    "dist": 1.4620368480682373
 	*/
 	
 	self.name = anim_info.name;
 	self.loop = anim_info.loop;
 	self.speed = anim_info.speed;
-	self.vertex_count = anim_info.num_vertices;
-	self.frame_count = anim_info.num_frames;
-	self.tex_size = anim_info.tex_size;
+	self.frame_start = anim_info.frame_start;
+	self.frame_end = anim_info.frame_end;
 	self.offset_min = anim_info.offset_min;
 	self.offset_max = anim_info.offset_max;
 	self.offset_dist = anim_info.dist;
-	self.spr_offsets = sprite_add(anim_info.path + anim_info.offset_tex_name, 0, false, false, 0, 0);
-	self.spr_normals = sprite_add(anim_info.path + anim_info.normal_tex_name, 0, false, false, 0, 0);
-	self.tex_offsets = sprite_get_texture(self.spr_offsets, 0);
-	self.tex_normals = sprite_get_texture(self.spr_normals, 0);
 }
 
-// load vertex animation
-function load_vertex_animation(filename)
+// load model animations
+function load_model_animations(filename)
 {
-	var anims = array_create(0);
-	
 	// check if file exists
 	if (!file_exists(filename))
 		throw "File \"" + string(filename) + "\" not found.";
@@ -51,15 +77,10 @@ function load_vertex_animation(filename)
 	
 	// parse json
 	var full_info = json_parse(full_info_text);
+	full_info.path = directory;
 	
-	// create vertex animation
-	for (var i=0; i<array_length(full_info.animations); i++)
-	{
-		var anim_info = full_info.animations[i];
-		anim_info.path = directory;
-		var anim = new VertexAnimation(anim_info);
-		anims[i] = anim;
-	}
+	// create model animations
+	var model_anims = new ModelAnimations(full_info);
 	
-	return anims;
+	return model_anims;
 }

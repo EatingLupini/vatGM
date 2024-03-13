@@ -1,6 +1,6 @@
 function init_animations()
 {
-	globalvar	anim_offsets_param, anim_normals_param, frame_count_param,
+	globalvar	anim_offsets_param, anim_normals_param, frame_start_param, frame_end_param,
 				offset_min_param, offset_dist_param, loop_param, time_param,
 				anim_offsets_old_param, anim_normals_old_param, frame_count_old_param,
 				offset_min_old_param, offset_dist_old_param, loop_old_param, time_old_param,
@@ -9,13 +9,15 @@ function init_animations()
 	// anim 1
 	anim_offsets_param = shader_get_sampler_index(sh_vat, "u_anim_offsets");
 	anim_normals_param = shader_get_sampler_index(sh_vat, "u_anim_normals");
-	frame_count_param = shader_get_uniform(sh_vat, "u_frame_count");
+	frame_start_param = shader_get_uniform(sh_vat, "u_frame_start");
+	frame_end_param = shader_get_uniform(sh_vat, "u_frame_end");
 	offset_min_param = shader_get_uniform(sh_vat, "u_offset_min");
 	offset_dist_param = shader_get_uniform(sh_vat, "u_offset_dist");
 	loop_param = shader_get_uniform(sh_vat, "u_loop");
 	time_param = shader_get_uniform(sh_vat, "u_time");
 	
 	// anim 2
+	/*
 	anim_offsets_old_param = shader_get_sampler_index(sh_vat, "u_anim_offsets_old");
 	anim_normals_old_param = shader_get_sampler_index(sh_vat, "u_anim_normals_old");
 	frame_count_old_param = shader_get_uniform(sh_vat, "u_frame_count_old");
@@ -23,6 +25,7 @@ function init_animations()
 	offset_dist_old_param = shader_get_uniform(sh_vat, "u_offset_dist_old");
 	loop_old_param = shader_get_uniform(sh_vat, "u_loop_old");
 	time_old_param = shader_get_uniform(sh_vat, "u_time_old");
+	*/
 	
 	// shared
 	tex_size_param = shader_get_uniform(sh_vat, "u_tex_size");
@@ -31,9 +34,10 @@ function init_animations()
 }
 
 
-function AnimationManager(anim, anim_end_func) constructor
+function AnimationManager(model_anims, anim_name, anim_end_func) constructor
 {
-	self.anim = anim;
+	self.model_anims = model_anims;
+	self.anim = model_anims.animations[? anim_name];
 	self.anim_end_func = anim_end_func;
 	self.time = 0;
 	
@@ -52,15 +56,17 @@ function AnimationManager(anim, anim_end_func) constructor
 			return;
 		
 		// anim 1
-		texture_set_stage_vs(anim_offsets_param, self.anim.tex_offsets);
-		texture_set_stage_vs(anim_normals_param, self.anim.tex_normals);
-		shader_set_uniform_f(frame_count_param, self.anim.frame_count);
+		texture_set_stage_vs(anim_offsets_param, self.model_anims.tex_offsets);
+		texture_set_stage_vs(anim_normals_param, self.model_anims.tex_normals);
+		shader_set_uniform_f(frame_start_param, self.anim.frame_start);
+		shader_set_uniform_f(frame_end_param, self.anim.frame_end);
 		shader_set_uniform_f(offset_min_param, self.anim.offset_min);
 		shader_set_uniform_f(offset_dist_param, self.anim.offset_dist);
 		shader_set_uniform_f(loop_param, self.anim.loop);
-		shader_set_uniform_f(time_param, (self.time / self.anim.tex_size));
+		shader_set_uniform_f(time_param, (self.time / self.model_anims.tex_size));
 		
 		// anim 2
+		/*
 		if (self.anim_old != undefined)
 		{
 			texture_set_stage_vs(anim_offsets_old_param, self.anim_old.tex_offsets);
@@ -71,9 +77,10 @@ function AnimationManager(anim, anim_end_func) constructor
 			shader_set_uniform_f(loop_old_param, self.anim_old.loop);
 			shader_set_uniform_f(time_old_param, (self.time_old % (self.anim_old.frame_count - 1) / self.anim_old.tex_size));
 		}
+		*/
 		
 		// shared
-		shader_set_uniform_f(tex_size_param, self.anim.tex_size, self.anim.tex_size);
+		shader_set_uniform_f(tex_size_param, self.model_anims.tex_size, self.model_anims.tex_size);
 		shader_set_uniform_f(blend_param, self.blend);
 		shader_set_uniform_f(sample_param, self.sample_num);
 	}
@@ -85,6 +92,7 @@ function AnimationManager(anim, anim_end_func) constructor
 		if (self.anim == undefined or self.anim_over)
 			return;
 		
+		/*
 		// blending
 		if (self.anim_old != undefined)
 		{
@@ -98,6 +106,7 @@ function AnimationManager(anim, anim_end_func) constructor
 				self.anim_old = undefined;
 			}
 		}
+		*/
 		
 		// sample num
 		if (self.sample_func != undefined)
@@ -109,8 +118,9 @@ function AnimationManager(anim, anim_end_func) constructor
 		self.time += dt * 60 * self.anim.speed * gspd;
 		
 		// animation over
+		var frame_count = self.anim.frame_end - self.anim.frame_start;
 		if (!self.anim_over and 
-			(self.time >= self.anim.frame_count - 1 or self.time <= -self.anim.frame_count + 1))
+			(self.time >= frame_count or self.time <= -frame_count))
 		{
 			if (!self.anim.loop)
 				self.anim_over = true;
@@ -122,9 +132,9 @@ function AnimationManager(anim, anim_end_func) constructor
 		}
 	}
 	
-	static set_animation = function(new_anim)
+	static set_animation = function(anim_new)
 	{
-		self.anim = new_anim;
+		self.anim = self.model_anims.animations[? anim_new];
 		self.anim_over = false;
 		self.time = 0;
 	}
@@ -150,6 +160,11 @@ function AnimationManager(anim, anim_end_func) constructor
 	{
 		self.sample_num = num;
 		self.sample_func = func;
+	}
+	
+	static get_animations_list = function()
+	{
+		return ds_map_keys_to_array(self.model_anims.animations);
 	}
 }
 

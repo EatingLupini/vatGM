@@ -9,9 +9,11 @@ if (keyboard_check_pressed(vk_escape))
 	game_end();
 
 if (keyboard_check(190))	// .
-	gspd += 0.1;
+	gspd += 0.01;
 if (keyboard_check(188))	// ,
-	gspd -= 0.1;
+	gspd -= 0.01;
+if (keyboard_check(189))	// -
+	gspd = 0;
 
 if (keyboard_check_pressed(ord("L")))
 	game_set_speed(game_get_speed(gamespeed_fps) == 30 ? 60 : 30, gamespeed_fps);

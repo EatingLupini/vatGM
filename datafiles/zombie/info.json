@@ -1,0 +1,21 @@
+{
+    "animations": [
+        {
+            "name": "walking",
+            "loop": true,
+            "speed": 1,
+            "frame_start": 0,
+            "frame_end": 31,
+            "offset_min": -0.8162100911140442,
+            "offset_max": 0.8384729623794556,
+            "dist": 1.6546830534934998
+        }
+    ],
+    "model_name": "model.obj",
+    "tex_diffuse": "tex_diffuse.png",
+    "num_vertices": 7882,
+    "num_frames": 32.0,
+    "tex_size": 8192,
+    "offsets_tex_name": "anim_offset.png",
+    "normals_tex_name": "anim_normal.png"
+}

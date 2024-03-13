@@ -2,7 +2,7 @@
     "animations": [
         {
             "name": "idle",
-            "loop": false,
+            "loop": true,
             "speed": 1,
             "frame_start": 0,
             "frame_end": 153,
@@ -12,7 +12,7 @@
         },
         {
             "name": "run_back",
-            "loop": false,
+            "loop": true,
             "speed": 1,
             "frame_start": 154,
             "frame_end": 174,
@@ -22,7 +22,7 @@
         },
         {
             "name": "run_forward",
-            "loop": false,
+            "loop": true,
             "speed": 1,
             "frame_start": 175,
             "frame_end": 201,
@@ -32,7 +32,7 @@
         },
         {
             "name": "stop_forward",
-            "loop": false,
+            "loop": true,
             "speed": 1,
             "frame_start": 202,
             "frame_end": 228,
@@ -42,7 +42,7 @@
         },
         {
             "name": "run_left",
-            "loop": false,
+            "loop": true,
             "speed": 1,
             "frame_start": 229,
             "frame_end": 249,
@@ -52,7 +52,7 @@
         },
         {
             "name": "run_right",
-            "loop": false,
+            "loop": true,
             "speed": 1,
             "frame_start": 250,
             "frame_end": 273,
@@ -62,7 +62,7 @@
         },
         {
             "name": "turn_left",
-            "loop": false,
+            "loop": true,
             "speed": 1,
             "frame_start": 274,
             "frame_end": 312,
@@ -72,7 +72,7 @@
         },
         {
             "name": "turn_right",
-            "loop": false,
+            "loop": true,
             "speed": 1,
             "frame_start": 313,
             "frame_end": 346,
@@ -82,7 +82,7 @@
         },
         {
             "name": "walk_back",
-            "loop": false,
+            "loop": true,
             "speed": 1,
             "frame_start": 347,
             "frame_end": 391,
@@ -92,7 +92,7 @@
         },
         {
             "name": "walk_forward",
-            "loop": false,
+            "loop": true,
             "speed": 1,
             "frame_start": 392,
             "frame_end": 428,
@@ -102,7 +102,7 @@
         },
         {
             "name": "walk_left",
-            "loop": false,
+            "loop": true,
             "speed": 1,
             "frame_start": 429,
             "frame_end": 465,
@@ -112,7 +112,7 @@
         },
         {
             "name": "walk_right",
-            "loop": false,
+            "loop": true,
             "speed": 1,
             "frame_start": 466,
             "frame_end": 502,
@@ -132,6 +132,7 @@
         }
     ],
     "model_name": "model.obj",
+    "tex_diffuse": "tex_diffuse.png",
     "num_vertices": 5588,
     "num_frames": 505.0,
     "tex_size": 8192,

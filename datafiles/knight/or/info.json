@@ -1,0 +1,142 @@
+{
+    "animations": [
+        {
+            "name": "walk_forward",
+            "loop": true,
+            "speed": 0.5,
+            "frame_start": 0,
+            "frame_end": 31,
+            "offset_min": -0.8262448906898499,
+            "offset_max": 0.721109926700592,
+            "dist": 1.547354817390442
+        },
+        {
+            "name": "run_forward",
+            "loop": true,
+            "speed": 0.5,
+            "frame_start": 32,
+            "frame_end": 53,
+            "offset_min": -0.8882966041564941,
+            "offset_max": 0.8610659837722778,
+            "dist": 1.749362587928772
+        },
+        {
+            "name": "turn_right_90",
+            "loop": false,
+            "speed": 0.5,
+            "frame_start": 54,
+            "frame_end": 82,
+            "offset_min": -0.9116227030754089,
+            "offset_max": 0.8952367901802063,
+            "dist": 1.8068594932556152
+        },
+        {
+            "name": "turn_right_180",
+            "loop": false,
+            "speed": 0.5,
+            "frame_start": 83,
+            "frame_end": 130,
+            "offset_min": -1.1679490804672241,
+            "offset_max": 1.1619837284088135,
+            "dist": 2.3299328088760376
+        },
+        {
+            "name": "walk_strafe_right",
+            "loop": true,
+            "speed": 0.5,
+            "frame_start": 131,
+            "frame_end": 162,
+            "offset_min": -0.9766495227813721,
+            "offset_max": 0.8011987805366516,
+            "dist": 1.7778483033180237
+        },
+        {
+            "name": "run_strafe_right",
+            "loop": true,
+            "speed": 0.5,
+            "frame_start": 163,
+            "frame_end": 183,
+            "offset_min": -1.2700119018554688,
+            "offset_max": 1.0708489418029785,
+            "dist": 2.3408608436584473
+        },
+        {
+            "name": "t_pose",
+            "loop": false,
+            "speed": 0.5,
+            "frame_start": 184,
+            "frame_end": 185,
+            "offset_min": -0.8711093068122864,
+            "offset_max": 0.6565704345703125,
+            "dist": 1.5276797413825989
+        },
+        {
+            "name": "turn_left_90",
+            "loop": false,
+            "speed": 0.5,
+            "frame_start": 186,
+            "frame_end": 213,
+            "offset_min": -0.8662256598472595,
+            "offset_max": 0.8750917315483093,
+            "dist": 1.7413173913955688
+        },
+        {
+            "name": "turn_left_180",
+            "loop": false,
+            "speed": 0.5,
+            "frame_start": 214,
+            "frame_end": 261,
+            "offset_min": -1.1472506523132324,
+            "offset_max": 1.1375339031219482,
+            "dist": 2.2847845554351807
+        },
+        {
+            "name": "walk_strafe_left",
+            "loop": true,
+            "speed": 0.5,
+            "frame_start": 262,
+            "frame_end": 293,
+            "offset_min": -0.8035833835601807,
+            "offset_max": 0.9756104350090027,
+            "dist": 1.7791938185691833
+        },
+        {
+            "name": "run_strafe_left",
+            "loop": true,
+            "speed": 0.5,
+            "frame_start": 294,
+            "frame_end": 314,
+            "offset_min": -1.0752339363098145,
+            "offset_max": 1.2616065740585327,
+            "dist": 2.336840510368347
+        },
+        {
+            "name": "jump",
+            "loop": false,
+            "speed": 0.5,
+            "frame_start": 315,
+            "frame_end": 380,
+            "offset_min": -1.0776695013046265,
+            "offset_max": 1.0261229276657104,
+            "dist": 2.103792428970337
+        },
+        {
+            "name": "idle",
+            "loop": true,
+            "speed": 0.5,
+            "frame_start": 381,
+            "frame_end": 627,
+            "offset_min": -0.7118440270423889,
+            "offset_max": 0.6815999150276184,
+            "dist": 1.3934439420700073
+        }
+    ],
+    "model_name": "model.obj",
+    "tex_diffuse": "tex_diffuse.png",
+    "num_vertices": 7825,
+    "num_frames": 628.0,
+    "tex_size": 8192,
+    "model_name": "model.obj",
+    "offsets_tex_name": "anim_offset.png",
+    "normals_tex_name": "anim_normal.png"
+}
