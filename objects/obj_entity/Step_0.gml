@@ -25,6 +25,10 @@ if (keyboard_check_pressed(ord("3")))
 {
 	current_anim = current_anim + 1 >= array_length(list_anims_name) ? 0 : current_anim + 1;
 }
+if (keyboard_check_pressed(ord("4")))
+{
+	anim_manager.change_animation(list_anims_name[current_anim]);
+}
 
 /*
 if (keyboard_check_pressed(ord("Y")))

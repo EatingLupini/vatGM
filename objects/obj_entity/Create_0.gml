@@ -3,10 +3,7 @@
 model_info = models[? "knight"];
 model_anims = model_info[ANIMS];
 
-anim_manager = new AnimationManager(model_anims, "run_forward", function()
-{
-	//show_debug_message("Animation End: " + string(current_time / 1000));
-});
+anim_manager = new AnimationManager(model_anims);
 
 current_anim = 0;
 list_anims_name = anim_manager.get_animations_list();
