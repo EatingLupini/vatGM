@@ -61,9 +61,10 @@ void main()
 				current_pos += texture2DLod(u_anim_offsets, vec2(current_vertex, current_frame), 0.0);
 			}
 			vec4 real_pos = current_pos * u_offset_dist[i] + u_offset_min[i];
-			avg_pos += real_pos.xyz;
+			//avg_pos += real_pos.xyz;
+			avg_pos = mix(avg_pos, real_pos.xyz, u_blend[i]);
 		}
-		avg_pos /= float(u_active_anims);
+		//avg_pos /= float(u_active_anims);
 	}
 	
 	// add offset to position

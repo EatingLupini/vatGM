@@ -95,6 +95,7 @@
     {"id":{"name":"tex_missing","path":"sprites/tex_missing/tex_missing.yy",},},
     {"id":{"name":"obj_entity","path":"objects/obj_entity/obj_entity.yy",},},
     {"id":{"name":"spr_grass","path":"sprites/spr_grass/spr_grass.yy",},},
+    {"id":{"name":"obj_knight","path":"objects/obj_knight/obj_knight.yy",},},
     {"id":{"name":"sh_vat_single","path":"shaders/sh_vat_single/sh_vat_single.yy",},},
     {"id":{"name":"sh_albedo","path":"shaders/sh_albedo/sh_albedo.yy",},},
     {"id":{"name":"AlbedoMaterial","path":"scripts/AlbedoMaterial/AlbedoMaterial.yy",},},

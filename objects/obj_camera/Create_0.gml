@@ -1,5 +1,6 @@
 /// @description
 
+free_cam = true;
 is_paused = false;
 anim_time = 0;
 
@@ -76,28 +77,10 @@ for (var j=0; j<num_zombies; j++)
 	for (var i=0; i<num_zombies; i++)
 		instance_create_depth(32 + 64 * i, 32 + 64 * j, 0, obj_entity);
 */
-instance_create_depth(32, 32, 0, obj_entity);
 
-#endregion
+// instance_create_depth(32, 32, 0, obj_entity);
 
-#region BATCH
-
-/*
-model_zombie = load_model("zombie/zombie.obj");
-batch = new StaticModelBatch(model_zombie);
-batch.set_material(0, new TextureMaterialAnim(spr_tex_zombie, 0, current_anim, spr_anim_normals_zombie));
-for (var j=0; j<10; j++)
-{
-	for (var i=0; i<10; i++)
-	{
-		if (i == 0 and j == 0)
-			continue;
-		batch.add(i * 64, j * 64, 0, 0, 0, irandom(360), 32, 32, 32);
-	}
-}
-batch.build();
-batch.freeze();
-*/
+var ent = instance_create_depth(32, 32, 0, obj_knight);
 
 #endregion
 

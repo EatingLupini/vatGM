@@ -22,7 +22,6 @@ anim_manager.set_sample_num(1, function()
 	anim_manager.sample_num = 2 + round(a);
 	*/
 	
-	
 	if (point_distance_3d(x, y, 0, obj_camera.pl_x, obj_camera.pl_y, obj_camera.pl_z) >= 128)
 		anim_manager.sample_num = 1.0;
 	else

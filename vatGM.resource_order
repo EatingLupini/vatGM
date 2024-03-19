@@ -23,6 +23,7 @@
     {"name":"sh_default_dbatch","order":1,"path":"shaders/sh_default_dbatch/sh_default_dbatch.yy",},
     {"name":"sh_vat","order":1,"path":"shaders/sh_vat/sh_vat.yy",},
     {"name":"obj_entity","order":2,"path":"objects/obj_entity/obj_entity.yy",},
+    {"name":"obj_knight","order":3,"path":"objects/obj_knight/obj_knight.yy",},
     {"name":"sh_vat_single","order":1,"path":"shaders/sh_vat_single/sh_vat_single.yy",},
     {"name":"sh_albedo","order":1,"path":"shaders/sh_albedo/sh_albedo.yy",},
     {"name":"Material","order":3,"path":"scripts/Material/Material.yy",},

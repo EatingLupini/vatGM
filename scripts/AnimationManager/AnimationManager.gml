@@ -36,7 +36,7 @@ function PlayAnimation(anim, blend_func=undefined, end_func=undefined) construct
 		if (self.blend_func == undefined)
 			return 1;
 		
-		var frame_current = self.time * dt * 60 * self.anim.speed * gspd;
+		var frame_current = self.time;// * dt * 60 * self.anim.speed * gspd;
 		var frame_count = self.anim.frame_end - self.anim.frame_start;
 		return min(self.blend_func(frame_current, frame_count), 1);
 	}
@@ -110,18 +110,32 @@ function AnimationManager(model_anims) constructor
 			self.sample_func();
 		}
 		
+		// increment frame time
 		for (var i=0; i<array_length(self.play_anims); i++)
 		{
 			var play_anim = self.play_anims[i];
-			
-			// increment frame time
 			play_anim.time += dt * 60 * play_anim.anim.speed * gspd;
+		}
 		
-			// animation over
+		// pop old animation
+		if (array_length(self.play_anims) >= 2)
+		{
+			if (self.play_anims[1].get_blend() >= 1)
+			{
+				self.play_anims[1].blend_func = undefined;
+				array_delete(self.play_anims, 0, 1);
+			}
+		}
+		
+		// animation over
+		for (var i=0; i<array_length(self.play_anims); i++)
+		{
+			var play_anim = self.play_anims[i];
 			var frame_count = play_anim.anim.frame_end - play_anim.anim.frame_start;
 			if (!play_anim.is_over and 
 				(play_anim.time >= frame_count or play_anim.time <= -frame_count))
 			{
+				// loop
 				if (!play_anim.anim.loop)
 					play_anim.is_over = true;
 				else
@@ -132,22 +146,6 @@ function AnimationManager(model_anims) constructor
 					play_anim.end_func();
 			}
 		}
-		
-		/*
-		// blending
-		if (self.anim_old != undefined)
-		{
-			self.time_old += dt * 60 * self.anim_old.speed * gspd;
-			self.blend += 1 / (self.anim.frame_count - 1) * dt * 60 * self.anim.speed * gspd;
-			
-			// blend over
-			if (self.blend > 1)
-			{
-				self.blend = 0;
-				self.anim_old = undefined;
-			}
-		}
-		*/
 	}
 	
 	static set_animation = function(anim_new)

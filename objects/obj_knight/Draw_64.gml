@@ -12,5 +12,5 @@ for (var i=0; i<array_length(anim_manager.play_anims); i++)
 	dstr += "  blend: " + string(play_anim.get_blend()) + "\n";
 }
 
-draw_text(256, 32, string("time: {0}\ncurrent_anim: {1}", 0, list_anims_name[current_anim]));
+draw_text(256, 32, string("current_anim: {0}", list_anims_name[current_anim]));
 draw_text(512, 32, dstr);
