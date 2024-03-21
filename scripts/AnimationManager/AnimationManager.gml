@@ -36,7 +36,7 @@ function PlayAnimation(anim, blend_func=undefined, end_func=undefined) construct
 		if (self.blend_func == undefined)
 			return 1;
 		
-		var frame_current = self.time;// * dt * 60 * self.anim.speed * gspd;
+		var frame_current = self.time;
 		var frame_count = self.anim.frame_end - self.anim.frame_start;
 		return min(self.blend_func(frame_current, frame_count), 1);
 	}
@@ -52,6 +52,11 @@ function AnimationManager(model_anims) constructor
 	
 	self.sample_num = 5;
 	self.sample_func = undefined;
+	
+	// linear blend
+	self.blend_default = function(frame_current, frame_count) {
+		return (1 / frame_count) * frame_current;
+	}
 	
 	static set_shader_params = function()
 	{
@@ -154,22 +159,28 @@ function AnimationManager(model_anims) constructor
 		self.play_anims = [play_anim];
 	}
 	
-	static change_animation = function(anim_new, blend_func)
+	static change_animation = function(anim_new, blend_func=self.blend_default, end_func=undefined)
 	{
+		// check max anims
 		if (array_length(self.play_anims) >= self.MAX_ANIMS)
 		{
 			show_debug_message("Too many animations");
 			return;
 		}
 		
-		// linear blending
-		blend_func ??= function(frame_current, frame_count) {
-			// self.blend += 1 / (self.anim.frame_count - 1) * dt * 60 * self.anim.speed * gspd;
-			return (1 / frame_count) * frame_current;
-		}
+		// check same anim
+		var last_anim = array_last(self.play_anims);
+		if (last_anim != undefined and last_anim.anim.name == anim_new)
+			return;
 		
-		var play_anim = new PlayAnimation(self.model_anims.animations[? anim_new], blend_func);
+		// add anim to the queue
+		var play_anim = new PlayAnimation(self.model_anims.animations[? anim_new], blend_func, end_func);
 		array_push(self.play_anims, play_anim);
+	}
+	
+	static set_default_blend_func = function(blend_func)
+	{
+		self.blend_default = blend_func;
 	}
 	
 	static set_sample_num = function(num, func=undefined)

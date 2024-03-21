@@ -68,6 +68,9 @@ pl_spd_min = 4;
 pl_spd_max = 8;
 pl_spd = pl_spd_min;
 
+// for third person
+local_dir = {x: 0, y: 0, z: 0};
+
 #endregion
 
 #region ENTITIES
@@ -80,7 +83,7 @@ for (var j=0; j<num_zombies; j++)
 
 // instance_create_depth(32, 32, 0, obj_entity);
 
-var ent = instance_create_depth(32, 32, 0, obj_knight);
+iik = instance_create_depth(32, 32, 0, obj_knight);
 
 #endregion
 
