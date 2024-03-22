@@ -1,30 +1,17 @@
 /// @description
 
-free_cam = true;
-is_paused = false;
+#macro VT_FREE		0
+#macro VT_THIRD		1
+#macro VT_FIXED		2
+
+view_type = VT_FREE;
+attached_to = noone;
 anim_time = 0;
 
 #region SETTINGS
 
 opt_fov = -90;
 opt_sensitivity = 0.1;
-
-#endregion
-
-#region 3D SETTINGS
-
-//enable z-buffer
-gpu_set_zwriteenable(true);	//Enables writing to the z-buffer
-gpu_set_ztestenable(true);	//Enables the depth testing, so far away things are drawn beind closer things
-
-//settings
-gpu_set_cullmode(cull_counterclockwise);
-gpu_set_texrepeat(false);
-gpu_set_texfilter(false);
-//gpu_set_tex_mip_enable(mip_on);
-
-//force draw depth
-layer_force_draw_depth(true, 0);
 
 #endregion
 
@@ -72,19 +59,4 @@ pl_spd = pl_spd_min;
 local_dir = {x: 0, y: 0, z: 0};
 
 #endregion
-
-#region ENTITIES
-/*
-var num_zombies = 32;
-for (var j=0; j<num_zombies; j++)
-	for (var i=0; i<num_zombies; i++)
-		instance_create_depth(32 + 64 * i, 32 + 64 * j, 0, obj_entity);
-*/
-
-// instance_create_depth(32, 32, 0, obj_entity);
-
-iik = instance_create_depth(32, 32, 0, obj_knight);
-
-#endregion
-
 

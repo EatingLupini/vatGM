@@ -1,10 +1,11 @@
 /// @description
 
 // global vars
-globalvar dt, gspd, models;
+globalvar dt, gspd, is_paused, models;
 
 dt = 0;
 gspd = 1;
+is_paused = false;
 
 // init animations
 init_animations();

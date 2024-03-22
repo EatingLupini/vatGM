@@ -81,6 +81,7 @@
     "IDEVersion": "2023.6.0.89",
   },
   "resources": [
+    {"id":{"name":"obj_controller","path":"objects/obj_controller/obj_controller.yy",},},
     {"id":{"name":"obj_init","path":"objects/obj_init/obj_init.yy",},},
     {"id":{"name":"VertexFormat","path":"scripts/VertexFormat/VertexFormat.yy",},},
     {"id":{"name":"ModelLoading","path":"scripts/ModelLoading/ModelLoading.yy",},},
@@ -107,6 +108,7 @@
     {"id":{"name":"ts_grass","path":"tilesets/ts_grass/ts_grass.yy",},},
     {"id":{"name":"sh_texture_dbatch","path":"shaders/sh_texture_dbatch/sh_texture_dbatch.yy",},},
     {"id":{"name":"ModelBBox","path":"scripts/ModelBBox/ModelBBox.yy",},},
+    {"id":{"name":"blender","path":"notes/blender/blender.yy",},},
     {"id":{"name":"MathFunctions","path":"scripts/MathFunctions/MathFunctions.yy",},},
     {"id":{"name":"TextureMaterialAnim","path":"scripts/TextureMaterialAnim/TextureMaterialAnim.yy",},},
     {"id":{"name":"BlendFunc","path":"scripts/BlendFunc/BlendFunc.yy",},},
