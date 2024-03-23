@@ -39,9 +39,9 @@ if (instance_exists(cam))
 	if (keyboard_check_pressed(ord("2")) and instance_exists(iik))
 	{
 		cam.view_type = VT_THIRD;
-		cam.attached_to = iik;
-		//cam.pl_direction = 0;
-		//cam.pl_zdirection = 0;
+		cam.obj_to_follow = iik;
+		//cam.dir = 0;
+		//cam.zdir = 0;
 	}
 	
 	// rts cam

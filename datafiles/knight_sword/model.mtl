@@ -1,0 +1,15 @@
+# Blender MTL File: 'knight_sword.blend'
+# Material Count: 1
+
+newmtl Paladin_MAT
+Ns 199.999995
+Ka 0.500000 0.500000 0.500000
+Kd 1.000000 1.000000 1.000000
+Ks 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 3
+map_Bump D:\\Davide\\home\\app\\mixamo-mini\\tmp\\skins_dc4f2d45-001b-4917-85ba-61cde60860f2.fbm\\Paladin_normal.png
+map_Kd D:\\Davide\\home\\app\\mixamo-mini\\tmp\\skins_dc4f2d45-001b-4917-85ba-61cde60860f2.fbm\\Paladin_diffuse.png
+map_Ks D:\\Davide\\home\\app\\mixamo-mini\\tmp\\skins_dc4f2d45-001b-4917-85ba-61cde60860f2.fbm\\Paladin_specular.png

@@ -1,15 +1,10 @@
 /// @description
-#macro ST_IDLE		0
-#macro ST_WALKING	1
-#macro ST_RUNNING	2
-#macro ST_TURNING	3
-
 
 model_info = models[? "knight"];
 model_anims = model_info[ANIMS];
 
 anim_manager = new AnimationManager(model_anims);
-anim_manager.set_animation("idle");
+anim_manager.set_animation("idle_4");
 anim_manager.set_default_blend_func(BLEND_LINEAR_3X);
 
 inst = model_info[MODEL].new_instance();

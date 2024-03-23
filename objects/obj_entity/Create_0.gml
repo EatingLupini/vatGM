@@ -15,14 +15,14 @@ anim_manager.set_sample_num(1, function()
 	/*
 	var sample_num_max = 50;
 	var dist_max = 128;
-	dist = point_distance_3d(x, y, 0, obj_camera.pl_x, obj_camera.pl_y, obj_camera.pl_z);
+	dist = point_distance_3d(x, y, 0, obj_camera.xfrom, obj_camera.yfrom, obj_camera.zfrom);
 	
 	a = sample_num_max / dist_max * dist;
 	a = sample_num_max - clamp(a, 0, sample_num_max);
 	anim_manager.sample_num = 2 + round(a);
 	*/
 	
-	if (point_distance_3d(x, y, 0, obj_camera.pl_x, obj_camera.pl_y, obj_camera.pl_z) >= 128)
+	if (point_distance_3d(x, y, 0, obj_camera.xfrom, obj_camera.yfrom, obj_camera.zfrom) >= 128)
 		anim_manager.sample_num = 1.0;
 	else
 		anim_manager.sample_num = 10.0;

@@ -1,11 +1,7 @@
 /// @description
 
-#macro VT_FREE		0
-#macro VT_THIRD		1
-#macro VT_FIXED		2
-
 view_type = VT_FREE;
-attached_to = noone;
+obj_to_follow = noone;
 anim_time = 0;
 
 #region SETTINGS
@@ -38,25 +34,30 @@ view_set_camera(0, camera);
 
 #region CAMERA VARS
 
-pl_x = 0;
-pl_y = 0;
-pl_z = 0;
+xfrom = 0;
+yfrom = 0;
+zfrom = 0;
 
-cam_x = 0;
-cam_y = 0;
-cam_z = 0;
+xto = 0;
+yto = 0;
+zto = 0;
 
-pl_zhigh = 64;
+dir_x = 0;
+dir_y = 0;
+dir_z = 0;
 
-pl_direction = 0;
-pl_zdirection = 0;
+dir = 0;
+zdir = 0;
 
-pl_spd_min = 4;
-pl_spd_max = 8;
-pl_spd = pl_spd_min;
+// third person offset
+dist = -32;	// -16;
+off_dist = 8;
+off_dir = -90;	// right
 
-// for third person
-local_dir = {x: 0, y: 0, z: 0};
+// speed
+spd_min = 4;
+spd_max = 8;
+spd = spd_min;
 
 #endregion
 

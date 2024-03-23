@@ -155,12 +155,22 @@ function AnimationManager(model_anims) constructor
 	
 	static set_animation = function(anim_new)
 	{
+		// check animation exists
+		if (!self.check_animation(anim_new))
+			throw(string("Animation \"{0}\" does not exists.", anim_new));
+		
 		var play_anim = new PlayAnimation(self.model_anims.animations[? anim_new]);
 		self.play_anims = [play_anim];
+		
+		return play_anim;
 	}
 	
 	static change_animation = function(anim_new, blend_func=self.blend_default, end_func=undefined)
 	{
+		// check animation exists
+		if (!self.check_animation(anim_new))
+			throw(string("Animation \"{0}\" does not exists.", anim_new));
+		
 		// check max anims
 		if (array_length(self.play_anims) >= self.MAX_ANIMS)
 		{
@@ -176,6 +186,8 @@ function AnimationManager(model_anims) constructor
 		// add anim to the queue
 		var play_anim = new PlayAnimation(self.model_anims.animations[? anim_new], blend_func, end_func);
 		array_push(self.play_anims, play_anim);
+		
+		return play_anim;
 	}
 	
 	static set_default_blend_func = function(blend_func)
@@ -192,6 +204,11 @@ function AnimationManager(model_anims) constructor
 	static get_animations_list = function()
 	{
 		return ds_map_keys_to_array(self.model_anims.animations);
+	}
+	
+	static check_animation = function(anim_name)
+	{
+		return ds_map_exists(self.model_anims.animations, anim_name);
 	}
 }
 

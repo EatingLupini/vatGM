@@ -1,0 +1,532 @@
+{
+    "animations": [
+        {
+            "name": "t_pose",
+            "loop": false,
+            "speed": 0.5,
+            "frame_start": 0,
+            "frame_end": 1,
+            "offset_min": -0.00014448165893554688,
+            "offset_max": 0.0004611802869476378,
+            "dist": 0.0006056619458831847
+        },
+        {
+            "name": "walk_forward",
+            "loop": true,
+            "speed": 0.5,
+            "frame_start": 2,
+            "frame_end": 35,
+            "offset_min": -0.7997068166732788,
+            "offset_max": 0.9680080413818359,
+            "dist": 1.7677148580551147
+        },
+        {
+            "name": "walk_backwards",
+            "loop": true,
+            "speed": 0.5,
+            "frame_start": 36,
+            "frame_end": 74,
+            "offset_min": -0.7675967216491699,
+            "offset_max": 0.8939971923828125,
+            "dist": 1.6615939140319824
+        },
+        {
+            "name": "stand_turn_left_90",
+            "loop": false,
+            "speed": 0.5,
+            "frame_start": 75,
+            "frame_end": 103,
+            "offset_min": -1.0231802463531494,
+            "offset_max": 1.4333628416061401,
+            "dist": 2.4565430879592896
+        },
+        {
+            "name": "stand_turn_right_90",
+            "loop": false,
+            "speed": 0.5,
+            "frame_start": 104,
+            "frame_end": 130,
+            "offset_min": -1.1805853843688965,
+            "offset_max": 1.2134020328521729,
+            "dist": 2.3939874172210693
+        },
+        {
+            "name": "run_strafe_right",
+            "loop": true,
+            "speed": 0.5,
+            "frame_start": 131,
+            "frame_end": 152,
+            "offset_min": -1.3978137969970703,
+            "offset_max": 0.9223597049713135,
+            "dist": 2.320173501968384
+        },
+        {
+            "name": "run_strafe_left",
+            "loop": true,
+            "speed": 0.5,
+            "frame_start": 153,
+            "frame_end": 173,
+            "offset_min": -1.288063645362854,
+            "offset_max": 0.9588179588317871,
+            "dist": 2.246881604194641
+        },
+        {
+            "name": "walk_strafe_left",
+            "loop": true,
+            "speed": 0.5,
+            "frame_start": 174,
+            "frame_end": 213,
+            "offset_min": -1.216198444366455,
+            "offset_max": 0.9469681978225708,
+            "dist": 2.163166642189026
+        },
+        {
+            "name": "walk_strafe_right",
+            "loop": true,
+            "speed": 0.5,
+            "frame_start": 214,
+            "frame_end": 248,
+            "offset_min": -1.2556034326553345,
+            "offset_max": 1.0127615928649902,
+            "dist": 2.2683650255203247
+        },
+        {
+            "name": "crouch_slash_1",
+            "loop": false,
+            "speed": 0.5,
+            "frame_start": 249,
+            "frame_end": 290,
+            "offset_min": -1.2298548221588135,
+            "offset_max": 2.280473232269287,
+            "dist": 3.5103280544281006
+        },
+        {
+            "name": "stand_slash_1",
+            "loop": false,
+            "speed": 0.5,
+            "frame_start": 291,
+            "frame_end": 360,
+            "offset_min": -1.6329911947250366,
+            "offset_max": 1.2141952514648438,
+            "dist": 2.8471864461898804
+        },
+        {
+            "name": "stand_slash_2",
+            "loop": false,
+            "speed": 0.5,
+            "frame_start": 361,
+            "frame_end": 408,
+            "offset_min": -1.056668996810913,
+            "offset_max": 1.7779674530029297,
+            "dist": 2.8346364498138428
+        },
+        {
+            "name": "stand_slash_3",
+            "loop": false,
+            "speed": 0.5,
+            "frame_start": 409,
+            "frame_end": 515,
+            "offset_min": -1.865612506866455,
+            "offset_max": 2.375319480895996,
+            "dist": 4.240931987762451
+        },
+        {
+            "name": "stand_slash_4",
+            "loop": false,
+            "speed": 0.5,
+            "frame_start": 516,
+            "frame_end": 561,
+            "offset_min": -1.1212667226791382,
+            "offset_max": 2.2238752841949463,
+            "dist": 3.3451420068740845
+        },
+        {
+            "name": "run_backwards",
+            "loop": true,
+            "speed": 0.5,
+            "frame_start": 562,
+            "frame_end": 578,
+            "offset_min": -1.1027110815048218,
+            "offset_max": 0.9639914035797119,
+            "dist": 2.0667024850845337
+        },
+        {
+            "name": "run_forward",
+            "loop": true,
+            "speed": 0.5,
+            "frame_start": 579,
+            "frame_end": 600,
+            "offset_min": -0.9195213317871094,
+            "offset_max": 1.1496864557266235,
+            "dist": 2.069207787513733
+        },
+        {
+            "name": "power_up",
+            "loop": false,
+            "speed": 0.5,
+            "frame_start": 601,
+            "frame_end": 672,
+            "offset_min": -1.8164513111114502,
+            "offset_max": 1.2674472332000732,
+            "dist": 3.0838985443115234
+        },
+        {
+            "name": "kick",
+            "loop": false,
+            "speed": 0.5,
+            "frame_start": 673,
+            "frame_end": 709,
+            "offset_min": -1.0231411457061768,
+            "offset_max": 1.5615763664245605,
+            "dist": 2.5847175121307373
+        },
+        {
+            "name": "stand_jump",
+            "loop": false,
+            "speed": 0.5,
+            "frame_start": 710,
+            "frame_end": 739,
+            "offset_min": -1.0549167394638062,
+            "offset_max": 1.344730019569397,
+            "dist": 2.399646759033203
+        },
+        {
+            "name": "run_jump",
+            "loop": false,
+            "speed": 0.5,
+            "frame_start": 740,
+            "frame_end": 765,
+            "offset_min": -0.7510351538658142,
+            "offset_max": 1.2828906774520874,
+            "dist": 2.0339258313179016
+        },
+        {
+            "name": "impact_1",
+            "loop": false,
+            "speed": 0.5,
+            "frame_start": 766,
+            "frame_end": 787,
+            "offset_min": -1.1885428428649902,
+            "offset_max": 1.045786738395691,
+            "dist": 2.234329581260681
+        },
+        {
+            "name": "impact_2",
+            "loop": false,
+            "speed": 0.5,
+            "frame_start": 788,
+            "frame_end": 817,
+            "offset_min": -1.2663172483444214,
+            "offset_max": 0.9879733324050903,
+            "dist": 2.2542905807495117
+        },
+        {
+            "name": "impact_3",
+            "loop": false,
+            "speed": 0.5,
+            "frame_start": 818,
+            "frame_end": 839,
+            "offset_min": -1.0907785892486572,
+            "offset_max": 0.9484351873397827,
+            "dist": 2.03921377658844
+        },
+        {
+            "name": "idle_1",
+            "loop": false,
+            "speed": 0.5,
+            "frame_start": 840,
+            "frame_end": 946,
+            "offset_min": -1.1776080131530762,
+            "offset_max": 0.9382631778717041,
+            "dist": 2.1158711910247803
+        },
+        {
+            "name": "idle_2",
+            "loop": false,
+            "speed": 0.5,
+            "frame_start": 947,
+            "frame_end": 1171,
+            "offset_min": -1.5970200300216675,
+            "offset_max": 1.9284148216247559,
+            "dist": 3.5254348516464233
+        },
+        {
+            "name": "idle_3",
+            "loop": false,
+            "speed": 0.5,
+            "frame_start": 1172,
+            "frame_end": 1432,
+            "offset_min": -1.8103129863739014,
+            "offset_max": 1.3756462335586548,
+            "dist": 3.185959219932556
+        },
+        {
+            "name": "idle_4",
+            "loop": true,
+            "speed": 0.5,
+            "frame_start": 1433,
+            "frame_end": 1508,
+            "offset_min": -1.0383182764053345,
+            "offset_max": 0.8702318668365479,
+            "dist": 1.9085501432418823
+        },
+        {
+            "name": "death_1",
+            "loop": false,
+            "speed": 0.5,
+            "frame_start": 1509,
+            "frame_end": 1578,
+            "offset_min": -3.2133803367614746,
+            "offset_max": 1.0256097316741943,
+            "dist": 4.238990068435669
+        },
+        {
+            "name": "death_2",
+            "loop": false,
+            "speed": 0.5,
+            "frame_start": 1579,
+            "frame_end": 1696,
+            "offset_min": -1.7002841234207153,
+            "offset_max": 1.7979751825332642,
+            "dist": 3.4982593059539795
+        },
+        {
+            "name": "crouch_stand",
+            "loop": false,
+            "speed": 0.5,
+            "frame_start": 1697,
+            "frame_end": 1712,
+            "offset_min": -1.2298569679260254,
+            "offset_max": 1.2564890384674072,
+            "dist": 2.4863460063934326
+        },
+        {
+            "name": "crouch_block_low",
+            "loop": false,
+            "speed": 0.5,
+            "frame_start": 1713,
+            "frame_end": 1728,
+            "offset_min": -1.1940443515777588,
+            "offset_max": 1.1204588413238525,
+            "dist": 2.3145031929016113
+        },
+        {
+            "name": "crouch_impact",
+            "loop": false,
+            "speed": 0.5,
+            "frame_start": 1729,
+            "frame_end": 1748,
+            "offset_min": -1.229854941368103,
+            "offset_max": 1.015921711921692,
+            "dist": 2.245776653289795
+        },
+        {
+            "name": "crouch_idle",
+            "loop": true,
+            "speed": 0.5,
+            "frame_start": 1749,
+            "frame_end": 1822,
+            "offset_min": -1.2365736961364746,
+            "offset_max": 1.039937973022461,
+            "dist": 2.2765116691589355
+        },
+        {
+            "name": "crouch_block_idle",
+            "loop": true,
+            "speed": 0.5,
+            "frame_start": 1823,
+            "frame_end": 1831,
+            "offset_min": -1.1826980113983154,
+            "offset_max": 1.1203384399414062,
+            "dist": 2.3030364513397217
+        },
+        {
+            "name": "crouch_block_impact",
+            "loop": false,
+            "speed": 0.5,
+            "frame_start": 1832,
+            "frame_end": 1852,
+            "offset_min": -1.2360968589782715,
+            "offset_max": 1.1438233852386475,
+            "dist": 2.379920244216919
+        },
+        {
+            "name": "crouch_block_high",
+            "loop": false,
+            "speed": 0.5,
+            "frame_start": 1853,
+            "frame_end": 1867,
+            "offset_min": -1.2298543453216553,
+            "offset_max": 1.395662546157837,
+            "dist": 2.625516891479492
+        },
+        {
+            "name": "stand_crouch",
+            "loop": false,
+            "speed": 0.5,
+            "frame_start": 1868,
+            "frame_end": 1885,
+            "offset_min": -1.2280458211898804,
+            "offset_max": 0.862546443939209,
+            "dist": 2.0905922651290894
+        },
+        {
+            "name": "casting_1",
+            "loop": false,
+            "speed": 0.5,
+            "frame_start": 1886,
+            "frame_end": 1975,
+            "offset_min": -1.4464991092681885,
+            "offset_max": 1.3742905855178833,
+            "dist": 2.8207896947860718
+        },
+        {
+            "name": "casting_2",
+            "loop": false,
+            "speed": 0.5,
+            "frame_start": 1976,
+            "frame_end": 2007,
+            "offset_min": -1.0703647136688232,
+            "offset_max": 1.2479287385940552,
+            "dist": 2.3182934522628784
+        },
+        {
+            "name": "block_idle",
+            "loop": true,
+            "speed": 0.5,
+            "frame_start": 2008,
+            "frame_end": 2049,
+            "offset_min": -1.190261721611023,
+            "offset_max": 1.0478192567825317,
+            "dist": 2.2380809783935547
+        },
+        {
+            "name": "block_high",
+            "loop": false,
+            "speed": 0.5,
+            "frame_start": 2050,
+            "frame_end": 2064,
+            "offset_min": -1.2370355129241943,
+            "offset_max": 1.2591444253921509,
+            "dist": 2.496179938316345
+        },
+        {
+            "name": "block_low",
+            "loop": false,
+            "speed": 0.5,
+            "frame_start": 2065,
+            "frame_end": 2080,
+            "offset_min": -1.1856482028961182,
+            "offset_max": 1.0675673484802246,
+            "dist": 2.2532155513763428
+        },
+        {
+            "name": "attack_1",
+            "loop": false,
+            "speed": 0.5,
+            "frame_start": 2081,
+            "frame_end": 2151,
+            "offset_min": -1.4792802333831787,
+            "offset_max": 1.6508208513259888,
+            "dist": 3.1301010847091675
+        },
+        {
+            "name": "attack_2",
+            "loop": false,
+            "speed": 0.5,
+            "frame_start": 2152,
+            "frame_end": 2191,
+            "offset_min": -1.5846092700958252,
+            "offset_max": 1.6999471187591553,
+            "dist": 3.2845563888549805
+        },
+        {
+            "name": "attack_3",
+            "loop": false,
+            "speed": 0.5,
+            "frame_start": 2192,
+            "frame_end": 2244,
+            "offset_min": -1.7306056022644043,
+            "offset_max": 1.797701358795166,
+            "dist": 3.5283069610595703
+        },
+        {
+            "name": "attack_4",
+            "loop": false,
+            "speed": 0.5,
+            "frame_start": 2245,
+            "frame_end": 2275,
+            "offset_min": -1.5751986503601074,
+            "offset_max": 1.2108824253082275,
+            "dist": 2.786081075668335
+        },
+        {
+            "name": "walk_turn_180",
+            "loop": false,
+            "speed": 0.5,
+            "frame_start": 2276,
+            "frame_end": 2300,
+            "offset_min": -1.4671529531478882,
+            "offset_max": 1.1247261762619019,
+            "dist": 2.59187912940979
+        },
+        {
+            "name": "run_turn_180",
+            "loop": false,
+            "speed": 0.5,
+            "frame_start": 2301,
+            "frame_end": 2326,
+            "offset_min": -1.6727344989776611,
+            "offset_max": 1.1215204000473022,
+            "dist": 2.7942548990249634
+        },
+        {
+            "name": "sheath_1",
+            "loop": false,
+            "speed": 0.5,
+            "frame_start": 2327,
+            "frame_end": 2365,
+            "offset_min": -1.4119610786437988,
+            "offset_max": 1.4020329713821411,
+            "dist": 2.81399405002594
+        },
+        {
+            "name": "sheath_2",
+            "loop": false,
+            "speed": 0.5,
+            "frame_start": 2366,
+            "frame_end": 2391,
+            "offset_min": -1.3028171062469482,
+            "offset_max": 1.6432719230651855,
+            "dist": 2.946089029312134
+        },
+        {
+            "name": "draw_1",
+            "loop": false,
+            "speed": 0.5,
+            "frame_start": 2392,
+            "frame_end": 2407,
+            "offset_min": -1.3761765956878662,
+            "offset_max": 1.6962480545043945,
+            "dist": 3.0724246501922607
+        },
+        {
+            "name": "draw_2",
+            "loop": false,
+            "speed": 0.5,
+            "frame_start": 2408,
+            "frame_end": 2431,
+            "offset_min": -1.354792594909668,
+            "offset_max": 1.4409704208374023,
+            "dist": 2.7957630157470703
+        }
+    ],
+    "model_name": "model.obj",
+    "tex_diffuse": "tex_diffuse.png",
+    "num_vertices": 8014,
+    "num_frames": 2432.0,
+    "tex_size": 8192,
+    "model_name": "model.obj",
+    "offsets_tex_name": "anim_offset.png",
+    "normals_tex_name": "anim_normal.png"
+}
