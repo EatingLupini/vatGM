@@ -5,3 +5,6 @@
 
 2) Animation not in place
 - Select graph editor -> Z location -> Press shift + H -> In the upper bar click on Key -> Snap -> Selection to cursor value
+
+3) Create texture atlas
+- https://www.youtube.com/watch?v=MH7Xdol5erw

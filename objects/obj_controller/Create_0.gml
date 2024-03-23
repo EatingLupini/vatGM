@@ -29,6 +29,12 @@ for (var j=0; j<num_zombies; j++)
 
 iik = instance_create_depth(32, 32, 0, obj_knight);
 
+// skybox
+instance_create_depth(0, 0, 0, obj_skybox);
+
+// castle
+instance_create_depth(0, 0, 0, obj_prop, {model_info: models[? "castle"]});
+
 #endregion
 
 #region CAMERA

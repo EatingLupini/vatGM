@@ -13,6 +13,7 @@ inst.set_material(0, new TextureMaterialAnim(model_info[TEXTURE], 0, anim_manage
 z = 0;
 rot_z = 0;
 
+is_controlled = true;
 status = ST_IDLE;
 dir = 0;
 spd = 0;

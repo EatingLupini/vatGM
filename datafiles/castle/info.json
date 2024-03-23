@@ -1,0 +1,141 @@
+{
+    "animations": [
+        {
+            "name": "idle",
+            "loop": true,
+            "speed": 1,
+            "frame_start": 0,
+            "frame_end": 153,
+            "offset_min": -0.7483420968055725,
+            "offset_max": 0.7136947512626648,
+            "dist": 1.4620368480682373
+        },
+        {
+            "name": "run_back",
+            "loop": true,
+            "speed": 1,
+            "frame_start": 154,
+            "frame_end": 174,
+            "offset_min": -2.2000129222869873,
+            "offset_max": 0.7029688358306885,
+            "dist": 2.902981758117676
+        },
+        {
+            "name": "run_forward",
+            "loop": true,
+            "speed": 1,
+            "frame_start": 175,
+            "frame_end": 201,
+            "offset_min": -0.8594256043434143,
+            "offset_max": 3.8216700553894043,
+            "dist": 4.681095659732819
+        },
+        {
+            "name": "stop_forward",
+            "loop": true,
+            "speed": 1,
+            "frame_start": 202,
+            "frame_end": 228,
+            "offset_min": -0.9520245790481567,
+            "offset_max": 1.2805917263031006,
+            "dist": 2.2326163053512573
+        },
+        {
+            "name": "run_left",
+            "loop": true,
+            "speed": 1,
+            "frame_start": 229,
+            "frame_end": 249,
+            "offset_min": -0.8041518330574036,
+            "offset_max": 2.6836159229278564,
+            "dist": 3.48776775598526
+        },
+        {
+            "name": "run_right",
+            "loop": true,
+            "speed": 1,
+            "frame_start": 250,
+            "frame_end": 273,
+            "offset_min": -3.174245595932007,
+            "offset_max": 0.5862775444984436,
+            "dist": 3.7605231404304504
+        },
+        {
+            "name": "turn_left",
+            "loop": true,
+            "speed": 1,
+            "frame_start": 274,
+            "frame_end": 312,
+            "offset_min": -0.7781473994255066,
+            "offset_max": 0.6685309410095215,
+            "dist": 1.446678340435028
+        },
+        {
+            "name": "turn_right",
+            "loop": true,
+            "speed": 1,
+            "frame_start": 313,
+            "frame_end": 346,
+            "offset_min": -1.3977383375167847,
+            "offset_max": 1.4108047485351562,
+            "dist": 2.808543086051941
+        },
+        {
+            "name": "walk_back",
+            "loop": true,
+            "speed": 1,
+            "frame_start": 347,
+            "frame_end": 391,
+            "offset_min": -1.879832148551941,
+            "offset_max": 0.9205996990203857,
+            "dist": 2.8004318475723267
+        },
+        {
+            "name": "walk_forward",
+            "loop": true,
+            "speed": 1,
+            "frame_start": 392,
+            "frame_end": 428,
+            "offset_min": -0.8226187229156494,
+            "offset_max": 2.009000778198242,
+            "dist": 2.8316195011138916
+        },
+        {
+            "name": "walk_left",
+            "loop": true,
+            "speed": 1,
+            "frame_start": 429,
+            "frame_end": 465,
+            "offset_min": -0.7961359024047852,
+            "offset_max": 2.3934576511383057,
+            "dist": 3.189593553543091
+        },
+        {
+            "name": "walk_right",
+            "loop": true,
+            "speed": 1,
+            "frame_start": 466,
+            "frame_end": 502,
+            "offset_min": -2.7125518321990967,
+            "offset_max": 0.60429847240448,
+            "dist": 3.3168503046035767
+        },
+        {
+            "name": "t_pose",
+            "loop": false,
+            "speed": 1,
+            "frame_start": 503,
+            "frame_end": 504,
+            "offset_min": -0.7961797714233398,
+            "offset_max": 0.5748594403266907,
+            "dist": 1.3710392117500305
+        }
+    ],
+    "model_name": "model.obj",
+    "tex_diffuse": "tex_diffuse.png",
+    "num_vertices": 5588,
+    "num_frames": 505.0,
+    "tex_size": 8192,
+    "offsets_tex_name": "anim_offset.png",
+    "normals_tex_name": "anim_normal.png"
+}

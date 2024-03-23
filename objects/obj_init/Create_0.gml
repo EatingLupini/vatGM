@@ -10,7 +10,7 @@ is_paused = false;
 // init animations
 init_animations();
 
-// load assets
+// model
 #macro MODEL			0
 #macro TEXTURE			1
 #macro ANIMS			2
@@ -27,6 +27,14 @@ init_animations();
 #macro VT_FREE			0
 #macro VT_THIRD			1
 #macro VT_FIXED			2
+
+
+// LOAD ASSETS
+
+// castle
+var model_skybox = load_model("skybox/model.obj");
+model_skybox.freeze();
+var spr_tex_skybox = sprite_add("skybox/tex_diffuse.png", 0, false, false, 0, 0);
 
 /*
 // zombie
@@ -51,10 +59,17 @@ model_knight.freeze();
 var spr_tex_knight = sprite_add("knight_sword/tex_diffuse.png", 0, true, false, 0, 0);
 var anims_knight = load_model_animations("knight_sword/info.json");
 
+// castle
+var model_castle = load_model("castle/model.obj");
+model_castle.freeze();
+var spr_tex_castle = sprite_add("castle/tex_diffuse.png", 0, false, false, 0, 0);
+
 models = ds_map_create();
+ds_map_add(models, "skybox", [model_skybox, spr_tex_skybox, undefined]);
 //ds_map_add(models, "zombie", [model_zombie, spr_tex_zombie, anims_zombie]);
 //ds_map_add(models, "archer", [model_archer, spr_tex_archer, anims_archer]);
 ds_map_add(models, "knight", [model_knight, spr_tex_knight, anims_knight]);
+ds_map_add(models, "castle", [model_castle, spr_tex_castle, undefined]);
 
 
 // debug
