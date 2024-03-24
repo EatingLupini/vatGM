@@ -121,6 +121,7 @@
     {"id":{"name":"Utils","path":"scripts/Utils/Utils.yy",},},
     {"id":{"name":"sh_albedo","path":"shaders/sh_albedo/sh_albedo.yy",},},
     {"id":{"name":"AlbedoMaterial","path":"scripts/AlbedoMaterial/AlbedoMaterial.yy",},},
+    {"id":{"name":"spr_coll_castle","path":"sprites/spr_coll_castle/spr_coll_castle.yy",},},
     {"id":{"name":"Material","path":"scripts/Material/Material.yy",},},
     {"id":{"name":"DynamicModelBatch","path":"scripts/DynamicModelBatch/DynamicModelBatch.yy",},},
     {"id":{"name":"obj_camera","path":"objects/obj_camera/obj_camera.yy",},},

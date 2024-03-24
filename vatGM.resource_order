@@ -29,6 +29,7 @@
     {"name":"obj_prop","order":6,"path":"objects/obj_prop/obj_prop.yy",},
     {"name":"Utils","order":3,"path":"scripts/Utils/Utils.yy",},
     {"name":"sh_albedo","order":1,"path":"shaders/sh_albedo/sh_albedo.yy",},
+    {"name":"spr_coll_castle","order":1,"path":"sprites/spr_coll_castle/spr_coll_castle.yy",},
     {"name":"Material","order":3,"path":"scripts/Material/Material.yy",},
     {"name":"DynamicModelBatch","order":2,"path":"scripts/DynamicModelBatch/DynamicModelBatch.yy",},
     {"name":"obj_camera","order":2,"path":"objects/obj_camera/obj_camera.yy",},

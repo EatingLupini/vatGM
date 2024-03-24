@@ -28,18 +28,26 @@ for (var j=0; j<num_zombies; j++)
 
 //iik = instance_create_depth(32, 32, 0, obj_knight);
 
-var num_zombies = 32;
-for (var j=0; j<num_zombies; j++)
-	for (var i=0; i<num_zombies; i++)
-		instance_create_depth(32 + 64 * i, 32 + 64 * j, 0, obj_knight);
-iik = instance_create_depth(256, 256, 0, obj_knight);
+// guards
+var sx = 512;
+var sy = 512;
+var num = 10;
+for (var j=0; j<num; j++)
+	for (var i=0; i<num; i++)
+		instance_create_depth(sx + 64 * i, sy + 64 * j, 0, obj_knight);
+		
+// knight
+iik = instance_create_depth(384, 384, 0, obj_knight);
 iik.is_controlled = true;
 
 // skybox
 instance_create_depth(0, 0, 0, obj_skybox);
 
 // castle
-instance_create_depth(0, 0, 0, obj_prop, {model_info: models[? "castle"]});
+var ii = instance_create_depth(0, 0, 0, obj_prop, {model_info: models[? "castle"]});
+ii.sprite_index = spr_coll_castle;
+ii.image_xscale = 5;
+ii.image_yscale = 5;
 
 #endregion
 

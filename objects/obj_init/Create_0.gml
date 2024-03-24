@@ -10,6 +10,9 @@ is_paused = false;
 // init animations
 init_animations();
 
+// other
+#macro WORLD_UNIT		32
+
 // model
 #macro MODEL			0
 #macro TEXTURE			1

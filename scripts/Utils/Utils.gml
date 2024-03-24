@@ -4,7 +4,7 @@ function angle_lerp(current, target, amount)
 {
 	var angle_diff = angle_difference(current, target);
 	target = current - angle_diff;
-	return lerp(current, target, amount);
+	return lerp(current, target, 1 - power(amount, dt));
 }
 
 function vec2_rotate(v, ang)

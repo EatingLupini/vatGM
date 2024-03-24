@@ -20,8 +20,13 @@ if (view_type == VT_FREE)
 {
 	if (dir_ws != 0 or dir_da != 0)
 	{
-		xfrom += lengthdir_x(spd, dir + dir_wasd);
-		yfrom += lengthdir_y(spd, dir + dir_wasd);
+		var xnew = xfrom + lengthdir_x(spd, dir + dir_wasd);
+		var ynew = yfrom + lengthdir_y(spd, dir + dir_wasd);
+		if (collision_point(xnew, ynew, obj_prop, true, false) == noone)
+		{
+			xfrom += lengthdir_x(spd, dir + dir_wasd);
+			yfrom += lengthdir_y(spd, dir + dir_wasd);
+		}
 	}
 
 	// fly up/down

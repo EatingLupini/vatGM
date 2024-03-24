@@ -9,10 +9,9 @@ if (is_controlled)
 	var shift = keyboard_check(vk_shift);
 	var shift_press = keyboard_check_pressed(vk_shift);
 	var shift_rel = keyboard_check_released(vk_shift);
-	var jump = keyboard_check(vk_space);
+	var jump = keyboard_check_pressed(vk_space);
 	var attack = mouse_check_button_pressed(mb_left);
-	var block = mouse_check_button_pressed(mb_right);
-	var is_blocking = mouse_check_button(mb_right);
+	var block = mouse_check_button(mb_right);
 	#endregion
 
 	#region MOVEMENT (old)
@@ -122,7 +121,7 @@ if (is_controlled)
 	
 	#region MOVEMENT
 	var has_input_move = hdir != 0 or vdir != 0;
-	var can_change_dir = true;
+	var can_change_dir = status != ST_ATTACK and status != ST_BLOCK;
 	var can_idle = status == ST_WALK or status == ST_RUN;
 	var can_walk = status == ST_IDLE or status == ST_WALK or status == ST_RUN;
 	var can_run = status == ST_IDLE or status == ST_WALK or status == ST_RUN;
@@ -163,7 +162,7 @@ if (is_controlled)
 
 	if (attack)
 	{
-		if (status != ST_ATTACK)
+		if (can_attack)
 		{
 			status = ST_ATTACK;
 			anim_manager.change_animation("attack_4", BLEND_FRAMES_10, method(self, function() {
@@ -175,40 +174,58 @@ if (is_controlled)
 
 	if (block)
 	{
-		if (status == ST_IDLE or status == ST_WALK)
+		if (can_block)
 		{
 			status = ST_BLOCK;
 			anim_manager.change_animation("block_high", BLEND_FRAMES_10, method(self, function() {
 				self.status = ST_BLOCK;
 				self.anim_manager.change_animation("block_idle", BLEND_FRAMES_10);
-			}));
+			})).anim.speed = 1;
 		}
 	}
-
-	if (status == ST_BLOCK)
+	else
 	{
-		if (!is_blocking)
+		if (status == ST_BLOCK)
 		{
 			status = ST_IDLE;
 			anim_manager.change_animation("idle_4", BLEND_FRAMES_10);
 		}
 	}
 
-
 	// actual movement
-	if (status != ST_TURN)
+	if (can_change_dir)
 	{
-		dir = angle_lerp(dir, final_dir, 0.1);
+		dir = angle_lerp(dir, final_dir, 0.001);
 		rot_z = dir;
 	}
-	x += lengthdir_x(spd, dir);
-	y += lengthdir_y(spd, dir);
-
+	
+	// collision
+	var max_angle = 90;
+	for (var i=0; i<max_angle; i+=10)
+	{
+		var a = 1 - (1 / max_angle * i);
+		
+		var xnew = x + lengthdir_x(spd * a * dt, dir + i);
+		var ynew = y + lengthdir_y(spd * a * dt, dir + i);
+		if (collision_point(xnew, ynew, obj_prop, true, false) == noone)
+		{
+			x = xnew;
+			y = ynew;
+			break;
+		}
+		
+		xnew = x + lengthdir_x(spd * a * dt, dir - i);
+		ynew = y + lengthdir_y(spd * a * dt, dir - i);
+		if (collision_point(xnew, ynew, obj_prop, true, false) == noone)
+		{
+			x = xnew;
+			y = ynew;
+			break;
+		}
+	}
 
 	// increase/decrease speed
-	// https://www.construct.net/en/blogs/ashleys-blog-2/using-lerp-delta-time-924
-	var f = 0.9;
-	spd = lerp(spd, final_spd, power(1 - f, dt)); // 0.2
+	spd = lerp(spd, final_spd, 1 - power(0.0005, dt));
 
 	#endregion
 }
