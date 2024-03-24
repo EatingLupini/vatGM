@@ -1,5 +1,9 @@
 /// @description
 
+show_debug_message(string(surface_get_width(application_surface)));
+show_debug_message(string(surface_get_height(application_surface)));
+
+
 #region DEBUG
 
 if (mouse_wheel_down())

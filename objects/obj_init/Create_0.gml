@@ -33,7 +33,6 @@ init_animations();
 
 
 // LOAD ASSETS
-
 // castle
 var model_skybox = load_model("skybox/model.obj");
 model_skybox.freeze();
@@ -83,5 +82,8 @@ ds_map_add(models, "castle", [model_castle, arr_tex_castle, undefined]);
 // debug
 //show_debug_overlay(true);
 
-// go to test room
+// RESIZE SURFACE
+surface_resize(application_surface, 1920, 1080);
+
+// GOTO TEST ROOM
 room_goto(rm_test);
