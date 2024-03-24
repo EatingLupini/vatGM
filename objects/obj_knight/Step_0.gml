@@ -15,7 +15,116 @@ if (is_controlled)
 	var is_blocking = mouse_check_button(mb_right);
 	#endregion
 
+	#region MOVEMENT (old)
+	/*
+	var final_spd = 0;
+	var final_dir = dir;
+	if (instance_exists(obj_camera) and (hdir != 0 or vdir != 0))
+	{
+		var input_dir = point_direction(0, 0, hdir, vdir) - 90;
+		final_dir = input_dir + obj_camera.dir;
+	}
+
+	if (hdir != 0 or vdir != 0)
+	{
+		final_spd = shift ? spd_run : spd_walk;
+	
+		if (status == ST_IDLE)
+		{
+			status = ST_WALK;
+			if (shift)
+			{
+				status = ST_RUN;
+				anim_manager.change_animation("run_forward");
+			}
+			else
+			{
+				status = ST_WALK;
+				anim_manager.change_animation("walk_forward");
+			}
+		}
+		if (status == ST_WALK)
+		{
+			if (shift)
+			{
+				status = ST_RUN;
+				anim_manager.change_animation("run_forward");
+			}
+		}
+		if (status == ST_RUN)
+		{
+			if (shift_rel)
+			{
+				status = ST_WALK;
+				anim_manager.change_animation("walk_forward");
+			}
+		}
+	}
+	else
+	{
+		if (status == ST_WALK or status == ST_RUN)
+		{
+			status = ST_IDLE;
+			anim_manager.change_animation("idle_4", BLEND_FRAMES_10);
+		}
+	
+		final_spd = 0;
+	}
+
+	if (attack)
+	{
+		if (status != ST_ATTACK)
+		{
+			status = ST_ATTACK;
+			anim_manager.change_animation("attack_4", BLEND_FRAMES_10, method(self, function() {
+				self.status = ST_IDLE;
+				self.anim_manager.change_animation("idle_4", BLEND_FRAMES_10);
+			})).anim.speed = 0.6;
+		}
+	}
+
+	if (block)
+	{
+		if (status == ST_IDLE or status == ST_WALK)
+		{
+			status = ST_BLOCK;
+			anim_manager.change_animation("block_high", BLEND_FRAMES_10, method(self, function() {
+				self.status = ST_BLOCK;
+				self.anim_manager.change_animation("block_idle", BLEND_FRAMES_10);
+			}));
+		}
+	}
+
+	if (status == ST_BLOCK)
+	{
+		if (!is_blocking)
+		{
+			status = ST_IDLE;
+			anim_manager.change_animation("idle_4", BLEND_FRAMES_10);
+		}
+	}
+
+
+	// actual movement
+	if (status != ST_TURN)
+	{
+		dir = angle_lerp(dir, final_dir, 0.1);
+		rot_z = dir;
+	}
+	x += lengthdir_x(spd, dir);
+	y += lengthdir_y(spd, dir);
+
+
+	// increase/decrease speed
+	spd = lerp(spd, final_spd, 0.2);
+	*/
+	#endregion
+	
 	#region MOVEMENT
+	var can_walk = status == ST_IDLE or status == ST_WALK or status == ST_RUN;
+	var can_run = status == ST_IDLE or status == ST_WALK or status == ST_RUN;
+	var can_attack = status == ST_IDLE or status == ST_WALK or status == ST_RUN;
+	
 	var final_spd = 0;
 	var final_dir = dir;
 	if (instance_exists(obj_camera) and (hdir != 0 or vdir != 0))
@@ -142,4 +251,3 @@ else
 {
 	
 }
- 

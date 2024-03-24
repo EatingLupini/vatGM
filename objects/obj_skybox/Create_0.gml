@@ -2,5 +2,6 @@
 
 model_info = models[? "skybox"];
 inst = model_info[MODEL].new_instance();
-inst.set_material(0, new TextureMaterial(sh_texture, model_info[TEXTURE], 0));
+for (var i=0; i<array_length(model_info[TEXTURE]); i++)
+	inst.set_material(i, new TextureMaterial(undefined, model_info[TEXTURE][i], 0));
 

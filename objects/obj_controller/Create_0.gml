@@ -8,7 +8,7 @@ gpu_set_ztestenable(true);	//Enables the depth testing, so far away things are d
 
 //settings
 gpu_set_cullmode(cull_counterclockwise);
-gpu_set_texrepeat(false);
+gpu_set_texrepeat(true);
 gpu_set_texfilter(false);
 //gpu_set_tex_mip_enable(mip_on);
 
@@ -24,10 +24,16 @@ for (var j=0; j<num_zombies; j++)
 	for (var i=0; i<num_zombies; i++)
 		instance_create_depth(32 + 64 * i, 32 + 64 * j, 0, obj_entity);
 */
-
 // instance_create_depth(32, 32, 0, obj_entity);
 
-iik = instance_create_depth(32, 32, 0, obj_knight);
+//iik = instance_create_depth(32, 32, 0, obj_knight);
+
+var num_zombies = 32;
+for (var j=0; j<num_zombies; j++)
+	for (var i=0; i<num_zombies; i++)
+		instance_create_depth(32 + 64 * i, 32 + 64 * j, 0, obj_knight);
+iik = instance_create_depth(256, 256, 0, obj_knight);
+iik.is_controlled = true;
 
 // skybox
 instance_create_depth(0, 0, 0, obj_skybox);

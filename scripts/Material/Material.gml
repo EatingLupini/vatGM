@@ -35,6 +35,7 @@ function Material(shader) constructor
  */
 function material_apply(material)
 {
-	shader_set(material.shader);
+	if (material.shader != undefined)
+		shader_set(material.shader);
 	material.on_apply();
 }
