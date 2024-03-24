@@ -14,5 +14,5 @@ if (is_controlled)
 		dstr += "  time: " + string(play_anim.time) + "\n";
 		dstr += "  blend: " + string(play_anim.get_blend()) + "\n";
 	}
-	draw_text(display_get_gui_width() - 128, 32, dstr);
+	draw_text(display_get_gui_width() - 160, 32, dstr);
 }

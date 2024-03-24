@@ -121,79 +121,44 @@ if (is_controlled)
 	#endregion
 	
 	#region MOVEMENT
+	var has_input_move = hdir != 0 or vdir != 0;
+	var can_change_dir = true;
+	var can_idle = status == ST_WALK or status == ST_RUN;
 	var can_walk = status == ST_IDLE or status == ST_WALK or status == ST_RUN;
 	var can_run = status == ST_IDLE or status == ST_WALK or status == ST_RUN;
 	var can_attack = status == ST_IDLE or status == ST_WALK or status == ST_RUN;
+	var can_block = status == ST_IDLE or status == ST_WALK or status == ST_RUN;
 	
 	var final_spd = 0;
 	var final_dir = dir;
-	if (instance_exists(obj_camera) and (hdir != 0 or vdir != 0))
+	if (instance_exists(obj_camera) and has_input_move)
 	{
 		var input_dir = point_direction(0, 0, hdir, vdir) - 90;
 		final_dir = input_dir + obj_camera.dir;
 	}
-
-	if (hdir != 0 or vdir != 0)
-	{
-		final_spd = shift ? spd_run : spd_walk;
 	
-		if (status == ST_IDLE)
+	if (has_input_move)
+	{
+		if (can_run and shift)
+		{
+			status = ST_RUN;
+			anim_manager.change_animation("run_forward");
+			final_spd = spd_run;
+		}
+		else if (can_walk)
 		{
 			status = ST_WALK;
-			if (shift)
-			{
-				status = ST_RUN;
-				anim_manager.change_animation("run_forward");
-			}
-			else
-			{
-				status = ST_WALK;
-				anim_manager.change_animation("walk_forward");
-			}
+			anim_manager.change_animation("walk_forward");
+			final_spd = spd_walk;
 		}
-		if (status == ST_WALK)
-		{
-			if (shift)
-			{
-				status = ST_RUN;
-				anim_manager.change_animation("run_forward");
-			}
-		}
-		if (status == ST_RUN)
-		{
-			if (shift_rel)
-			{
-				status = ST_WALK;
-				anim_manager.change_animation("walk_forward");
-			}
-		}
-		/*
-		if (status != ST_TURN)
-		{
-			if (angle_difference(dir, final_dir) >= 160)
-			{
-				status = ST_TURN;
-				anim_manager.change_animation("run_turn_180", BLEND_FRAMES_50, function() {
-					show_debug_message("END");
-					obj_knight.status = ST_RUN;
-					obj_knight.anim_manager.change_animation("run_forward", BLEND_FRAMES_50);
-					obj_knight.dir += 180;
-				});
-				array_last(anim_manager.play_anims).anim.speed = 1;
-				spd = 0;
-			}
-		}
-		*/
 	}
 	else
 	{
-		if (status == ST_WALK or status == ST_RUN)
+		if (can_idle)
 		{
 			status = ST_IDLE;
 			anim_manager.change_animation("idle_4", BLEND_FRAMES_10);
 		}
-	
-		final_spd = 0;
 	}
 
 	if (attack)
@@ -241,7 +206,9 @@ if (is_controlled)
 
 
 	// increase/decrease speed
-	spd = lerp(spd, final_spd, 0.2);
+	// https://www.construct.net/en/blogs/ashleys-blog-2/using-lerp-delta-time-924
+	var f = 0.9;
+	spd = lerp(spd, final_spd, power(1 - f, dt)); // 0.2
 
 	#endregion
 }
