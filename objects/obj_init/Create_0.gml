@@ -82,8 +82,5 @@ ds_map_add(models, "castle", [model_castle, arr_tex_castle, undefined]);
 // debug
 //show_debug_overlay(true);
 
-// RESIZE SURFACE
-surface_resize(application_surface, 1920, 1080);
-
 // GOTO TEST ROOM
 room_goto(rm_test);

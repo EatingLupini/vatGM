@@ -40,8 +40,6 @@ if (instance_exists(cam))
 	{
 		cam.view_type = VT_THIRD;
 		cam.obj_to_follow = iik;
-		//cam.dir = 0;
-		//cam.zdir = 0;
 	}
 	
 	// rts cam

@@ -1,9 +1,5 @@
 /// @description
 
-show_debug_message(string(surface_get_width(application_surface)));
-show_debug_message(string(surface_get_height(application_surface)));
-
-
 #region DEBUG
 
 if (mouse_wheel_down())
@@ -24,13 +20,8 @@ if (view_type == VT_FREE)
 {
 	if (dir_ws != 0 or dir_da != 0)
 	{
-		var xnew = xfrom + lengthdir_x(spd, dir + dir_wasd);
-		var ynew = yfrom + lengthdir_y(spd, dir + dir_wasd);
-		if (collision_point(xnew, ynew, obj_prop, true, false) == noone)
-		{
-			xfrom += lengthdir_x(spd, dir + dir_wasd);
-			yfrom += lengthdir_y(spd, dir + dir_wasd);
-		}
+		xfrom += lengthdir_x(spd, dir + dir_wasd);
+		yfrom += lengthdir_y(spd, dir + dir_wasd);
 	}
 
 	// fly up/down

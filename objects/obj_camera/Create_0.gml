@@ -30,6 +30,9 @@ camera_set_proj_mat(camera, proj_mat);
 // set camera
 view_set_camera(0, camera);
 
+// resize surface
+surface_resize(application_surface, 1920, 1080);
+
 #endregion
 
 #region CAMERA VARS
