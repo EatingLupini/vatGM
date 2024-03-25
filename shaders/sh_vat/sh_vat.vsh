@@ -34,54 +34,73 @@ float mod_neg(float xx, float mm)
     return mod(mod(xx, mm) + mm, mm);
 }
 
-
-void main()
+// get the current frame value of the vertex
+// val_type: 0 -> offset
+//			 1 -> normal
+vec3 get_frame_val(sampler2D anim_tex, int val_type)
 {
 	float frame_px = 1.0 / u_tex_size.y;
 	float frame_px_half = frame_px * 0.5;
 	
-	vec3 avg_pos = vec3(0.0);
+	vec3 avg_val = vec3(0.0);
 	if (u_active_anims > 0)
 	{
 		for (int i=0; i<u_active_anims; i++)
 		{
 			float frame_count =  (u_frame_end[i] - u_frame_start[i] + 1.0) * frame_px;
 	
-			vec4 current_pos = vec4(0.0);
+			vec4 current_val = vec4(0.0);
 			if (u_loop[i])
 			{
 				float current_vertex = (in_Index + 0.5) / u_tex_size.x;
 				float current_frame = mod_neg(u_frame_start[i] * frame_px + u_time[i] + frame_px_half, u_frame_start[i] * frame_px + frame_count);
-				current_pos += texture2DLod(u_anim_offsets, vec2(current_vertex, current_frame), 0.0);
+				current_val += texture2DLod(anim_tex, vec2(current_vertex, current_frame), 0.0);
 			}
 			else
 			{
 				float current_vertex = (in_Index + 0.5) / u_tex_size.x;
 				float current_frame = clamp(u_frame_start[i] * frame_px + u_time[i] + frame_px_half, 0.0, u_frame_start[i] * frame_px + frame_count - frame_px_half);
-				current_pos += texture2DLod(u_anim_offsets, vec2(current_vertex, current_frame), 0.0);
+				current_val += texture2DLod(anim_tex, vec2(current_vertex, current_frame), 0.0);
 			}
-			vec4 real_pos = current_pos * u_offset_dist[i] + u_offset_min[i];
-			avg_pos = mix(avg_pos, real_pos.xyz, u_blend[i]);
+			
+			if (val_type == 0)
+			{
+				vec4 real_pos = current_val * u_offset_dist[i] + u_offset_min[i];
+				avg_val = mix(avg_val, real_pos.xyz, u_blend[i]);
+			}
+			else
+			{
+				vec3 real_normal = current_val.xyz * 2.0 - 1.0;
+				avg_val = mix(avg_val, real_normal.xyz, u_blend[i]);
+			}
 		}
 	}
+	
+	return avg_val;
+}
+
+
+void main()
+{
+	// get frame offset
+	vec3 avg_pos = get_frame_val(u_anim_offsets, 0);
 	
 	// add offset to position
 	vec3 final_pos = in_Position + avg_pos;
 	
-	//Vertex position.
+	// update vertex position
     gl_Position = gm_Matrices[MATRIX_WORLD_VIEW_PROJECTION] * vec4(final_pos, 1.);
 	
-	// normals
-	//vec4 color_normal = texture2DLod(u_anim_normals, vec2((in_Index + 0.5) / u_tex_size.x, clamp(u_time + frame_px_half, 0.0, (u_frame_count - 1.0) * frame_px)), 0.0);
-	//vec3 real_normal = color_normal.xyz * 2.0 - 1.0;
+	//get frame normal
+	vec3 real_normal = get_frame_val(u_anim_normals, 1);
+	normal = (gm_Matrices[MATRIX_WORLD] * vec4(real_normal, 0.0)).xyz;
 	
     //Vertex data.
 	vertex_position = in_Position;
 	uvs = in_TextureCoord;
     vertex_color = in_Colour;
-	//normal = (gm_Matrices[MATRIX_WORLD] * vec4(real_normal, 0.0)).xyz;
-	normal = (gm_Matrices[MATRIX_WORLD] * vec4(in_Normal, 0.0)).xyz;
 
+	// debug normal
 	//vertex_color = vec4((normal + 1.0) * 0.5, 1.0);
 }
 
