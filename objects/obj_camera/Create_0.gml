@@ -32,6 +32,7 @@ view_set_camera(0, camera);
 
 // resize surface
 surface_resize(application_surface, 1920, 1080);
+//surface_resize(application_surface, 640, 360);
 
 #endregion
 
@@ -53,9 +54,24 @@ dir = 0;
 zdir = 0;
 
 // third person offset
-dist = -32;	// -16;
-off_dist = 8;
-off_dir = -90;	// right
+dist = -32;		// distance from the object to follow
+off_dist = 0;	// offset distance
+off_dir = -90;	// offset direction (-90 -> right)
+
+// rts offset
+fixed_zoff = 384;
+fixed_yoff = 256;
+fixed_zcur = fixed_zoff;
+
+// misc
+num_diff = 60;
+cur_diff = num_diff;
+xfrom_old = 0;
+yfrom_old = 0;
+zfrom_old = 0;
+xto_old = 0;
+yto_old = 0;
+zto_old = 0;
 
 // speed
 spd_min = 4;
@@ -64,3 +80,42 @@ spd = spd_min;
 
 #endregion
 
+#region FUNCS
+set_view_type = function(type, otf=noone)
+{
+	if (view_type != type)
+	{
+		switch (type)
+		{
+			case VT_FREE:
+				view_type = VT_FREE;
+				obj_to_follow = noone;
+				window_set_cursor(cr_none);
+				break;
+			
+			case VT_THIRD:
+				view_type = VT_THIRD;
+				obj_to_follow = otf;
+				window_set_cursor(cr_none);
+				cur_diff = 0;
+				xfrom_old = xfrom;
+				yfrom_old = yfrom;
+				zfrom_old = zfrom;
+				xto_old = xto;
+				yto_old = yto;
+				zto_old = zto;
+				break;
+			
+			case VT_FIXED:
+				view_type = VT_FIXED;
+				obj_to_follow = noone;
+				window_set_cursor(cr_default);
+				fixed_zcur = fixed_zoff;
+				xto_old = xto;
+				yto_old = yto;
+				zto_old = zto;
+				break;
+		}
+	}
+}
+#endregion

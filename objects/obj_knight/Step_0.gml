@@ -60,7 +60,7 @@ if (is_controlled)
 		if (can_attack)
 		{
 			status = ST_ATTACK;
-			var new_anim = anim_manager.change_animation("attack_4", BLEND_FRAMES_10, method(self, function() {
+			var new_anim = anim_manager.change_animation("stand_slash_4", BLEND_FRAMES_10, method(self, function() {
 				self.status = ST_IDLE;
 				self.anim_manager.change_animation("idle_4", BLEND_FRAMES_10);
 			}));
@@ -104,8 +104,8 @@ if (is_controlled)
 	{
 		var a = 1 - (1 / max_angle * i);
 		
-		var xnew = x + lengthdir_x(spd * a * dt, dir + i);
-		var ynew = y + lengthdir_y(spd * a * dt, dir + i);
+		var xnew = x + lengthdir_x(spd * a * dt * gspd, dir + i);
+		var ynew = y + lengthdir_y(spd * a * dt * gspd, dir + i);
 		if (collision_point(xnew, ynew, obj_prop, true, false) == noone)
 		{
 			x = xnew;
@@ -113,8 +113,8 @@ if (is_controlled)
 			break;
 		}
 		
-		xnew = x + lengthdir_x(spd * a * dt, dir - i);
-		ynew = y + lengthdir_y(spd * a * dt, dir - i);
+		xnew = x + lengthdir_x(spd * a * dt * gspd, dir - i);
+		ynew = y + lengthdir_y(spd * a * dt * gspd, dir - i);
 		if (collision_point(xnew, ynew, obj_prop, true, false) == noone)
 		{
 			x = xnew;
@@ -124,7 +124,7 @@ if (is_controlled)
 	}
 
 	// increase/decrease speed
-	spd = lerp(spd, final_spd, 1 - power(0.0005, dt));
+	spd = lerp(spd, final_spd, 1 - power(0.0005, dt * gspd));
 
 	#endregion
 }
@@ -132,5 +132,11 @@ if (is_controlled)
 // rts
 else
 {
+	var can_idle = status == ST_WALK or status == ST_RUN;
 	
+	if (can_idle)
+	{
+		status = ST_IDLE;
+		anim_manager.change_animation("idle_4", BLEND_FRAMES_10);
+	}
 }

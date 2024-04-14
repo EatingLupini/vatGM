@@ -22,3 +22,10 @@ spd_walk = 60;
 spd_run = 180;
 
 
+#region FUNCS
+set_controlled = function(controlled)
+{
+	is_controlled = controlled;
+	spd = 0;
+}
+#endregion

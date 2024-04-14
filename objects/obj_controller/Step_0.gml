@@ -32,20 +32,24 @@ if (instance_exists(cam))
 	// free cam
 	if (keyboard_check_pressed(ord("1")))
 	{
-		cam.view_type = VT_FREE;
+		cam.set_view_type(VT_FREE);
+		with (obj_knight)
+			set_controlled(false);
 	}
 	
 	// third person
 	if (keyboard_check_pressed(ord("2")) and instance_exists(iik))
 	{
-		cam.view_type = VT_THIRD;
-		cam.obj_to_follow = iik;
+		cam.set_view_type(VT_THIRD, iik);
+		iik.set_controlled(true);
 	}
 	
 	// rts cam
 	if (keyboard_check_pressed(ord("3")))
 	{
-		// ...
+		cam.set_view_type(VT_FIXED);
+		with (obj_knight)
+			set_controlled(false);
 	}
 }
 #endregion

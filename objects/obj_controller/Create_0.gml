@@ -38,7 +38,6 @@ for (var j=0; j<num; j++)
 		
 // knight
 iik = instance_create_depth(384, 384, 0, obj_knight);
-iik.is_controlled = true;
 
 // skybox
 instance_create_depth(0, 0, 0, obj_skybox);
