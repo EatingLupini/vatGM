@@ -23,15 +23,19 @@ view_set_visible(0, true);
 // create camera
 camera = camera_create();
 
+// set view matrix
+view_mat = matrix_build_lookat(0, 0, 0, 1, 0, 0, 0, 0, 1);
+camera_set_view_mat(camera, view_mat);
+
 // set projection matrix
-var proj_mat = matrix_build_projection_perspective_fov(opt_fov, -view_get_wport(0)/view_get_hport(0), 1, 32000);
+proj_mat = matrix_build_projection_perspective_fov(opt_fov, -view_get_wport(0)/view_get_hport(0), 1, 32000);
 camera_set_proj_mat(camera, proj_mat);
 
 // set camera
 view_set_camera(0, camera);
 
 // resize surface
-surface_resize(application_surface, 1920, 1080);
+//surface_resize(application_surface, 1920, 1080);
 //surface_resize(application_surface, 640, 360);
 
 #endregion

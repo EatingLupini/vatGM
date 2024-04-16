@@ -55,3 +55,11 @@ ii.image_yscale = 5;
 cam = instance_create_depth(0, 0, 0, obj_camera);
 
 #endregion
+
+#region VARS
+is_selecting = false;
+sel_screen_start = [0, 0];
+sel_world_start = [0, 0];
+sel_screen_end = [0, 0];
+sel_world_end = [0, 0];
+#endregion

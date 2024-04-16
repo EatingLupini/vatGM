@@ -132,6 +132,7 @@
     {"id":{"name":"obj_skybox","path":"objects/obj_skybox/obj_skybox.yy",},},
     {"id":{"name":"blender","path":"notes/blender/blender.yy",},},
     {"id":{"name":"MathFunctions","path":"scripts/MathFunctions/MathFunctions.yy",},},
+    {"id":{"name":"spr_coll_knight","path":"sprites/spr_coll_knight/spr_coll_knight.yy",},},
     {"id":{"name":"TextureMaterialAnim","path":"scripts/TextureMaterialAnim/TextureMaterialAnim.yy",},},
     {"id":{"name":"BlendFunc","path":"scripts/BlendFunc/BlendFunc.yy",},},
     {"id":{"name":"StaticModelBatch","path":"scripts/StaticModelBatch/StaticModelBatch.yy",},},

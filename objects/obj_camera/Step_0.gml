@@ -73,8 +73,8 @@ if (!is_paused and window_has_focus())
 		yto = yfrom - sin(degtorad(dir));
 		zto = zfrom + tan(degtorad(zdir));
 
-		var m_look_at = matrix_build_lookat(xfrom, yfrom, zfrom, xto, yto, zto, 0, 0, 1);
-		camera_set_view_mat(view_camera[0], m_look_at);
+		view_mat = matrix_build_lookat(xfrom, yfrom, zfrom, xto, yto, zto, 0, 0, 1);
+		camera_set_view_mat(camera, view_mat);
 	}
 	
 	// third person
@@ -89,6 +89,7 @@ if (!is_paused and window_has_focus())
 			dir_y = -dsin(dir) * dcos(zdir);
 			dir_z = dsin(zdir);
 			
+			#region old
 			/*
 			// camera closer to the object when props are in line of sight
 			for (var i=abs(dist); i>=0; i--)
@@ -129,6 +130,7 @@ if (!is_paused and window_has_focus())
 			yto = lerp(yto, obj_to_follow.y + yoff, 1 - power(0.01, dt * gspd));
 			zto = lerp(zto, obj_to_follow.z + 48, 1 - power(0.01, dt * gspd));
 			*/
+			#endregion
 			
 			// linear
 			xfrom = xfrom_old + ((obj_to_follow.x + xoff + dir_x * dist) - xfrom_old) / num_diff * cur_diff;
@@ -142,8 +144,8 @@ if (!is_paused and window_has_focus())
 			if (cur_diff < num_diff)
 				cur_diff += 1;
 		
-			var m_look_at = matrix_build_lookat(xfrom, yfrom, zfrom, xto, yto, zto, 0, 0, 1);
-			camera_set_view_mat(view_camera[0], m_look_at);
+			view_mat = matrix_build_lookat(xfrom, yfrom, zfrom, xto, yto, zto, 0, 0, 1);
+			camera_set_view_mat(camera, view_mat);
 		}
 		else
 		{
@@ -162,8 +164,8 @@ if (!is_paused and window_has_focus())
 		yto = yto_old;
 		zto = zto_old;
 		
-		var m_look_at = matrix_build_lookat(xfrom, yfrom, zfrom, xto, yto, zto, 0, 0, 1);
-		camera_set_view_mat(view_camera[0], m_look_at);
+		view_mat = matrix_build_lookat(xfrom, yfrom, zfrom, xto, yto, zto, 0, 0, 1);
+		camera_set_view_mat(camera, view_mat);
 	}
 }
 

@@ -133,7 +133,6 @@ if (is_controlled)
 else
 {
 	var can_idle = status == ST_WALK or status == ST_RUN;
-	
 	if (can_idle)
 	{
 		status = ST_IDLE;

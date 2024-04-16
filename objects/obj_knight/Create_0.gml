@@ -20,7 +20,7 @@ dir = 0;
 spd = 0;
 spd_walk = 60;
 spd_run = 180;
-
+mask_index = spr_coll_knight;
 
 #region FUNCS
 set_controlled = function(controlled)

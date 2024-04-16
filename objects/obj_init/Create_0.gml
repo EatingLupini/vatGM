@@ -13,6 +13,10 @@ init_animations();
 // other
 #macro WORLD_UNIT		32
 
+// coo
+#macro X				0
+#macro Y				1
+
 // model
 #macro MODEL			0
 #macro TEXTURE			1
