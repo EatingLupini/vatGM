@@ -75,3 +75,75 @@ function screen_to_world(x, y, view_mat, proj_mat)
 	return [fx, fy];
 }
 
+
+// POINT IN QUADRILATERAL
+function point_in_halfplane(quad, i, px, py)
+{
+	var v1 = quad[i % 4];
+	var v2 = quad[(i+1) % 4];
+	var v3 = quad[(i+2) % 4];
+	
+	// edge case
+	if (v1[X] == v2[X])
+		v1[X] += 0.01;
+	
+	var m = (v1[Y] - v2[Y]) / (v1[X] - v2[X]);
+	var q = v1[Y] - m * v1[X];
+	
+	var halfplane = py >= m * px + q;
+	
+	if (v3[Y] > m * v3[X] + q)
+		return halfplane;
+	else
+		return !halfplane;
+}
+
+function point_in_quad(px, py, quad)
+{
+	return point_in_halfplane(quad, 0, px, py) and
+			point_in_halfplane(quad, 1, px, py) and
+			point_in_halfplane(quad, 2, px, py) and
+			point_in_halfplane(quad, 3, px, py);
+}
+
+/*
+function get_eq(x1, y1, x2, y2)
+{
+	var m = (y1 - y2) / (x1 - x2);
+	var q = y1 - m * x1;
+	return [m, q];
+}
+
+function get_ud(quad, i, px, py, ud)
+{
+	var v1 = quad[i % 4];
+	var v2 = quad[(i+1) % 4];
+	var eq = get_eq(v1[X], v1[Y], v2[X], v2[Y]);
+	if (ud)
+		return py > eq[0] * px + eq[1];
+	else
+		return py < eq[0] * px + eq[1];
+}
+
+function half_plane(quad, i, px, py)
+{
+	var v1 = quad[i % 4];
+	var v2 = quad[(i+1) % 4];
+	var v3 = quad[(i+2) % 4];
+	var eq = get_eq(v1[X], v1[Y], v2[X], v2[Y]);
+		
+	if (get_ud(quad, i, v3[X], v3[Y], true))
+		return py >= eq[0] * px + eq[1];
+	else if (get_ud(quad, i, v3[X], v3[Y], false))
+		return py <= eq[0] * px + eq[1];
+}
+
+function point_in_quad(px, py, quad)
+{
+	return half_plane(quad, 0, px, py) and
+			half_plane(quad, 1, px, py) and
+			half_plane(quad, 2, px, py) and
+			half_plane(quad, 3, px, py);
+}
+*/
+

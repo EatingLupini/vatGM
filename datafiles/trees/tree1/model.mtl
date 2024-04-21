@@ -1,0 +1,25 @@
+# Blender MTL File: 'None'
+# Material Count: 2
+
+newmtl Trank_bark
+Ns 16.000006
+Ka 1.000000 1.000000 1.000000
+Kd 0.000000 0.000000 0.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 1
+map_Kd D:\\Davide\\Programmi\\blender-3.5.1-windows-x64\\assets_download\\whnp3v2jflkw-Tree\\Tree\\bark_0021.jpg
+
+newmtl polySurface1SG1
+Ns 5.890001
+Ka 1.000000 1.000000 1.000000
+Kd 0.000000 0.000000 0.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 1
+map_Kd D:\\Davide\\Programmi\\blender-3.5.1-windows-x64\\assets_download\\whnp3v2jflkw-Tree\\Tree\\DB2X2_L01.png
+map_Ks D:\\Davide\\Programmi\\blender-3.5.1-windows-x64\\assets_download\\whnp3v2jflkw-Tree\\Tree\\DB2X2_L01_Spec.png

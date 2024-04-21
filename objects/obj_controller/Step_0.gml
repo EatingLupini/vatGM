@@ -3,7 +3,7 @@
 #region DEBUG
 if (keyboard_check_pressed(vk_f4))
 	window_set_fullscreen(!window_get_fullscreen());
-if (window_get_width() != surface_get_width(application_surface))
+if (window_get_width() > 0 and  window_get_width() != surface_get_width(application_surface))
 	surface_resize(application_surface, window_get_width(), window_get_height());
 
 if (keyboard_check_pressed(vk_escape))
@@ -64,8 +64,6 @@ if (cam.view_type == VT_FIXED)
 	{
 		is_selecting = true;
 		sel_screen_start = [device_mouse_x_to_gui(0), device_mouse_y_to_gui(0)];
-		sel_world_start = screen_to_world(sel_screen_start[X], sel_screen_start[Y], cam.view_mat, cam.proj_mat);
-		show_debug_message("fx: {0}\nfy: {1}", sel_world_start[X], sel_world_start[Y]);
 	}
 	
 	// stop selecting
@@ -78,7 +76,32 @@ if (cam.view_type == VT_FIXED)
 	if (is_selecting and device_mouse_check_button(0, mb_left))
 	{
 		sel_screen_end = [device_mouse_x_to_gui(0), device_mouse_y_to_gui(0)];
-		sel_world_end = screen_to_world(sel_screen_end[X], sel_screen_end[Y], cam.view_mat, cam.proj_mat);
+		
+		if ((sel_screen_end[X] >= sel_screen_start[X] and sel_screen_end[Y] >= sel_screen_start[Y]) or
+			(sel_screen_end[X] <= sel_screen_start[X] and sel_screen_end[Y] <= sel_screen_start[Y]))
+		{
+			sel_world_v[0] = screen_to_world(sel_screen_start[X], sel_screen_start[Y], cam.view_mat, cam.proj_mat);
+			sel_world_v[1] = screen_to_world(sel_screen_end[X], sel_screen_start[Y], cam.view_mat, cam.proj_mat);
+			sel_world_v[2] = screen_to_world(sel_screen_end[X], sel_screen_end[Y], cam.view_mat, cam.proj_mat);
+			sel_world_v[3] = screen_to_world(sel_screen_start[X], sel_screen_end[Y], cam.view_mat, cam.proj_mat);
+		}
+		else
+		{
+			sel_world_v[0] = screen_to_world(sel_screen_start[X], sel_screen_end[Y], cam.view_mat, cam.proj_mat);
+			sel_world_v[1] = screen_to_world(sel_screen_end[X], sel_screen_end[Y], cam.view_mat, cam.proj_mat);
+			sel_world_v[2] = screen_to_world(sel_screen_end[X], sel_screen_start[Y], cam.view_mat, cam.proj_mat);
+			sel_world_v[3] = screen_to_world(sel_screen_start[X], sel_screen_start[Y], cam.view_mat, cam.proj_mat);
+		}
+	}
+	
+	// select knights
+	if (is_selecting)
+	{
+		for (var i=0; i<instance_number(obj_knight); i++)
+		{
+			var ii = instance_find(obj_knight, i);
+			ii.is_selected = point_in_quad(ii.x, ii.y, sel_world_v);
+		}
 	}
 }
 #endregion

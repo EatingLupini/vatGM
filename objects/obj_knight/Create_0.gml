@@ -15,6 +15,7 @@ z = 0;
 rot_z = 0;
 
 is_controlled = false;
+is_selected = false;
 status = ST_IDLE;
 dir = 0;
 spd = 0;

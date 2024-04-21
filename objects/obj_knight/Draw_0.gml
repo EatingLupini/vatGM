@@ -1,5 +1,13 @@
 /// @description
 
+// draw sel
+if (is_selected)
+{
+	draw_set_color(c_red);
+	draw_circle(x, y, 16, false);
+	draw_set_color(c_white);
+}
+
 // draw model
 var m_x = x;
 var m_y = y;

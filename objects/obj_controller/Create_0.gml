@@ -18,15 +18,18 @@ layer_force_draw_depth(true, 0);
 #endregion
 
 #region ENTITIES
-/*
-var num_zombies = 32;
-for (var j=0; j<num_zombies; j++)
-	for (var i=0; i<num_zombies; i++)
-		instance_create_depth(32 + 64 * i, 32 + 64 * j, 0, obj_entity);
-*/
-// instance_create_depth(32, 32, 0, obj_entity);
 
-//iik = instance_create_depth(32, 32, 0, obj_knight);
+// skybox
+instance_create_depth(0, 0, 0, obj_skybox);
+
+// castle
+var ii = instance_create_depth(0, 0, 0, obj_prop, {model_info: models[? "castle"]});
+ii.sprite_index = spr_coll_castle;
+ii.image_xscale = 5;
+ii.image_yscale = 5;
+
+// tree
+instance_create_depth(512, 512, 0, obj_prop, {model_info: models[? "tree"]});
 
 // guards
 var sx = 512;
@@ -38,15 +41,6 @@ for (var j=0; j<num; j++)
 		
 // knight
 iik = instance_create_depth(384, 384, 0, obj_knight);
-
-// skybox
-instance_create_depth(0, 0, 0, obj_skybox);
-
-// castle
-var ii = instance_create_depth(0, 0, 0, obj_prop, {model_info: models[? "castle"]});
-ii.sprite_index = spr_coll_castle;
-ii.image_xscale = 5;
-ii.image_yscale = 5;
 
 #endregion
 
@@ -62,4 +56,8 @@ sel_screen_start = [0, 0];
 sel_world_start = [0, 0];
 sel_screen_end = [0, 0];
 sel_world_end = [0, 0];
+sel_world_v = [];
+
+is_minimap_enabled = true;
 #endregion
+

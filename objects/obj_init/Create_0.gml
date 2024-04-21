@@ -75,12 +75,22 @@ var arr_tex_castle = [
 	sprite_add("castle/tex_stones_painted.png", 0, false, false, 0, 0),
 ];
 
+// castle
+var model_tree = load_model("trees/tree1/model.obj");
+model_tree.freeze();
+var arr_tex_tree = [
+	sprite_add("trees/tree1//tex_wood.jpg", 0, false, false, 0, 0),
+	sprite_add("trees/tree1//tex_leaves.png", 0, false, false, 0, 0),
+];
+
+
 models = ds_map_create();
 ds_map_add(models, "skybox", [model_skybox, arr_tex_skybox, undefined]);
 //ds_map_add(models, "zombie", [model_zombie, spr_tex_zombie, anims_zombie]);
 //ds_map_add(models, "archer", [model_archer, spr_tex_archer, anims_archer]);
 ds_map_add(models, "knight", [model_knight, arr_tex_knight, anims_knight]);
 ds_map_add(models, "castle", [model_castle, arr_tex_castle, undefined]);
+ds_map_add(models, "tree", [model_tree, arr_tex_tree, undefined]);
 
 
 // debug
