@@ -80,6 +80,7 @@ if (cam.view_type == VT_FIXED)
 	{
 		sel_screen_end = [device_mouse_x_to_gui(0), device_mouse_y_to_gui(0)];
 		
+		/*
 		if ((sel_screen_end[X] >= sel_screen_start[X] and sel_screen_end[Y] >= sel_screen_start[Y]) or
 			(sel_screen_end[X] <= sel_screen_start[X] and sel_screen_end[Y] <= sel_screen_start[Y]))
 		{
@@ -95,6 +96,7 @@ if (cam.view_type == VT_FIXED)
 			sel_world_v[2] = screen_to_world(sel_screen_end[X], sel_screen_start[Y], cam.view_mat, cam.proj_mat);
 			sel_world_v[3] = screen_to_world(sel_screen_start[X], sel_screen_start[Y], cam.view_mat, cam.proj_mat);
 		}
+		*/
 	}
 	
 	// select knights
@@ -111,7 +113,11 @@ if (cam.view_type == VT_FIXED)
 			var ii = instance_find(obj_knight, i);
 			var pos = world_to_screen(ii.x, ii.y, ii.z, obj_camera.view_mat, obj_camera.proj_mat);
 			if (pos[X] >= 0)
-				ii.is_selected = point_in_rectangle(pos[X], pos[Y], sel_screen_start[X], sel_screen_start[Y], sel_screen_end[X], sel_screen_end[Y]);
+			{
+				var sel_start = [min(sel_screen_start[X], sel_screen_end[X]), min(sel_screen_start[Y], sel_screen_end[Y])];
+				var sel_end = [max(sel_screen_start[X], sel_screen_end[X]), max(sel_screen_start[Y], sel_screen_end[Y])];
+				ii.is_selected = point_in_rectangle(pos[X], pos[Y], sel_start[X], sel_start[Y], sel_end[X], sel_end[Y]);
+			}
 		}
 	}
 }
