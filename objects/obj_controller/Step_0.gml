@@ -115,5 +115,17 @@ if (cam.view_type == VT_FIXED)
 		}
 	}
 }
+
+// DEBUG
+if (keyboard_check_pressed(ord("0")))
+{
+	with (obj_knight)
+	{
+		if (is_selected)
+			anim_manager.change_animation("walk_forward");
+		else
+			anim_manager.change_animation("idle_4");
+	}
+}
 #endregion
 

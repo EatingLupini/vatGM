@@ -58,23 +58,25 @@ function AnimationManager(model_anims) constructor
 		return (1 / frame_count) * frame_current;
 	}
 	
+	// anims data
+	self.active_anims = 0;
+	self.frame_start = array_create(self.MAX_ANIMS);
+	self.frame_end = array_create(self.MAX_ANIMS);
+	self.offset_min = array_create(self.MAX_ANIMS);
+	self.offset_dist = array_create(self.MAX_ANIMS);
+	self.loop = array_create(self.MAX_ANIMS);
+	self.time = array_create(self.MAX_ANIMS);
+	self.blend = array_create(self.MAX_ANIMS);
+	
 	static set_shader_params = function()
 	{
+		self.active_anims = array_length(self.play_anims);
+		
 		// skip if no animations are set
-		if (array_length(self.play_anims) <= 0)
+		if (self.active_anims <= 0)
 			return;
 		
-		// build arrays
-		var active_anims = array_length(self.play_anims);
-		var frame_start = array_create(active_anims);
-		var frame_end = array_create(active_anims);
-		var offset_min = array_create(active_anims);
-		var offset_dist = array_create(active_anims);
-		var loop = array_create(active_anims);
-		var time = array_create(active_anims);
-		var blend = array_create(active_anims);
-		
-		for (var i=0; i<active_anims; i++)
+		for (var i=0; i<self.active_anims; i++)
 		{
 			var play_anim = self.play_anims[i];
 			frame_start[i] = play_anim.anim.frame_start;
@@ -86,18 +88,17 @@ function AnimationManager(model_anims) constructor
 			blend[i] = play_anim.get_blend();
 		}
 		
-		
 		shader_set_uniform_f(tex_size_param, self.model_anims.tex_size, self.model_anims.tex_size);
 		texture_set_stage_vs(anim_offsets_param, self.model_anims.tex_offsets);
 		texture_set_stage_vs(anim_normals_param, self.model_anims.tex_normals);
-		shader_set_uniform_i(active_anims_param, active_anims);
-		shader_set_uniform_f_array(frame_start_param, frame_start);
-		shader_set_uniform_f_array(frame_end_param, frame_end);
-		shader_set_uniform_f_array(offset_min_param, offset_min);
-		shader_set_uniform_f_array(offset_dist_param, offset_dist);
-		shader_set_uniform_f_array(loop_param, loop);
-		shader_set_uniform_f_array(time_param, time);
-		shader_set_uniform_f_array(blend_param, blend);
+		shader_set_uniform_i(active_anims_param, self.active_anims);
+		shader_set_uniform_f_array(frame_start_param, self.frame_start);
+		shader_set_uniform_f_array(frame_end_param, self.frame_end);
+		shader_set_uniform_f_array(offset_min_param, self.offset_min);
+		shader_set_uniform_f_array(offset_dist_param, self.offset_dist);
+		shader_set_uniform_f_array(loop_param, self.loop);
+		shader_set_uniform_f_array(time_param, self.time);
+		shader_set_uniform_f_array(blend_param, self.blend);
 		
 		// settings
 		shader_set_uniform_f(sample_param, self.sample_num);
@@ -105,8 +106,10 @@ function AnimationManager(model_anims) constructor
 	
 	static step = function()
 	{
+		self.active_anims = array_length(self.play_anims);
+		
 		// skip if no animations are set
-		if (array_length(self.play_anims) <= 0)
+		if (self.active_anims <= 0)
 			return;
 		
 		// sample num
@@ -116,19 +119,19 @@ function AnimationManager(model_anims) constructor
 		}
 		
 		// increment frame time
-		for (var i=0; i<array_length(self.play_anims); i++)
+		for (var i=0; i<self.active_anims; i++)
 		{
 			var play_anim = self.play_anims[i];
 			play_anim.time += dt * 60 * play_anim.anim.speed * gspd;
 		}
 		
 		// pop old animation
-		if (array_length(self.play_anims) >= 2)
+		if (self.active_anims >= 2)
 		{
 			if (self.play_anims[1].get_blend() >= 1)
 			{
 				self.play_anims[1].blend_func = undefined;
-				array_delete(self.play_anims, 0, 1);
+				array_shift(self.play_anims);
 			}
 		}
 		
@@ -172,7 +175,7 @@ function AnimationManager(model_anims) constructor
 			throw(string("Animation \"{0}\" does not exists.", anim_new));
 		
 		// check max anims
-		if (array_length(self.play_anims) >= self.MAX_ANIMS)
+		if (self.active_anims >= self.MAX_ANIMS)
 		{
 			show_debug_message("Too many animations");
 			return;
