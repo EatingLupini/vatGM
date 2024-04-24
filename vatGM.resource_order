@@ -16,6 +16,7 @@
   ],
   "ResourceOrderSettings": [
     {"name":"obj_controller","order":1,"path":"objects/obj_controller/obj_controller.yy",},
+    {"name":"spr_selection","order":3,"path":"sprites/spr_selection/spr_selection.yy",},
     {"name":"VertexFormat","order":1,"path":"scripts/VertexFormat/VertexFormat.yy",},
     {"name":"Model","order":5,"path":"scripts/Model/Model.yy",},
     {"name":"sh_albedo_dbatch","order":2,"path":"shaders/sh_albedo_dbatch/sh_albedo_dbatch.yy",},

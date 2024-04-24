@@ -106,6 +106,7 @@
   "resources": [
     {"id":{"name":"obj_controller","path":"objects/obj_controller/obj_controller.yy",},},
     {"id":{"name":"obj_init","path":"objects/obj_init/obj_init.yy",},},
+    {"id":{"name":"spr_selection","path":"sprites/spr_selection/spr_selection.yy",},},
     {"id":{"name":"VertexFormat","path":"scripts/VertexFormat/VertexFormat.yy",},},
     {"id":{"name":"ModelLoading","path":"scripts/ModelLoading/ModelLoading.yy",},},
     {"id":{"name":"Model","path":"scripts/Model/Model.yy",},},
@@ -141,6 +142,7 @@
     {"id":{"name":"BlendFunc","path":"scripts/BlendFunc/BlendFunc.yy",},},
     {"id":{"name":"StaticModelBatch","path":"scripts/StaticModelBatch/StaticModelBatch.yy",},},
     {"id":{"name":"sh_texture","path":"shaders/sh_texture/sh_texture.yy",},},
+    {"id":{"name":"sh_selection","path":"shaders/sh_selection/sh_selection.yy",},},
     {"id":{"name":"rm_test","path":"rooms/rm_test/rm_test.yy",},},
     {"id":{"name":"__d3d11","path":"scripts/__d3d11/__d3d11.yy",},},
     {"id":{"name":"TextureMaterial","path":"scripts/TextureMaterial/TextureMaterial.yy",},},

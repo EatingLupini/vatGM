@@ -32,9 +32,9 @@ ii.image_yscale = 5;
 instance_create_depth(512, 512, 0, obj_prop, {model_info: models[? "tree"]});
 
 // guards
+var num = 30;
 var sx = 512;
 var sy = 512;
-var num = 10;
 for (var j=0; j<num; j++)
 	for (var i=0; i<num; i++)
 		instance_create_depth(sx + 64 * i, sy + 64 * j, 0, obj_knight);
@@ -58,6 +58,6 @@ sel_screen_end = [0, 0];
 sel_world_end = [0, 0];
 sel_world_v = [];
 
-is_minimap_enabled = true;
+is_minimap_enabled = false;
 #endregion
 

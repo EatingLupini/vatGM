@@ -1,6 +1,14 @@
 /// @description
 
-// anims
+// draw sel
+if (is_selected)
+{
+	var pos = world_to_screen(x, y, z +64, obj_camera.view_mat, obj_camera.proj_mat);
+	draw_set_color(c_aqua);
+	draw_circle(pos[X], pos[Y], 8, false);
+}
+
+// DEBUG
 if (is_controlled)
 {
 	var dstr = "";

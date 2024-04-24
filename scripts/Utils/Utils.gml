@@ -14,9 +14,52 @@ function vec2_rotate(v, ang)
 	return [ics, ips];
 }
 
+/// @param xx
+/// @param yy
+/// @param zz
+/// @param view_mat
+/// @param proj_mat
+/*
+    Transforms a 3D world-space coordinate to a 2D window-space coordinate. Returns an array of the following format:
+    [xx, yy]
+    Returns [-1, -1] if the 3D point is not in view
+   
+    Script created by TheSnidr
+    www.thesnidr.com
+*/
+function world_to_screen(xx, yy, zz, view_mat, proj_mat)
+{
+	var cx = -1;
+	var cy = -1;
+	
+	//This is a perspective projection
+	if (proj_mat[15] == 0)
+	{
+	    var w = view_mat[2] * xx + view_mat[6] * yy + view_mat[10] * zz + view_mat[14];
+	    // If you try to convert the camera's "from" position to screen space, you will
+	    // end up dividing by zero (please don't do that)
+	    //if (w == 0) return [-1, -1];
+		
+		// If 3d point is not in view
+	    if (w <= 0)
+			return [cx, cy];
+		
+	    cx = proj_mat[8] + proj_mat[0] * (view_mat[0] * xx + view_mat[4] * yy + view_mat[8] * zz + view_mat[12]) / w;
+	    cy = proj_mat[9] + proj_mat[5] * (view_mat[1] * xx + view_mat[5] * yy + view_mat[9] * zz + view_mat[13]) / w;
+	}
+	//This is an ortho projection
+	else
+	{
+	    cx = proj_mat[12] + proj_mat[0] * (view_mat[0] * xx + view_mat[4] * yy + view_mat[8]  * zz + view_mat[12]);
+	    cy = proj_mat[13] + proj_mat[5] * (view_mat[1] * xx + view_mat[5] * yy + view_mat[9]  * zz + view_mat[13]);
+	}
+
+	return [(0.5 + 0.5 * cx) * window_get_width(), (0.5 + 0.5 * cy) * window_get_height()];
+}
+
 /// @description screen_raycast(x, y, view_mat, proj_mat)
-/// @param x
-/// @param y
+/// @param xx
+/// @param yy
 /// @param view_mat
 /// @param proj_mat
 /*
@@ -31,10 +74,10 @@ Script created by TheSnidr
 (slightly modified by @dragonitespam)
 (https://www.youtube.com/watch?v=F1G9Qgf1JNY)
 */
-function screen_raycast(x, y, view_mat, proj_mat)
+function screen_raycast(xx, yy, view_mat, proj_mat)
 {
-	var mx = 2 * (x / window_get_width() - .5) / proj_mat[0];
-	var my = 2 * (y / window_get_height() - .5) / proj_mat[5];
+	var mx = 2 * (xx / window_get_width() - .5) / proj_mat[0];
+	var my = 2 * (yy / window_get_height() - .5) / proj_mat[5];
 	var camX = - (view_mat[12] * view_mat[0] + view_mat[13] * view_mat[1] + view_mat[14] * view_mat[2]);
 	var camY = - (view_mat[12] * view_mat[4] + view_mat[13] * view_mat[5] + view_mat[14] * view_mat[6]);
 	var camZ = - (view_mat[12] * view_mat[8] + view_mat[13] * view_mat[9] + view_mat[14] * view_mat[10]);

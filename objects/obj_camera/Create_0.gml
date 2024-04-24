@@ -78,8 +78,8 @@ yto_old = 0;
 zto_old = 0;
 
 // speed
-spd_min = 4;
-spd_max = 8;
+spd_min = 8;
+spd_max = 16;
 spd = spd_min;
 
 #endregion
