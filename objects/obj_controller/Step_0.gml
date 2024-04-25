@@ -18,6 +18,10 @@ if (keyboard_check(189))	// -
 
 if (keyboard_check_pressed(ord("L")))
 	game_set_speed(game_get_speed(gamespeed_fps) == 30 ? 60 : 30, gamespeed_fps);
+
+if (keyboard_check_pressed(ord("M")))
+	is_minimap_enabled = !is_minimap_enabled;
+
 #endregion
 
 #region PAUSE
@@ -59,65 +63,63 @@ if (instance_exists(cam))
 #region SELECTION
 if (cam.view_type == VT_FIXED)
 {
-	// strt selecting
+	// start selecting
 	if (device_mouse_check_button_pressed(0, mb_left))
 	{
 		is_selecting = true;
 		sel_screen_start = [device_mouse_x_to_gui(0), device_mouse_y_to_gui(0)];
+		ds_list_clear(list_selected);
 		
 		with (obj_knight)
 			is_selected = false;
-	}
-	
-	// stop selecting
-	if (device_mouse_check_button_released(0, mb_left))
-	{
-		is_selecting = false;
 	}
 	
 	// selecting
 	if (is_selecting and device_mouse_check_button(0, mb_left))
 	{
 		sel_screen_end = [device_mouse_x_to_gui(0), device_mouse_y_to_gui(0)];
-		
-		/*
-		if ((sel_screen_end[X] >= sel_screen_start[X] and sel_screen_end[Y] >= sel_screen_start[Y]) or
-			(sel_screen_end[X] <= sel_screen_start[X] and sel_screen_end[Y] <= sel_screen_start[Y]))
-		{
-			sel_world_v[0] = screen_to_world(sel_screen_start[X], sel_screen_start[Y], cam.view_mat, cam.proj_mat);
-			sel_world_v[1] = screen_to_world(sel_screen_end[X], sel_screen_start[Y], cam.view_mat, cam.proj_mat);
-			sel_world_v[2] = screen_to_world(sel_screen_end[X], sel_screen_end[Y], cam.view_mat, cam.proj_mat);
-			sel_world_v[3] = screen_to_world(sel_screen_start[X], sel_screen_end[Y], cam.view_mat, cam.proj_mat);
-		}
-		else
-		{
-			sel_world_v[0] = screen_to_world(sel_screen_start[X], sel_screen_end[Y], cam.view_mat, cam.proj_mat);
-			sel_world_v[1] = screen_to_world(sel_screen_end[X], sel_screen_end[Y], cam.view_mat, cam.proj_mat);
-			sel_world_v[2] = screen_to_world(sel_screen_end[X], sel_screen_start[Y], cam.view_mat, cam.proj_mat);
-			sel_world_v[3] = screen_to_world(sel_screen_start[X], sel_screen_start[Y], cam.view_mat, cam.proj_mat);
-		}
-		*/
+		sel_num_ent = 0;
+		buffer_seek(sel_buffer, buffer_seek_start, 0);
 	}
 	
 	// select knights
-	if (is_selecting and sel_screen_start[X] != sel_screen_end[X] and sel_screen_start[Y] != sel_screen_end[Y])
+	if (is_selecting and
+		sel_screen_start[X] != sel_screen_end[X] and sel_screen_start[Y] != sel_screen_end[Y])
 	{
 		var ii_number = instance_number(obj_knight);
 		for (var i=0; i<ii_number; i++)
 		{
-			// screen to world
-			//var ii = instance_find(obj_knight, i);
-			//ii.is_selected = point_in_quad(ii.x, ii.y, sel_world_v);
-			
 			// world to screen
 			var ii = instance_find(obj_knight, i);
-			var pos = world_to_screen(ii.x, ii.y, ii.z, obj_camera.view_mat, obj_camera.proj_mat);
+			var pos = world_to_screen(ii.x, ii.y, ii.z, cam.view_mat, cam.proj_mat);
 			if (pos[X] >= 0)
 			{
 				var sel_start = [min(sel_screen_start[X], sel_screen_end[X]), min(sel_screen_start[Y], sel_screen_end[Y])];
 				var sel_end = [max(sel_screen_start[X], sel_screen_end[X]), max(sel_screen_start[Y], sel_screen_end[Y])];
 				ii.is_selected = point_in_rectangle(pos[X], pos[Y], sel_start[X], sel_start[Y], sel_end[X], sel_end[Y]);
+				
+				if (ii.is_selected)
+				{
+					sel_num_ent += 1;
+					buffer_write(sel_buffer, buffer_f16, ii.x);
+					buffer_write(sel_buffer, buffer_f16, ii.y);
+					buffer_write(sel_buffer, buffer_f16, ii.z);
+					buffer_write(sel_buffer, buffer_f16, 0);
+				}
 			}
+		}
+	}
+	
+	// stop selecting
+	if (device_mouse_check_button_released(0, mb_left))
+	{
+		is_selecting = false;
+		var ii_number = instance_number(obj_knight);
+		for (var i=0; i<ii_number; i++)
+		{
+			var ii = instance_find(obj_knight, i);
+			if (ii.is_selected)
+				ds_list_add(list_selected, ii);
 		}
 	}
 }

@@ -106,7 +106,7 @@ if (is_controlled)
 		
 		var xnew = x + lengthdir_x(spd * a * dt * gspd, dir + i);
 		var ynew = y + lengthdir_y(spd * a * dt * gspd, dir + i);
-		if (collision_point(xnew, ynew, obj_prop, true, false) == noone)
+		if (collision_circle(xnew, ynew, radius, obj_prop, true, false) == noone)
 		{
 			x = xnew;
 			y = ynew;
@@ -115,7 +115,7 @@ if (is_controlled)
 		
 		xnew = x + lengthdir_x(spd * a * dt * gspd, dir - i);
 		ynew = y + lengthdir_y(spd * a * dt * gspd, dir - i);
-		if (collision_point(xnew, ynew, obj_prop, true, false) == noone)
+		if (collision_circle(xnew, ynew, radius, obj_prop, true, false) == noone)
 		{
 			x = xnew;
 			y = ynew;

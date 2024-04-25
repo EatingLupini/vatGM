@@ -8,7 +8,8 @@ draw_text(512, 32,	"current_time: " + string(current_time * 0.001) + "\n" +
 					"fps_real: " + string(fps_real) + "\n" +
 					"gspd: " + string(gspd) + "\n" +
 					"screen_w: " + string(window_get_width()) + "\n" +
-					"screen_h: " + string(window_get_height())
+					"screen_h: " + string(window_get_height()) + "\n" +
+					"list_selected: " + string(ds_list_size(list_selected))
 					);
 
 // SELECTION
@@ -31,6 +32,22 @@ if (is_minimap_enabled)
 	draw_rectangle(0, 0, room_width / f, room_height / f, false);
 	
 	// selection
+	if ((sel_screen_end[X] >= sel_screen_start[X] and sel_screen_end[Y] >= sel_screen_start[Y]) or
+		(sel_screen_end[X] <= sel_screen_start[X] and sel_screen_end[Y] <= sel_screen_start[Y]))
+	{
+		sel_world_v[0] = screen_to_world(sel_screen_start[X], sel_screen_start[Y], cam.view_mat, cam.proj_mat);
+		sel_world_v[1] = screen_to_world(sel_screen_end[X], sel_screen_start[Y], cam.view_mat, cam.proj_mat);
+		sel_world_v[2] = screen_to_world(sel_screen_end[X], sel_screen_end[Y], cam.view_mat, cam.proj_mat);
+		sel_world_v[3] = screen_to_world(sel_screen_start[X], sel_screen_end[Y], cam.view_mat, cam.proj_mat);
+	}
+	else
+	{
+		sel_world_v[0] = screen_to_world(sel_screen_start[X], sel_screen_end[Y], cam.view_mat, cam.proj_mat);
+		sel_world_v[1] = screen_to_world(sel_screen_end[X], sel_screen_end[Y], cam.view_mat, cam.proj_mat);
+		sel_world_v[2] = screen_to_world(sel_screen_end[X], sel_screen_start[Y], cam.view_mat, cam.proj_mat);
+		sel_world_v[3] = screen_to_world(sel_screen_start[X], sel_screen_start[Y], cam.view_mat, cam.proj_mat);
+	}
+	
 	draw_primitive_begin(pr_trianglefan);
 	for (var i=0; i<array_length(sel_world_v); i++)
 		draw_vertex_color(sel_world_v[i][X] / f, sel_world_v[i][Y] / f, c_red, 1);

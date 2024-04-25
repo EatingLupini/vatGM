@@ -13,6 +13,7 @@ for (var i=0; i<array_length(model_info[TEXTURE]); i++)
 
 z = 0;
 rot_z = 0;
+radius = 16;
 
 is_controlled = false;
 is_selected = false;

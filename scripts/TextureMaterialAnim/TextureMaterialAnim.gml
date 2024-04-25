@@ -4,6 +4,7 @@ function TextureMaterialAnim(texture, subimg, anim_manager) : TextureMaterial(sh
 	
 	static on_apply = function()
 	{
+		gpu_set_cullmode(cull_counterclockwise);
 		self.anim_manager.step();
 		self.anim_manager.set_shader_params();
 	}

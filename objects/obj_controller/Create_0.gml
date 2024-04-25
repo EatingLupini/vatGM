@@ -23,13 +23,10 @@ layer_force_draw_depth(true, 0);
 instance_create_depth(0, 0, 0, obj_skybox);
 
 // castle
-var ii = instance_create_depth(0, 0, 0, obj_prop, {model_info: models[? "castle"]});
-ii.sprite_index = spr_coll_castle;
-ii.image_xscale = 5;
-ii.image_yscale = 5;
+instance_create_depth(0, 0, 0, obj_castle);
 
 // tree
-instance_create_depth(512, 512, 0, obj_prop, {model_info: models[? "tree"]});
+instance_create_depth(512, 512, 0, obj_tree);
 
 // guards
 var num = 30;
@@ -51,13 +48,24 @@ cam = instance_create_depth(0, 0, 0, obj_camera);
 #endregion
 
 #region VARS
+is_minimap_enabled = false;
 is_selecting = false;
 sel_screen_start = [0, 0];
 sel_world_start = [0, 0];
 sel_screen_end = [0, 0];
 sel_world_end = [0, 0];
 sel_world_v = [];
+sel_num_ent = 0;
+list_selected = ds_list_create();
 
-is_minimap_enabled = false;
+// max 1024 selectable entities
+sel_max_surf_size = 32;
+sel_max_entities = sel_max_surf_size * sel_max_surf_size;
+// 4 channels (rgbs) * 2 byte (16 bit float) * max num entities
+sel_buffer = buffer_create(4 * 2 * sel_max_entities, buffer_fixed, 2);
+sel_surf = surface_create(sel_max_surf_size, sel_max_surf_size, surface_rgba16float);
+
+u_num_ent = shader_get_uniform(sh_selection, "u_num_ent");
+u_sel_ent = shader_get_sampler_index(sh_selection, "u_sel_ent");
 #endregion
 
