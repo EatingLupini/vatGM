@@ -57,15 +57,5 @@ sel_world_end = [0, 0];
 sel_world_v = [];
 sel_num_ent = 0;
 list_selected = ds_list_create();
-
-// max 1024 selectable entities
-sel_max_surf_size = 32;
-sel_max_entities = sel_max_surf_size * sel_max_surf_size;
-// 4 channels (rgbs) * 2 byte (16 bit float) * max num entities
-sel_buffer = buffer_create(4 * 2 * sel_max_entities, buffer_fixed, 2);
-sel_surf = surface_create(sel_max_surf_size, sel_max_surf_size, surface_rgba16float);
-
-u_num_ent = shader_get_uniform(sh_selection, "u_num_ent");
-u_sel_ent = shader_get_sampler_index(sh_selection, "u_sel_ent");
 #endregion
 

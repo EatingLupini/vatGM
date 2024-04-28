@@ -68,7 +68,6 @@ if (cam.view_type == VT_FIXED)
 	{
 		is_selecting = true;
 		sel_screen_start = [device_mouse_x_to_gui(0), device_mouse_y_to_gui(0)];
-		ds_list_clear(list_selected);
 		
 		with (obj_knight)
 			is_selected = false;
@@ -78,8 +77,7 @@ if (cam.view_type == VT_FIXED)
 	if (is_selecting and device_mouse_check_button(0, mb_left))
 	{
 		sel_screen_end = [device_mouse_x_to_gui(0), device_mouse_y_to_gui(0)];
-		sel_num_ent = 0;
-		buffer_seek(sel_buffer, buffer_seek_start, 0);
+		ds_list_clear(list_selected);
 	}
 	
 	// select knights
@@ -97,15 +95,8 @@ if (cam.view_type == VT_FIXED)
 				var sel_start = [min(sel_screen_start[X], sel_screen_end[X]), min(sel_screen_start[Y], sel_screen_end[Y])];
 				var sel_end = [max(sel_screen_start[X], sel_screen_end[X]), max(sel_screen_start[Y], sel_screen_end[Y])];
 				ii.is_selected = point_in_rectangle(pos[X], pos[Y], sel_start[X], sel_start[Y], sel_end[X], sel_end[Y]);
-				
 				if (ii.is_selected)
-				{
-					sel_num_ent += 1;
-					buffer_write(sel_buffer, buffer_f16, ii.x);
-					buffer_write(sel_buffer, buffer_f16, ii.y);
-					buffer_write(sel_buffer, buffer_f16, ii.z);
-					buffer_write(sel_buffer, buffer_f16, 0);
-				}
+					ds_list_add(list_selected, ii);
 			}
 		}
 	}
@@ -114,13 +105,6 @@ if (cam.view_type == VT_FIXED)
 	if (device_mouse_check_button_released(0, mb_left))
 	{
 		is_selecting = false;
-		var ii_number = instance_number(obj_knight);
-		for (var i=0; i<ii_number; i++)
-		{
-			var ii = instance_find(obj_knight, i);
-			if (ii.is_selected)
-				ds_list_add(list_selected, ii);
-		}
 	}
 }
 

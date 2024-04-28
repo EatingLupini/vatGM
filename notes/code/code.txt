@@ -1,0 +1,33 @@
+BUFFER TO SURFACE
+
+-> CREATE EVENT
+// max 1024 selectable entities
+sel_max_surf_size = 32;
+sel_max_entities = sel_max_surf_size * sel_max_surf_size;
+// 4 channels (rgbs) * 2 byte (16 bit float) * max num entities
+sel_buffer = buffer_create(4 * 2 * sel_max_entities, buffer_fixed, 2);
+sel_surf = surface_create(sel_max_surf_size, sel_max_surf_size, surface_rgba16float);
+
+u_num_ent = shader_get_uniform(sh_selection, "u_num_ent");
+u_sel_ent = shader_get_sampler_index(sh_selection, "u_sel_ent");
+
+-> STEP EVENT
+buffer_write(sel_buffer, buffer_f16, ii.x);
+buffer_write(sel_buffer, buffer_f16, ii.y);
+buffer_write(sel_buffer, buffer_f16, ii.z);
+buffer_write(sel_buffer, buffer_f16, 0);
+
+-> DRAW EVENT
+// https://forum.gamemaker.io/index.php?threads/how-to-read-a-gml-buffer-inside-of-a-shader-gms-1-4.95635/post-575772
+if (!surface_exists(sel_surf))
+	sel_surf = surface_create(32, 32, surface_rgba16float);
+buffer_set_surface(sel_buffer, sel_surf, 0);
+	
+var sel_surf_tex = surface_get_texture(sel_surf);
+shader_set(sh_selection);
+shader_set_uniform_i(u_num_ent, sel_num_ent);
+texture_set_stage(u_sel_ent, sel_surf_tex);
+draw_sprite_stretched(spr_selection, 0, 0, 0, room_width, room_height);
+shader_reset();
+
+

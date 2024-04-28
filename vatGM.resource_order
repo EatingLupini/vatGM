@@ -45,6 +45,7 @@
     {"name":"spr_coll_knight","order":1,"path":"sprites/spr_coll_knight/spr_coll_knight.yy",},
     {"name":"BlendFunc","order":4,"path":"scripts/BlendFunc/BlendFunc.yy",},
     {"name":"StaticModelBatch","order":8,"path":"scripts/StaticModelBatch/StaticModelBatch.yy",},
+    {"name":"code","order":2,"path":"notes/code/code.yy",},
     {"name":"sh_texture","order":1,"path":"shaders/sh_texture/sh_texture.yy",},
     {"name":"obj_tree","order":2,"path":"objects/obj_tree/obj_tree.yy",},
     {"name":"rm_test","order":1,"path":"rooms/rm_test/rm_test.yy",},

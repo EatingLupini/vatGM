@@ -146,6 +146,7 @@
     {"id":{"name":"TextureMaterialAnim","path":"scripts/TextureMaterialAnim/TextureMaterialAnim.yy",},},
     {"id":{"name":"BlendFunc","path":"scripts/BlendFunc/BlendFunc.yy",},},
     {"id":{"name":"StaticModelBatch","path":"scripts/StaticModelBatch/StaticModelBatch.yy",},},
+    {"id":{"name":"code","path":"notes/code/code.yy",},},
     {"id":{"name":"sh_texture","path":"shaders/sh_texture/sh_texture.yy",},},
     {"id":{"name":"sh_selection","path":"shaders/sh_selection/sh_selection.yy",},},
     {"id":{"name":"obj_tree","path":"objects/obj_tree/obj_tree.yy",},},
