@@ -132,11 +132,12 @@ function AnimationManager(model_anims) constructor
 			{
 				self.play_anims[1].blend_func = undefined;
 				array_shift(self.play_anims);
+				self.active_anims -= 1;
 			}
 		}
 		
 		// animation over
-		for (var i=0; i<array_length(self.play_anims); i++)
+		for (var i=0; i<self.active_anims; i++)
 		{
 			var play_anim = self.play_anims[i];
 			var frame_count = play_anim.anim.frame_end - play_anim.anim.frame_start;
@@ -175,7 +176,7 @@ function AnimationManager(model_anims) constructor
 			throw(string("Animation \"{0}\" does not exists.", anim_new));
 		
 		// check max anims
-		if (self.active_anims >= self.MAX_ANIMS)
+		if (array_length(self.play_anims) >= self.MAX_ANIMS)
 		{
 			show_debug_message("Too many animations");
 			return;
