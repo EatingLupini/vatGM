@@ -42,6 +42,7 @@
     {"name":"obj_skybox","order":3,"path":"objects/obj_skybox/obj_skybox.yy",},
     {"name":"blender","order":1,"path":"notes/blender/blender.yy",},
     {"name":"MathFunctions","order":4,"path":"scripts/MathFunctions/MathFunctions.yy",},
+    {"name":"sh_zfight","order":1,"path":"shaders/sh_zfight/sh_zfight.yy",},
     {"name":"spr_coll_knight","order":1,"path":"sprites/spr_coll_knight/spr_coll_knight.yy",},
     {"name":"BlendFunc","order":4,"path":"scripts/BlendFunc/BlendFunc.yy",},
     {"name":"StaticModelBatch","order":8,"path":"scripts/StaticModelBatch/StaticModelBatch.yy",},

@@ -19,6 +19,22 @@ function vec2_rotate(v, ang)
 /// @param zz
 /// @param view_mat
 /// @param proj_mat
+function point_in_camera(xx, yy, zz, view_mat, proj_mat)
+{
+	//return view_mat[2] * xx + view_mat[6] * yy + view_mat[10] * zz + view_mat[14] > 0;
+	
+	var pos = world_to_screen(xx, yy, zz, view_mat, proj_mat);
+	if (pos[X] < 0)
+		return false;
+	return point_in_rectangle(pos[X], pos[Y], 0, 0, display_get_gui_width(), display_get_gui_height());
+}
+
+
+/// @param xx
+/// @param yy
+/// @param zz
+/// @param view_mat
+/// @param proj_mat
 /*
     Transforms a 3D world-space coordinate to a 2D window-space coordinate. Returns an array of the following format:
     [xx, yy]

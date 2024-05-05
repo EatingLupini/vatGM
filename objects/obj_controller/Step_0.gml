@@ -21,6 +21,9 @@ if (keyboard_check_pressed(ord("L")))
 
 if (keyboard_check_pressed(ord("M")))
 	is_minimap_enabled = !is_minimap_enabled;
+	
+if (keyboard_check_pressed(ord("N")))
+	is_navgrid_enabled = !is_navgrid_enabled;
 
 #endregion
 
@@ -73,6 +76,12 @@ if (cam.view_type == VT_FIXED)
 			is_selected = false;
 	}
 	
+	// stop selecting
+	if (device_mouse_check_button_released(0, mb_left))
+	{
+		is_selecting = false;
+	}
+	
 	// selecting
 	if (is_selecting and device_mouse_check_button(0, mb_left))
 	{
@@ -100,12 +109,6 @@ if (cam.view_type == VT_FIXED)
 			}
 		}
 	}
-	
-	// stop selecting
-	if (device_mouse_check_button_released(0, mb_left))
-	{
-		is_selecting = false;
-	}
 }
 
 // DEBUG
@@ -117,6 +120,25 @@ if (keyboard_check_pressed(ord("0")))
 			anim_manager.change_animation("walk_forward");
 		else
 			anim_manager.change_animation("idle_4");
+	}
+}
+#endregion
+
+#region ORDERS
+if (cam.view_type == VT_FIXED)
+{
+	if (device_mouse_check_button_pressed(0, mb_right))
+	{
+		var pos = screen_to_world(
+						device_mouse_x_to_gui(0), device_mouse_y_to_gui(0),
+						cam.view_mat, cam.proj_mat);
+		for (var i=0; i<ds_list_size(list_selected); i++)
+		{
+			var ent = list_selected[| i];
+			mp_grid_path(navgrid, ent.navpath, ent.x, ent.y, pos[X], pos[Y] , true);
+			with (ent)
+				path_start(navpath, 2, path_action_stop, true);
+		}
 	}
 }
 #endregion

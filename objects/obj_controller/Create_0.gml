@@ -49,13 +49,17 @@ cam = instance_create_depth(0, 0, 0, obj_camera);
 
 #region VARS
 is_minimap_enabled = false;
+is_navgrid_enabled = false;
 is_selecting = false;
 sel_screen_start = [0, 0];
 sel_world_start = [0, 0];
 sel_screen_end = [0, 0];
 sel_world_end = [0, 0];
 sel_world_v = [];
-sel_num_ent = 0;
 list_selected = ds_list_create();
+
+// set navgrid collisions
+navgrid = mp_grid_create(0, 0, room_width / 16, room_height / 16, 16, 16);
+alarm[0] = 1;
 #endregion
 

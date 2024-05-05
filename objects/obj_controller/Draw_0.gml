@@ -1,12 +1,8 @@
 /// @description
 
-// SELECTION
-if (is_selecting or ds_list_size(list_selected) > 0)
+if (is_navgrid_enabled)
 {
-	var l = ds_list_size(list_selected);
-	for (var i=0; i<l; i++)
-	{
-		var ent = list_selected[| i];
-		draw_sprite(spr_selection, 0, ent.x, ent.y);
-	}
+	shader_set(sh_zfight);
+	mp_grid_draw(navgrid);
+	shader_reset();
 }

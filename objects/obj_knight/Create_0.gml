@@ -24,6 +24,10 @@ spd_walk = 60;
 spd_run = 180;
 mask_index = spr_coll_knight;
 
+navpath = path_add();
+path_set_kind(navpath, true);
+path_set_precision(navpath, 2);
+
 #region FUNCS
 set_controlled = function(controlled)
 {

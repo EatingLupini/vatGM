@@ -1,12 +1,17 @@
 /// @description
 
-// draw model
-var m_x = x;
-var m_y = y;
-var m_z = 0;
-var m_scale = WORLD_UNIT;
+if (is_selected)
+{
+	shader_set(sh_zfight)
+	draw_sprite(spr_selection, 0, x, y);
+	shader_reset();
+}
 
-var matrix = matrix_build(m_x, m_y, m_z, 0, 0, rot_z, m_scale, m_scale, m_scale);
-matrix_set(matrix_world, matrix);
-inst.render();
-matrix_set(matrix_world, matrix_build_identity());
+// draw model
+//if (point_in_camera(x, y, z, obj_camera.view_mat, obj_camera.proj_mat))
+{
+	var matrix = matrix_build(x, y, z, 0, 0, rot_z, WORLD_UNIT, WORLD_UNIT, WORLD_UNIT);
+	matrix_set(matrix_world, matrix);
+	inst.render();
+	matrix_set(matrix_world, matrix_build_identity());
+}
