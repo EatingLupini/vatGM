@@ -1,10 +1,12 @@
 {
-  "resourceType": "GMShader",
-  "resourceVersion": "1.0",
-  "name": "sh_vat",
-  "parent": {
-    "name": "TextureAnim",
-    "path": "folders/Scripts/RedemptionEditor/ObjImporter/Materials/TextureAnim.yy",
+  "$GMShader":"",
+  "%Name":"sh_vat",
+  "name":"sh_vat",
+  "parent":{
+    "name":"TextureAnim",
+    "path":"folders/Scripts/RedemptionEditor/ObjImporter/Materials/TextureAnim.yy",
   },
-  "type": 1,
+  "resourceType":"GMShader",
+  "resourceVersion":"2.0",
+  "type":1,
 }

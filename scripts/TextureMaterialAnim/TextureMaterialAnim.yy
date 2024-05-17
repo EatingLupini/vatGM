@@ -1,11 +1,13 @@
 {
-  "resourceType": "GMScript",
-  "resourceVersion": "1.0",
-  "name": "TextureMaterialAnim",
-  "isCompatibility": false,
-  "isDnD": false,
-  "parent": {
-    "name": "TextureAnim",
-    "path": "folders/Scripts/RedemptionEditor/ObjImporter/Materials/TextureAnim.yy",
+  "$GMScript":"",
+  "%Name":"TextureMaterialAnim",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"TextureMaterialAnim",
+  "parent":{
+    "name":"TextureAnim",
+    "path":"folders/Scripts/RedemptionEditor/ObjImporter/Materials/TextureAnim.yy",
   },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
 }

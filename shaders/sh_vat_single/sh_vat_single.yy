@@ -1,10 +1,12 @@
 {
-  "resourceType": "GMShader",
-  "resourceVersion": "1.0",
-  "name": "sh_vat_single",
-  "parent": {
-    "name": "TextureAnimSingle",
-    "path": "folders/Scripts/RedemptionEditor/ObjImporter/Materials/TextureAnimSingle.yy",
+  "$GMShader":"",
+  "%Name":"sh_vat_single",
+  "name":"sh_vat_single",
+  "parent":{
+    "name":"TextureAnimSingle",
+    "path":"folders/Scripts/RedemptionEditor/ObjImporter/Materials/TextureAnimSingle.yy",
   },
-  "type": 1,
+  "resourceType":"GMShader",
+  "resourceVersion":"2.0",
+  "type":1,
 }

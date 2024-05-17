@@ -1,10 +1,12 @@
 {
-  "resourceType": "GMShader",
-  "resourceVersion": "1.0",
-  "name": "sh_default",
-  "parent": {
-    "name": "Default",
-    "path": "folders/Scripts/RedemptionEditor/ObjImporter/Materials/Default.yy",
+  "$GMShader":"",
+  "%Name":"sh_default",
+  "name":"sh_default",
+  "parent":{
+    "name":"Default",
+    "path":"folders/Scripts/RedemptionEditor/ObjImporter/Materials/Default.yy",
   },
-  "type": 1,
+  "resourceType":"GMShader",
+  "resourceVersion":"2.0",
+  "type":1,
 }

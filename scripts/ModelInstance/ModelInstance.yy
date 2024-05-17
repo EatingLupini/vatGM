@@ -1,11 +1,13 @@
 {
-  "resourceType": "GMScript",
-  "resourceVersion": "1.0",
-  "name": "ModelInstance",
-  "isCompatibility": false,
-  "isDnD": false,
-  "parent": {
-    "name": "Scripts",
-    "path": "folders/Scripts/RedemptionEditor/ObjImporter/Scripts.yy",
+  "$GMScript":"",
+  "%Name":"ModelInstance",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"ModelInstance",
+  "parent":{
+    "name":"Scripts",
+    "path":"folders/Scripts/RedemptionEditor/ObjImporter/Scripts.yy",
   },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
 }
