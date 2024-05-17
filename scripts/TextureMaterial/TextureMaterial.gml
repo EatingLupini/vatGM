@@ -1,6 +1,6 @@
 function TextureMaterial(shader, texture, subimg, params=undefined) : Material(shader) constructor
 {
-	self.base_texture = sprite_get_texture(texture, subimg);
+	self.base_texture = texture;
 	self.params = params ?? {
 		cull: cull_counterclockwise,
 		texrep: true

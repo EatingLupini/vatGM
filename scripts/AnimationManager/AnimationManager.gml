@@ -88,9 +88,9 @@ function AnimationManager(model_anims) constructor
 			blend[i] = play_anim.get_blend();
 		}
 		
-		shader_set_uniform_f(tex_size_param, self.model_anims.tex_size, self.model_anims.tex_size);
-		texture_set_stage_vs(anim_offsets_param, self.model_anims.tex_offsets);
-		texture_set_stage_vs(anim_normals_param, self.model_anims.tex_normals);
+		// shader_set_uniform_f(tex_size_param, self.model_anims.tex_size, self.model_anims.tex_size);
+		// texture_set_stage_vs(anim_offsets_param, self.model_anims.tex_offsets);
+		// texture_set_stage_vs(anim_normals_param, self.model_anims.tex_normals);
 		shader_set_uniform_i(active_anims_param, self.active_anims);
 		shader_set_uniform_f_array(frame_start_param, self.frame_start);
 		shader_set_uniform_f_array(frame_end_param, self.frame_end);

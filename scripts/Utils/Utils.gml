@@ -1,5 +1,11 @@
 // Utils
 
+function texture_add(filename)
+{
+	var spr = sprite_add(filename, 0, false, false, 0, 0);
+	return sprite_get_texture(spr, 0);
+}
+
 function angle_lerp(current, target, amount)
 {
 	var angle_diff = angle_difference(current, target);
@@ -164,45 +170,4 @@ function point_in_quad(px, py, quad)
 			point_in_halfplane(quad, 2, px, py) and
 			point_in_halfplane(quad, 3, px, py);
 }
-
-/*
-function get_eq(x1, y1, x2, y2)
-{
-	var m = (y1 - y2) / (x1 - x2);
-	var q = y1 - m * x1;
-	return [m, q];
-}
-
-function get_ud(quad, i, px, py, ud)
-{
-	var v1 = quad[i % 4];
-	var v2 = quad[(i+1) % 4];
-	var eq = get_eq(v1[X], v1[Y], v2[X], v2[Y]);
-	if (ud)
-		return py > eq[0] * px + eq[1];
-	else
-		return py < eq[0] * px + eq[1];
-}
-
-function half_plane(quad, i, px, py)
-{
-	var v1 = quad[i % 4];
-	var v2 = quad[(i+1) % 4];
-	var v3 = quad[(i+2) % 4];
-	var eq = get_eq(v1[X], v1[Y], v2[X], v2[Y]);
-		
-	if (get_ud(quad, i, v3[X], v3[Y], true))
-		return py >= eq[0] * px + eq[1];
-	else if (get_ud(quad, i, v3[X], v3[Y], false))
-		return py <= eq[0] * px + eq[1];
-}
-
-function point_in_quad(px, py, quad)
-{
-	return half_plane(quad, 0, px, py) and
-			half_plane(quad, 1, px, py) and
-			half_plane(quad, 2, px, py) and
-			half_plane(quad, 3, px, py);
-}
-*/
 

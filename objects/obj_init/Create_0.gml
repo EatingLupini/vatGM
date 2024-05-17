@@ -7,6 +7,9 @@ dt = 0;
 gspd = 1;
 is_paused = false;
 
+// debug
+show_debug_overlay(true);
+
 // init animations
 init_animations();
 
@@ -40,7 +43,7 @@ init_animations();
 // castle
 var model_skybox = load_model("skybox/model.obj");
 model_skybox.freeze();
-var arr_tex_skybox = [sprite_add("skybox/tex_diffuse.png", 0, false, false, 0, 0)];
+var arr_tex_skybox = [texture_add("skybox/tex_diffuse.png")];
 
 /*
 // zombie
@@ -62,25 +65,25 @@ var anims_archer = load_model_animations("archer/info.json");
 // knight
 var model_knight = load_model("knight_sword/model.obj");
 model_knight.freeze();
-var arr_tex_knight = [sprite_add("knight_sword/tex_diffuse.png", 0, false, false, 0, 0)];
+var arr_tex_knight = [texture_add("knight_sword/tex_diffuse.png")];
 var anims_knight = load_model_animations("knight_sword/info.json");
 
 // castle
 var model_castle = load_model("castle/model.obj");
 model_castle.freeze();
 var arr_tex_castle = [
-	sprite_add("castle/tex_bricks.png", 0, false, false, 0, 0),
-	sprite_add("castle/tex_planks.png", 0, false, false, 0, 0),
-	sprite_add("castle/tex_stones.png", 0, false, false, 0, 0),
-	sprite_add("castle/tex_stones_painted.png", 0, false, false, 0, 0),
+	texture_add("castle/tex_bricks.png"),
+	texture_add("castle/tex_planks.png"),
+	texture_add("castle/tex_stones.png"),
+	texture_add("castle/tex_stones_painted.png"),
 ];
 
 // castle
 var model_tree = load_model("trees/tree1/model.obj");
 model_tree.freeze();
 var arr_tex_tree = [
-	sprite_add("trees/tree1//tex_wood.jpg", 0, false, false, 0, 0),
-	sprite_add("trees/tree1//tex_leaves.png", 0, false, false, 0, 0),
+	texture_add("trees/tree1//tex_wood.jpg"),
+	texture_add("trees/tree1//tex_leaves.png"),
 ];
 
 
@@ -92,9 +95,6 @@ ds_map_add(models, "knight", [model_knight, arr_tex_knight, anims_knight]);
 ds_map_add(models, "castle", [model_castle, arr_tex_castle, undefined]);
 ds_map_add(models, "tree", [model_tree, arr_tex_tree, undefined]);
 
-
-// debug
-//show_debug_overlay(true);
 
 // GOTO TEST ROOM
 room_goto(rm_test);

@@ -63,11 +63,17 @@ function ModelInstance(model) constructor
 	
 	/**
 	 * Renders the instance without materials.
-	 * @param {pointer.texture} [texture]=pointer_null Id of the texture to use (pointer_null for none).
+	 * @param {array<pointer.texture>} [texture]=[] Ids of the texture to use ([] for none).
 	 */	
-	static render_without_materials = function(texture = pointer_null)
+	static render_without_materials = function(textures = [])
 	{
-		for (var i = 0; i < self.model.material_count; i++)
-			self.model.render(i, texture);
+		if (array_length(textures) > 0)
+		{
+			for (var i = 0; i < array_length(textures); i++)
+				self.model.render(i, textures[i]);
+			return;
+		}
+		
+		self.model.render(i, -1);
 	}
 }
