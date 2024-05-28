@@ -84,7 +84,7 @@ function Model(buffers, material_count) constructor
 				buffer_write(out_buffers[i], buffer_f32, buffer_read(temp_buffer, buffer_f32));
 				
 				//Id
-				buffer_write(out_buffers[i], buffer_f32, 0);
+				buffer_write(out_buffers[i], buffer_f32, buffer_read(temp_buffer, buffer_f32));
 
 			}
 		}

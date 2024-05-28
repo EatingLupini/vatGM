@@ -1,4 +1,4 @@
-#macro MAX_BATCH_SIZE 1024
+#macro MAX_BATCH_SIZE 64
 
 /**
  * A DynamicModelBatch is used to draw a dynamic model (that does move) multiple times with a single draw call,
@@ -171,8 +171,9 @@ function DynamicModelBatch(model) constructor
 				//Apply transformation onto the temp buffer.
 				repeat(self.model.vertex_counts[i]) //Apply transformation to each vertex.
 				{
-					buffer_seek(transformed_buffer, buffer_seek_relative, global.buffer_format_size);
-					buffer_write(transformed_buffer, buffer_f32, j);
+					buffer_seek(transformed_buffer, buffer_seek_relative, global.buffer_format_size - 4);
+					var vertex_id = buffer_peek(transformed_buffer, buffer_tell(transformed_buffer), buffer_f32);
+					buffer_write(transformed_buffer, buffer_f32, j * self.model.vertex_counts[i] + vertex_id);
 				}
 				
 				//Return to the start of the buffer.
@@ -223,6 +224,7 @@ function DynamicModelBatch(model) constructor
 			shader_set_uniform_f_array(shader_get_uniform(self.materials[i].shader, "translations"), self.translations);
 			shader_set_uniform_f_array(shader_get_uniform(self.materials[i].shader, "scales"), self.scales);
 			shader_set_uniform_f_array(shader_get_uniform(self.materials[i].shader, "rotations"), self.rotations);
+			shader_set_uniform_f(shader_get_uniform(self.materials[i].shader, "total_vertices"), self.model.vertex_counts[i]);
 			
 			vertex_submit(self.vertex_buffers[i], pr_trianglelist, self.materials[i].base_texture);
 			shader_reset();
@@ -231,9 +233,9 @@ function DynamicModelBatch(model) constructor
 	
 	/**
 	 * Renders the batch without materials.
-	 * @param {pointer.texture} [texture]=pointer_null  Id of the texture to use (pointer_null for none).
+	 * @param {Real} [texture]=-1  Id of the texture to use (or -1).
 	 */	
-	static render_without_materials = function(texture = pointer_null)
+	static render_without_materials = function(texture = -1)
 	{
 		if (self.batch_size <= 0)
 			return;

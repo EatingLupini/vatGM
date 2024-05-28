@@ -243,15 +243,29 @@ function StaticModelBatch(model) constructor
 	
 	/**
 	 * Renders the batch without materials.
-	 * @param {pointer.texture} [texture]=pointer_null  Id of the texture to use (pointer_null for none).
+	 * @param {array<pointer.texture>} [textures]=[]  Id of the texture to use ([] for none).
 	 */	
-	static render_without_materials = function(texture = pointer_null)
+	static render_without_materials = function(textures = [])
 	{
+		/*
 		if (self.batch_size <= 0)
 			return;
 		
 		for (var i = 0; i < self.model.material_count; i++)
 			vertex_submit(self.vertex_buffers[i], pr_trianglelist, texture);
+		*/
+		
+		if (self.batch_size <= 0)
+			return;
+		
+		if (array_length(textures) == 0)
+		{
+			vertex_submit(self.vertex_buffers[0], pr_trianglelist, -1);
+			return;
+		}
+		
+		for (var i = 0; i < self.model.material_count; i++)
+			vertex_submit(self.vertex_buffers[i], pr_trianglelist, textures[i]);
 	}
 	
 	/**

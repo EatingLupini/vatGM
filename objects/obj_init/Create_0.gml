@@ -10,9 +10,6 @@ is_paused = false;
 // debug
 show_debug_overlay(true);
 
-// init animations
-init_animations();
-
 // other
 #macro WORLD_UNIT		32
 
@@ -24,6 +21,11 @@ init_animations();
 #macro MODEL			0
 #macro TEXTURE			1
 #macro ANIMS			2
+
+// batch
+#macro BATCH			0
+#macro V_INDEX			1
+#macro A_MANAGER		2
 
 // knight status
 #macro ST_IDLE			0
@@ -64,7 +66,7 @@ var anims_archer = load_model_animations("archer/info.json");
 
 // knight
 var model_knight = load_model("knight_sword/model.obj");
-model_knight.freeze();
+//model_knight.freeze();
 var arr_tex_knight = [texture_add("knight_sword/tex_diffuse.png")];
 var anims_knight = load_model_animations("knight_sword/info.json");
 
@@ -78,7 +80,7 @@ var arr_tex_castle = [
 	texture_add("castle/tex_stones_painted.png"),
 ];
 
-// castle
+// tree
 var model_tree = load_model("trees/tree1/model.obj");
 model_tree.freeze();
 var arr_tex_tree = [

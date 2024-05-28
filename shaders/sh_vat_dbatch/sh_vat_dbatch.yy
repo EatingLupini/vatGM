@@ -1,0 +1,12 @@
+{
+  "$GMShader":"",
+  "%Name":"sh_vat_dbatch",
+  "name":"sh_vat_dbatch",
+  "parent":{
+    "name":"TextureAnim",
+    "path":"folders/Scripts/RedemptionEditor/ObjImporter/Materials/TextureAnim.yy",
+  },
+  "resourceType":"GMShader",
+  "resourceVersion":"2.0",
+  "type":1,
+}

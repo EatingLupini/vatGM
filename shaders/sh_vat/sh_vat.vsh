@@ -24,9 +24,6 @@ uniform bool u_loop[MAX_ANIMS];
 uniform float u_time[MAX_ANIMS];
 uniform float u_blend[MAX_ANIMS];
 
-// settings
-uniform float u_sample_num;
-
 
 // mod function that works with negative numbers
 float mod_neg(float xx, float mm)

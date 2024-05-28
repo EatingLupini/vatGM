@@ -1,26 +1,3 @@
-function init_animations()
-{
-	globalvar	tex_size_param, anim_offsets_param, anim_normals_param,
-				active_anims_param, frame_start_param, frame_end_param,
-				offset_min_param, offset_dist_param, loop_param, time_param,
-				blend_param, sample_param;
-	
-	// anim
-	tex_size_param = shader_get_uniform(sh_vat, "u_tex_size");
-	anim_offsets_param = shader_get_sampler_index(sh_vat, "u_anim_offsets");
-	anim_normals_param = shader_get_sampler_index(sh_vat, "u_anim_normals");
-	active_anims_param = shader_get_uniform(sh_vat, "u_active_anims");
-	frame_start_param = shader_get_uniform(sh_vat, "u_frame_start");
-	frame_end_param = shader_get_uniform(sh_vat, "u_frame_end");
-	offset_min_param = shader_get_uniform(sh_vat, "u_offset_min");
-	offset_dist_param = shader_get_uniform(sh_vat, "u_offset_dist");
-	loop_param = shader_get_uniform(sh_vat, "u_loop");
-	time_param = shader_get_uniform(sh_vat, "u_time");
-	blend_param = shader_get_uniform(sh_vat, "u_blend");
-	
-	// settings
-	sample_param = shader_get_uniform(sh_vat, "u_sample_num");
-}
 
 function PlayAnimation(anim, blend_func=undefined, end_func=undefined) constructor
 {
@@ -50,15 +27,13 @@ function AnimationManager(model_anims) constructor
 	self.model_anims = model_anims;
 	self.play_anims = [];
 	
-	self.sample_num = 5;
-	self.sample_func = undefined;
-	
 	// linear blend
 	self.blend_default = function(frame_current, frame_count) {
 		return (1 / frame_count) * frame_current;
 	}
 	
 	// anims data
+	self.params = {};
 	self.active_anims = 0;
 	self.frame_start = array_create(self.MAX_ANIMS);
 	self.frame_end = array_create(self.MAX_ANIMS);
@@ -68,7 +43,7 @@ function AnimationManager(model_anims) constructor
 	self.time = array_create(self.MAX_ANIMS);
 	self.blend = array_create(self.MAX_ANIMS);
 	
-	static set_shader_params = function()
+	static get_shader_params = function()
 	{
 		self.active_anims = array_length(self.play_anims);
 		
@@ -79,29 +54,28 @@ function AnimationManager(model_anims) constructor
 		for (var i=0; i<self.active_anims; i++)
 		{
 			var play_anim = self.play_anims[i];
-			frame_start[i] = play_anim.anim.frame_start;
-			frame_end[i] = play_anim.anim.frame_end;
-			offset_min[i] = play_anim.anim.offset_min;
-			offset_dist[i] = play_anim.anim.offset_dist;
-			loop[i] = play_anim.anim.loop;
-			time[i] = play_anim.time / self.model_anims.tex_size;
-			blend[i] = play_anim.get_blend();
+			self.frame_start[i] = play_anim.anim.frame_start;
+			self.frame_end[i] = play_anim.anim.frame_end;
+			self.offset_min[i] = play_anim.anim.offset_min;
+			self.offset_dist[i] = play_anim.anim.offset_dist;
+			self.loop[i] = play_anim.anim.loop;
+			self.time[i] = play_anim.time / self.model_anims.tex_size;
+			self.blend[i] = play_anim.get_blend();
 		}
 		
-		// shader_set_uniform_f(tex_size_param, self.model_anims.tex_size, self.model_anims.tex_size);
-		// texture_set_stage_vs(anim_offsets_param, self.model_anims.tex_offsets);
-		// texture_set_stage_vs(anim_normals_param, self.model_anims.tex_normals);
-		shader_set_uniform_i(active_anims_param, self.active_anims);
-		shader_set_uniform_f_array(frame_start_param, self.frame_start);
-		shader_set_uniform_f_array(frame_end_param, self.frame_end);
-		shader_set_uniform_f_array(offset_min_param, self.offset_min);
-		shader_set_uniform_f_array(offset_dist_param, self.offset_dist);
-		shader_set_uniform_f_array(loop_param, self.loop);
-		shader_set_uniform_f_array(time_param, self.time);
-		shader_set_uniform_f_array(blend_param, self.blend);
+		self.params.tex_size = self.model_anims.tex_size;
+		self.params.anim_offsets = self.model_anims.tex_offsets;
+		self.params.anim_normals = self.model_anims.tex_normals;
+		self.params.active_anims = self.active_anims;
+		self.params.frame_start = self.frame_start;
+		self.params.frame_end = self.frame_end;
+		self.params.offset_min = self.offset_min;
+		self.params.offset_dist = self.offset_dist;
+		self.params.loop = self.loop;
+		self.params.time = self.time;
+		self.params.blend = self.blend;
 		
-		// settings
-		shader_set_uniform_f(sample_param, self.sample_num);
+		return self.params;
 	}
 	
 	static step = function()
@@ -111,12 +85,6 @@ function AnimationManager(model_anims) constructor
 		// skip if no animations are set
 		if (self.active_anims <= 0)
 			return;
-		
-		// sample num
-		if (self.sample_func != undefined)
-		{
-			self.sample_func();
-		}
 		
 		// increment frame time
 		for (var i=0; i<self.active_anims; i++)
@@ -197,12 +165,6 @@ function AnimationManager(model_anims) constructor
 	static set_default_blend_func = function(blend_func)
 	{
 		self.blend_default = blend_func;
-	}
-	
-	static set_sample_num = function(num, func=undefined)
-	{
-		self.sample_num = num;
-		self.sample_func = func;
 	}
 	
 	static get_animations_list = function()

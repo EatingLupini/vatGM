@@ -7,15 +7,15 @@
  */
 function quaternion_set_euler(pitch, yaw, roll) 
 {
-	var quat;
-	var cx = cos(x * MATH_HALF_DEGTORAD);
-	var cy = cos(y * MATH_HALF_DEGTORAD);
-	var cz = cos(z * MATH_HALF_DEGTORAD);
+	var cx = dcos(pitch / 2);
+	var cy = dcos(yaw / 2);
+	var cz = dcos(roll / 2);
 
-	var sx = sin(x * MATH_HALF_DEGTORAD);
-	var sy = sin(y * MATH_HALF_DEGTORAD);
-	var sz = sin(z * MATH_HALF_DEGTORAD);
-		
+	var sx = dsin(pitch / 2);
+	var sy = dsin(yaw / 2);
+	var sz = dsin(roll / 2);
+	
+	var quat = array_create(4);
 	quat[0] = cy * sx * cz + sy * cx * sz;
 	quat[1] = sy * cx * cz - cy * sx * sz;
 	quat[2] = cy * cx * sz - sy * sx * cz;

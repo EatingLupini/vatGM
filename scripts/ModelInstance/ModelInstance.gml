@@ -67,13 +67,13 @@ function ModelInstance(model) constructor
 	 */	
 	static render_without_materials = function(textures = [])
 	{
-		if (array_length(textures) > 0)
+		if (array_length(textures) == 0)
 		{
-			for (var i = 0; i < array_length(textures); i++)
-				self.model.render(i, textures[i]);
+			self.model.render(0, -1);
 			return;
 		}
-		
-		self.model.render(0, -1);
+
+		for (var i = 0; i < array_length(textures); i++)
+			self.model.render(i, textures[i]);
 	}
 }

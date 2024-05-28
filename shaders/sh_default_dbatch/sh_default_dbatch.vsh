@@ -1,4 +1,5 @@
 #define MAX_BATCH_SIZE 1024
+#define MAX_ANIMS 5
 
 attribute vec3 in_Position;                  
 attribute vec2 in_TextureCoord;           
@@ -46,7 +47,8 @@ vec3 rotate_vertex(vec3 position, vec4 rotation)
 void main()
 {
 	//Index of the transform.
-	int index = int(in_Index);
+	//int index = int(in_Index);
+	int index = int(in_Index / 44970.0);
 	
 	//Dynamic batch transformations.
 	vec3 translation = translations[index]; 

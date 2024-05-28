@@ -13,7 +13,7 @@ function init_buffer_formats()
 		vertex_format_add_normal();
 		vertex_format_add_custom(vertex_type_float1, vertex_usage_texcoord);
 		global.buffer_format = vertex_format_end();
-		global.buffer_format_size = 3 * 4 + 2 * 4 + 4 + 3 * 4;
+		global.buffer_format_size = 3 * 4 + 2 * 4 + 4 + 3 * 4 + 4;
 	}
 
 	if (!variable_global_exists("dynamic_batch_buffer_format"))

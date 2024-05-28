@@ -48,7 +48,7 @@ void main()
 	int index = int(in_Index);
 	
 	//Dynamic batch transformations.
-	vec3 translation = translations[index]; 
+	vec3 translation = translations[index];
 	vec3 scale = scales[index];
 	vec4 rotation = rotations[index];
 	

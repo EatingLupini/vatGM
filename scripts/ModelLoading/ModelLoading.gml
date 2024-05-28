@@ -97,15 +97,18 @@ function load_model(filename)
 				break;
 				
 			case OBJLineType.VERTEX: //Add the vertex to the vertices list.
-				model_data.vertices[| ds_list_size(model_data.vertices)] = line.data;
+				//model_data.vertices[| ds_list_size(model_data.vertices)] = line.data;
+				ds_list_add(model_data.vertices, line.data);
 				break;
 				
 			case OBJLineType.UV: //Add the UV coordinate to the uvs list.
-				model_data.uvs[| ds_list_size(model_data.uvs)] = line.data;
+				//model_data.uvs[| ds_list_size(model_data.uvs)] = line.data;
+				ds_list_add(model_data.uvs, line.data);
 				break;
 				
 			case OBJLineType.NORMAL: //Add the normal to the normals list.
-				model_data.normals[| ds_list_size(model_data.normals)] = line.data;
+				//model_data.normals[| ds_list_size(model_data.normals)] = line.data;
+				ds_list_add(model_data.normals, line.data);
 				break;
 				
 			case OBJLineType.USE_MATERIAL: //Faces after this line belongs to the last used material.
@@ -117,7 +120,8 @@ function load_model(filename)
 					throw "All faces must have 3 vertices, found face with " + string(array_length(line.data)) + " vertices. Be sure to triangulate the mesh.";
 				
 				var face_list = model_data.faces[? current_material]; //Get the correct face list.
-				face_list[| ds_list_size(face_list)] = new OBJFace(line.data); //Create a new face and add it to the list.
+				//face_list[| ds_list_size(face_list)] = new OBJFace(line.data); //Create a new face and add it to the list.
+				ds_list_add(face_list, new OBJFace(line.data));
 				break;
 				
 			case OBJLineType.OTHER: //These type of line are not important.

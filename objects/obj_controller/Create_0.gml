@@ -28,16 +28,58 @@ instance_create_depth(0, 0, 0, obj_castle);
 // tree
 instance_create_depth(512, 512, 0, obj_tree);
 
+// knight
+iik = instance_create_depth(384, 384, 0, obj_knight);
+
 // guards
+/*
 var num = 30;
 var sx = 512;
 var sy = 512;
 for (var j=0; j<num; j++)
 	for (var i=0; i<num; i++)
 		instance_create_depth(sx + 64 * i, sy + 64 * j, 0, obj_knight);
-		
-// knight
-iik = instance_create_depth(384, 384, 0, obj_knight);
+*/
+
+// BATCH
+var model_info = models[? "knight"];
+var model_anims = model_info[ANIMS];
+
+batches_count = 14;
+batches_line =  1;
+mbs = array_create(batches_count);
+for (var bc=0; bc<batches_count; bc++)
+{
+	var model_batch = new DynamicModelBatch(model_info[MODEL]);
+	var anims_batch = array_create(0);
+	var num = 8;
+	var sx = 512;
+	var sy = 512;
+	for (var j=0; j<num; j++)
+	{
+		for (var i=0; i<num; i++)
+		{
+			var asd = model_batch.add(
+						(bc mod batches_line) * num * 64 + sx + 64 * i,
+						(bc div batches_line) * num * 64 + sy + 64 * j,
+						0, 0, 0, 0, WORLD_UNIT, WORLD_UNIT, WORLD_UNIT);
+			
+			var anim_manager = new AnimationManager(model_anims);
+			if (i == 4)
+				anim_manager.set_animation("run_forward");
+			else
+				anim_manager.set_animation("idle_4");
+			anim_manager.set_default_blend_func(BLEND_LINEAR_3X);
+			
+			array_push(anims_batch, anim_manager);
+		}
+	}
+	model_batch.set_material(0, new TextureMaterialAnimBatch(model_info[TEXTURE][0], 0, anims_batch));
+	model_batch.build();
+	model_batch.freeze();
+	
+	mbs[bc] = model_batch;
+}
 
 #endregion
 
@@ -63,3 +105,16 @@ navgrid = mp_grid_create(0, 0, room_width / 16, room_height / 16, 16, 16);
 alarm[0] = 1;
 #endregion
 
+#region SHADER UNIFORMS
+vat_u_tex_size = shader_get_uniform(sh_vat, "u_tex_size");
+vat_u_anim_offsets = shader_get_sampler_index(sh_vat, "u_anim_offsets");
+vat_u_anim_normals = shader_get_sampler_index(sh_vat, "u_anim_normals");
+vat_u_active_anims = shader_get_uniform(sh_vat, "u_active_anims");
+vat_u_frame_start = shader_get_uniform(sh_vat, "u_frame_start");
+vat_u_frame_end = shader_get_uniform(sh_vat, "u_frame_end");
+vat_u_offset_min = shader_get_uniform(sh_vat, "u_offset_min");
+vat_u_offset_dist = shader_get_uniform(sh_vat, "u_offset_dist");
+vat_u_loop = shader_get_uniform(sh_vat, "u_loop");
+vat_u_time = shader_get_uniform(sh_vat, "u_time");
+vat_u_blend = shader_get_uniform(sh_vat, "u_blend");
+#endregion
