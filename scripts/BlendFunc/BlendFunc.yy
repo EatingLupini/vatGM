@@ -1,5 +1,5 @@
 {
-  "$GMScript":"",
+  "$GMScript":"v1",
   "%Name":"BlendFunc",
   "isCompatibility":false,
   "isDnD":false,

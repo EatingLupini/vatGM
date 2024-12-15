@@ -1,5 +1,5 @@
 {
-  "$GMScript":"",
+  "$GMScript":"v1",
   "%Name":"TextureMaterialAnim",
   "isCompatibility":false,
   "isDnD":false,

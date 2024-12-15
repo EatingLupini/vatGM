@@ -1,5 +1,5 @@
 {
-  "$GMScript":"",
+  "$GMScript":"v1",
   "%Name":"StaticModelBatch",
   "isCompatibility":false,
   "isDnD":false,
