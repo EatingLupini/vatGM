@@ -31,22 +31,12 @@ instance_create_depth(512, 512, 0, obj_tree);
 // knight
 iik = instance_create_depth(384, 384, 0, obj_knight);
 
-// guards
-/*
-var num = 30;
-var sx = 512;
-var sy = 512;
-for (var j=0; j<num; j++)
-	for (var i=0; i<num; i++)
-		instance_create_depth(sx + 64 * i, sy + 64 * j, 0, obj_knight);
-*/
-
-// BATCH
+// BATCH of guards
 var model_info = models[? "knight"];
 var model_anims = model_info[ANIMS];
 
 batches_count = 14;
-batches_line =  1;
+batches_line =  2;
 mbs = array_create(batches_count);
 for (var bc=0; bc<batches_count; bc++)
 {
