@@ -12,6 +12,11 @@ draw_text(512, 32,	"current_time: " + string(current_time * 0.001) + "\n" +
 					"list_selected: " + string(ds_list_size(list_selected))
 					);
 
+draw_set_color(c_black);
+draw_rectangle(16, 32, 256, 128, false);
+draw_set_color(c_white);
+draw_text(32, 40, "1) Free Cam\n2) Third Person Cam\n3) RTS Cam\nCurrent: " + string(cam.get_view_type() + 1));
+
 // SELECTION
 if (is_selecting)
 {
@@ -83,25 +88,4 @@ if (is_minimap_enabled)
 	draw_primitive_end();
 }
 
-
-/*
-// DEBUG POINT IN QUAD
-var points = [
-	[200, 200],
-	[400, 200],
-	[400, 400],
-	[100, 400]
-];
-draw_set_color(c_red);
-draw_primitive_begin(pr_trianglefan);
-for (var i=0; i<array_length(points); i++)
-	draw_vertex_color(points[i][X], points[i][Y], c_red, 1);
-draw_primitive_end();
-
-if (point_in_quad(window_mouse_get_x(), window_mouse_get_y(), points))
-	draw_set_color(c_white);
-else
-	draw_set_color(c_blue);
-draw_circle(window_mouse_get_x(), window_mouse_get_y(), 2, false);
-*/
 

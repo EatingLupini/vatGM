@@ -89,49 +89,6 @@ if (!is_paused and window_has_focus())
 			dir_y = -dsin(dir) * dcos(zdir);
 			dir_z = dsin(zdir);
 			
-			#region old
-			/*
-			// camera closer to the object when props are in line of sight
-			for (var i=abs(dist); i>=0; i--)
-			{
-				var xtemp = obj_to_follow.x + xoff + dir_x * i * sign(dist);
-				var ytemp = obj_to_follow.y + yoff + dir_y * i * sign(dist);
-				var ztemp = obj_to_follow.z + 48 + dir_z * i * sign(dist);
-				
-				if (collision_line(obj_to_follow.x, obj_to_follow.y, xtemp, ytemp, obj_prop, true, false) == noone)
-				{
-					show_debug_message(string(xtemp) + " - " + string(ytemp) + " - " + string(ztemp));
-					xfrom = lerp(xfrom, xtemp, 0.1);
-					yfrom = lerp(yfrom, ytemp, 0.1);
-					zfrom = lerp(zfrom, ztemp, 0.1);
-					break;
-				}
-			}
-			*/
-			
-			/*
-			// standard
-			xfrom = obj_to_follow.x + xoff + dir_x * dist;
-			yfrom = obj_to_follow.y + yoff + dir_y * dist;
-			zfrom = obj_to_follow.z + 48 + dir_z * dist;
-		
-			xto = obj_to_follow.x + xoff;
-			yto = obj_to_follow.y + yoff;
-			zto = obj_to_follow.z + 48;
-			*/
-			
-			// lerp
-			/*
-			xfrom = lerp(xfrom, obj_to_follow.x + xoff + dir_x * dist, 1 - power(0.01, dt * gspd));
-			yfrom = lerp(yfrom, obj_to_follow.y + yoff + dir_y * dist, 1 - power(0.01, dt * gspd));
-			zfrom = lerp(zfrom, obj_to_follow.z + 48 + dir_z * dist, 1 - power(0.01, dt * gspd));
-			
-			xto = lerp(xto, obj_to_follow.x + xoff, 1 - power(0.01, dt * gspd));
-			yto = lerp(yto, obj_to_follow.y + yoff, 1 - power(0.01, dt * gspd));
-			zto = lerp(zto, obj_to_follow.z + 48, 1 - power(0.01, dt * gspd));
-			*/
-			#endregion
-			
 			// linear
 			xfrom = xfrom_old + ((obj_to_follow.x + xoff + dir_x * dist) - xfrom_old) / num_diff * cur_diff;
 			yfrom = yfrom_old + ((obj_to_follow.y + yoff + dir_y * dist) - yfrom_old) / num_diff * cur_diff;

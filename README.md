@@ -114,17 +114,15 @@ You can manually add the attribute "tex_diffuse" which is the texture of the mod
 <details>
 <summary>Click to view screenshots</summary>
 
-### Main Screen
-![Screenshot 1](screenshots/screen1.png)
+### 14 batches of 64 knights
+![Screenshot 1](screenshots/screen_demo1.png)
 
-### Possible Solution
-![Screenshot 2](screenshots/screen2.png)
+### Close up
+![Screenshot 2](screenshots/screen_demo2.png)
 
-### Definitions
-![Screenshot 5](screenshots/screen5.png)
+### Real Time Strategy Cam
+![Screenshot 5](screenshots/screen_demo3.png)
 
-### Ouput of a run without GUI
-![Screenshot 4](screenshots/screen4.png)
 
 </details>
 

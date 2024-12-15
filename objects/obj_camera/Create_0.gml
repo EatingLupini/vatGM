@@ -122,4 +122,9 @@ set_view_type = function(type, otf=noone)
 		}
 	}
 }
+
+get_view_type = function()
+{
+	return view_type;
+}
 #endregion

@@ -8,7 +8,7 @@ gspd = 1;
 is_paused = false;
 
 // debug
-show_debug_overlay(true);
+//show_debug_overlay(true);
 
 // other
 #macro WORLD_UNIT		32
@@ -47,23 +47,6 @@ var model_skybox = load_model("skybox/model.obj");
 model_skybox.freeze();
 var arr_tex_skybox = [texture_add("skybox/tex_diffuse.png")];
 
-/*
-// zombie
-var model_zombie = load_buffer_model("zombie/model.buf")
-model_zombie.freeze();
-// RICORDA DI SPECCHIARE LA TEXTURE VERTICALMENTE
-var spr_tex_zombie = sprite_add("zombie/tex_diffuse.png", 0, true, false, 0, 0);
-var anims_zombie = load_model_animations("zombie/info.json");
-*/
-
-/*
-// archer
-var model_archer = load_model("archer/model.obj");
-model_archer.freeze();
-var spr_tex_archer = sprite_add("archer/tex_diffuse.png", 0, true, false, 0, 0);
-var anims_archer = load_model_animations("archer/info.json");
-*/
-
 // knight
 var model_knight = load_model("knight_sword/model.obj");
 //model_knight.freeze();
@@ -91,8 +74,6 @@ var arr_tex_tree = [
 
 models = ds_map_create();
 ds_map_add(models, "skybox", [model_skybox, arr_tex_skybox, undefined]);
-//ds_map_add(models, "zombie", [model_zombie, spr_tex_zombie, anims_zombie]);
-//ds_map_add(models, "archer", [model_archer, spr_tex_archer, anims_archer]);
 ds_map_add(models, "knight", [model_knight, arr_tex_knight, anims_knight]);
 ds_map_add(models, "castle", [model_castle, arr_tex_castle, undefined]);
 ds_map_add(models, "tree", [model_tree, arr_tex_tree, undefined]);
