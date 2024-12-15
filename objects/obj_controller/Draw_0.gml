@@ -13,8 +13,7 @@ for (var i=0; i<batches_count; i++)
 	mbs[i].render();
 
 
-// KNIGHT
-/*
+// CONTROLLED KNIGHT
 var model_info = models[? "knight"];
 var model_anims = model_info[ANIMS];
 
@@ -26,7 +25,7 @@ texture_set_stage_vs(vat_u_anim_offsets, model_anims.tex_offsets);
 texture_set_stage_vs(vat_u_anim_normals, model_anims.tex_normals);
 
 var c = self;
-with (obj_knight)
+with (iik)
 {
 	self.anim_manager.step();
 	var u = self.anim_manager.get_shader_params();
@@ -41,4 +40,3 @@ with (obj_knight)
 	event_perform(ev_other, ev_user0);
 }
 shader_reset();
-*/
