@@ -1,2 +1,2 @@
-# vatGM
-Implementation of the Vertex Animation Texture in GameMaker.
+# rtsGM
+A small Real Time Strategy game developed in GameMaker.
