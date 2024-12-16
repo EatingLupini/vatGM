@@ -2,23 +2,31 @@
 
 > **vatGM** is an implementation of the Vertex Animation Texture technique in GameMaker.
 
-![Main Panel](screenshots/screen_blender1.png)
+![Demo](screenshots/video_demo1.webp)
 
 ## Table of Contents
-- [vatGM](#crosswords-generator)
+- [vatGM](#vatgm)
   - [Table of Contents](#table-of-contents)
   - [Features](#features)
   - [Getting Started](#getting-started)
     - [Prerequisites](#prerequisites)
     - [Installation Project](#installation-project)
     - [Installation Blender](#installation-blender)
-  - [Usage Project](#usage-project)
+  - [Usage Demo](#usage-demo)
+    - [Controls](#controls)
+      - [Free camera controls](#free-camera-controls)
+      - [Third Person camera controls](#third-person-camera-controls)
+      - [Fixed camera controls](#fixed-camera-controls)
   - [Usage Blender](#usage-blender)
+    - [Example content of a info.json file](#example-content-of-a-infojson-file)
   - [Screenshots](#screenshots)
-    - [Main Screen](#main-screen)
-    - [Possible Solution](#possible-solution)
-    - [Definitions](#definitions)
-    - [Ouput of a run without GUI](#ouput-of-a-run-without-gui)
+    - [14 batches of 64 knights](#14-batches-of-64-knights)
+    - [Close up](#close-up)
+    - [Real Time Strategy Cam](#real-time-strategy-cam)
+  - [Videos](#videos)
+    - [Batch Demo 1](#batch-demo-1)
+    - [Third Person Demo](#third-person-demo)
+    - [Batch Demo 2 with ~1000 entities](#batch-demo-2-with-1000-entities)
   - [Credits](#credits)
 
 ## Features
@@ -58,8 +66,44 @@ Now you should have an additional panel on the right as shown in the image below
 ![Main Panel](screenshots/screen_blender1.png)
 
 
-## Usage Project
+## Usage Demo
 Open the Project and launch.
+
+
+### Controls
+
+| **Button** |      **Action**     |
+|------------|---------------------|
+| 1          | Free camera         |
+| 2          | Third person camera |
+| 3          | Fixed camera        |
+| P          | Pause               |
+| F4         | Fullscreen          |
+| ESC        | Quit demo           |
+
+#### Free camera controls
+| **Button** |  **Action** |
+|------------|-------------|
+| Move mouse | Look around |
+| W, A, S, D | Move        |
+| Space      | Fly up      |
+| Ctrl       | Fly down    |
+
+#### Third Person camera controls
+|     **Button**     |  **Action** |
+|--------------------|-------------|
+| Move mouse         | Look around |
+| W, A, S, D         | Move        |
+| Shift              | Run         |
+| Left mouse button  | Attack      |
+| Right mouse button | Shield      |
+
+#### Fixed camera controls
+|     **Button**     |    **Action**   |
+|--------------------|-----------------|
+| W, A, S, D         | Move            |
+| Left mouse button  | Select          |
+| Right mouse button | Give move order |
 
 ## Usage Blender
 1. Load a model in Blender, select it and click on "Process".
@@ -112,7 +156,7 @@ You can manually add the attribute "tex_diffuse" which is the texture of the mod
 ## Screenshots
 
 <details>
-<summary>Click to view screenshots</summary>
+<summary>Click to view the screenshots</summary>
 
 ### 14 batches of 64 knights
 ![Screenshot 1](screenshots/screen_demo1.png)
@@ -123,9 +167,23 @@ You can manually add the attribute "tex_diffuse" which is the texture of the mod
 ### Real Time Strategy Cam
 ![Screenshot 5](screenshots/screen_demo3.png)
 
-
 </details>
 
+## Videos
+
+<details>
+<summary>Click to view the videos</summary>
+
+### Batch Demo 1
+![Video 2](screenshots/video_demo2.webp)
+
+### Third Person Demo
+![Video 3](screenshots/video_demo3.webp)
+
+### Batch Demo 2 with ~1000 entities
+![Video 4](screenshots/video_demo4.webp)
+
+</details>
 
 ## Credits
 * [GMD3D11](https://github.com/blueburncz/GMD3D11) by **kraifpatrik**.

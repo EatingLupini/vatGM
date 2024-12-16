@@ -55,12 +55,21 @@ for (var bc=0; bc<batches_count; bc++)
 						0, 0, 0, 0, WORLD_UNIT, WORLD_UNIT, WORLD_UNIT);
 			
 			var anim_manager = new AnimationManager(model_anims);
-			if (i == 4)
-				anim_manager.set_animation("run_forward");
-			else
-				anim_manager.set_animation("idle_4");
+			var play_anim = undefined;
+			switch (i)
+			{
+				case 2: play_anim = anim_manager.set_animation("block_idle"); break;
+				case 3: play_anim = anim_manager.set_animation("walk_forward"); break;
+				case 4: play_anim = anim_manager.set_animation("run_forward"); break;
+				default: play_anim = anim_manager.set_animation("idle_4"); break;
+			}
 			anim_manager.set_default_blend_func(BLEND_LINEAR_3X);
 			
+			// set random anmation time
+			var frame_count = play_anim.anim.frame_end - play_anim.anim.frame_start;
+			play_anim.time = irandom_range(0, frame_count - 1);
+			
+			// add animation manager
 			array_push(anims_batch, anim_manager);
 		}
 	}

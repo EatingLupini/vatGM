@@ -9,6 +9,7 @@ is_paused = false;
 
 // debug
 //show_debug_overlay(true);
+randomize();
 
 // other
 #macro WORLD_UNIT		32
