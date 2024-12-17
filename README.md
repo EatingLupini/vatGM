@@ -188,4 +188,4 @@ You can manually add the attribute "tex_diffuse" which is the texture of the mod
 ## Credits
 * [GMD3D11](https://github.com/blueburncz/GMD3D11) by **kraifpatrik**.
 * [Mixamo](https://www.mixamo.com) for the free models used in this project.
-* Model Importer and other useful script such as DynamicModelBatch by **SerpensSolida**.
+* Special thanks to **SerpensSolida** for his help with the project, the Model Importer and other useful scripts.
