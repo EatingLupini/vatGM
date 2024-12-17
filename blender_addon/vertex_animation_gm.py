@@ -18,7 +18,8 @@
 
 # <pep8 compliant>
 
-
+# original author Joshua Bogart
+# https://github.com/JoshRBogart/unreal_tools/blob/master/vertex_animation.py
 bl_info = {
     "name": "Vertex Animation Texture",
     "author": "Davide Modenese",

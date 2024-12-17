@@ -27,7 +27,8 @@
     - [Batch Demo 1](#batch-demo-1)
     - [Third Person Demo](#third-person-demo)
     - [Batch Demo 2 with ~1000 entities](#batch-demo-2-with-1000-entities)
-  - [Credits](#credits)
+  - [Authors](#authors)
+  - [Acknowledgments](#acknowledgments)
 
 ## Features
 * Vertex Animation Texture shader.
@@ -185,7 +186,11 @@ You can manually add the attribute "tex_diffuse" which is the texture of the mod
 
 </details>
 
-## Credits
+## Authors
+* Davide Modenese
+
+## Acknowledgments
 * [GMD3D11](https://github.com/blueburncz/GMD3D11) by **kraifpatrik**.
 * [Mixamo](https://www.mixamo.com) for the free models used in this project.
+* [Blender Addon](https://github.com/JoshRBogart/unreal_tools) adapted for GameMaker from Unreal Engine created by **Joshua Bogart**.
 * Special thanks to **SerpensSolida** for his help with the project, the Model Importer and other useful scripts.
